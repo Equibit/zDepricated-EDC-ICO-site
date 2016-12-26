@@ -11,6 +11,11 @@ can.stache.registerSimpleHelper('leading', num => {
   return s.substr(s.length-8);
 });
 
+can.stache.registerSimpleHelper('addCommas', num => {
+  var nf = new Intl.NumberFormat();
+  return nf.format(num)
+});
+
 can.stache.registerSimpleHelper('cleanKey', str => {
   str = str.replace(/_/g, ' ');
   return str.replace(/\w\S*/g, txt => {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});

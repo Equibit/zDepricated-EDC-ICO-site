@@ -15,6 +15,7 @@
 <can-import from="components/notification-component/" />
 
 <can-import from="components/countdown-component/" />
+<can-import from="components/ico-progress-component/" />
 
 <can-import from="pages-admin/admin-users/" />
 <can-import from="pages-admin/admin-comm-templates/" />
@@ -34,7 +35,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="/" class="navbar-brand" ($click)="switchPage('pageHome')"><img src="/assets/img/logo.png"></a>
+        <a href="/" class="navbar-brand" ($click)="switchPage('pageHome')"><img src="/assets/img/logo.png"> <span>Initial <strong>EQB</strong> Offering</span></a>
       </div>
 
       <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -114,12 +115,18 @@
     {{#if isLoggedIn}}
       {{#switch page}}
         {{#case 'pageHome'}}
-          <div class="row">
-            <div class="col-xs-12 col-md-8 col-md-offset-2">
-              <countdown-component {(countdown)}="countdown"></countdown-component>
-              {{#if countdown}}Done{{else}}Not Done{{/if}}
-            </div>
-          </div>
+
+          <h1 class="text-center">Equibit (EQB) ICO</h1>
+          <p class="text-center">EDC (Equibit Development Corporation) is building several applications that are decentralizing the securities industry. Just some of the features are outlined here.</p>
+
+          {{#if countdown}}
+            <div class="h2 text-center">Crowd sale ends in</div>
+          {{else}}
+            <div class="h2 text-center">Crowd sale starts in</div>
+            <countdown-component {(countdown)}="countdown"></countdown-component>
+          {{/if}}
+
+          <ico-progress-component></ico-progress-component>
         {{/case}}
         {{#case 'pageBlog'}}
           <page-blog {lang}="lang"></page-blog>
@@ -146,12 +153,22 @@
     {{else}}
       {{#switch page}}
         {{#case 'pageHome'}}
+
           <div class="row">
-            <div class="col-xs-12 col-md-8 col-md-offset-2">
-              <countdown-component {(countdown)}="countdown"></countdown-component>
-              {{#if countdown}}Done{{else}}Not Done{{/if}}
+            <div class="col-sm-6 col-sm-offset-3 text-center">
+              <h1 class="text-center">Equibit (EQB) ICO</h1>
+              <p class="text-center">EDC (Equibit Development Corporation) is building several applications that are decentralizing the securities industry. Just some of the features are outlined here.</p>
             </div>
           </div>
+
+          {{#if countdown}}
+            <div class="h2 text-center">Crowd sale ends in</div>
+          {{else}}
+            <div class="h2 text-center">Crowd sale starts in</div>
+            <countdown-component {(countdown)}="countdown"></countdown-component>
+          {{/if}}
+
+          <ico-progress-component></ico-progress-component>
         {{/case}}
         {{#case 'pageBlog'}}
           <page-blog {lang}="lang"></page-blog>

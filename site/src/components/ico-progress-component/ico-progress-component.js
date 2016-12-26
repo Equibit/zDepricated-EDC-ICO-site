@@ -4,7 +4,7 @@ import viewModel from './view-model';
 import moment from 'moment';
 
 can.Component.extend({
-  tag: 'countdown-component',
+  tag: 'ico-progress-component',
   viewModel: viewModel,
   template: template,
   events: {

@@ -31,22 +31,22 @@ export default can.Map.extend({
     },
     hasDays: {
       get() {
-        return parseInt(this.attr("days"))
+        return parseInt(this.attr("days")) || parseInt(this.attr("months"))
       }
     },
     hasHours: {
       get() {
-        return parseInt(this.attr("hours"))
+        return parseInt(this.attr("hours")) || parseInt(this.attr("days")) || parseInt(this.attr("months"))
       }
     },
     hasMinutes: {
       get() {
-        return parseInt(this.attr("minutes"))
+        return parseInt(this.attr("minutes")) || parseInt(this.attr("hours")) || parseInt(this.attr("days")) || parseInt(this.attr("months"))
       }
     },
     hasSeconds: {
       get() {
-        return parseInt(this.attr("seconds"))
+        return parseInt(this.attr("seconds")) || parseInt(this.attr("minutes")) || parseInt(this.attr("hours")) || parseInt(this.attr("days")) || parseInt(this.attr("months"))
       }
     },
     manyMonths: {
@@ -72,6 +72,31 @@ export default can.Map.extend({
     manySeconds: {
       get() {
         return (parseInt(this.attr("seconds")) > 1)
+      }
+    },
+    yearProgress: {
+      get() {
+        return (parseInt(this.attr("months"))/12)*100
+      }
+    },
+    monthProgress: {
+      get() {
+        return (parseInt(this.attr("days"))/30)*100
+      }
+    },
+    dayProgress: {
+      get() {
+        return (parseInt(this.attr("hours"))/24)*100
+      }
+    },
+    hourProgress: {
+      get() {
+        return (parseInt(this.attr("minutes"))/60)*100
+      }
+    },
+    minuteProgress: {
+      get() {
+        return (parseInt(this.attr("seconds"))/60)*100
       }
     }
   }
