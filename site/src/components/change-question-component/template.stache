@@ -1,0 +1,44 @@
+<can-import from="easyapp/attrs/selectpicker.attr" />
+
+<!-- Sign-up Modal -->
+<div id="change-question-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myChangePasswordModal">{{i18n.changeQuestionTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="security_question_change">{{i18n.changeQuestionSelect}}</label>
+          <select selectpicker="large" id="security_question_change" {($value)}="securityQuestionChange" {{inputDisabled}} class="selectpicker show-tick form-control">
+            {{#each i18n.changeQuestionQuestions}}
+              <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+          {{#if selectQuestionError}}
+          <span class="red-text">{{i18n.changeQuestionError}}</span>
+          {{/if}}
+        </div>
+        <div class="form-group">
+          <label for="security_answer_create">{{i18n.changeQuestionAnswer}}</label>
+          <input type="text" class="form-control" id="security_answer_create" {($value)}="securityAnswerChange" ($blur)="lengthAnswerFunc()" {{inputDisabled}} placeholder="{{i18n.changeQuestionAnswer}}" autocomplete="off" />
+          {{#if securityAnswerError}}
+          <span class="red-text">{{i18n.changeQuestionLengthError}}</span>
+          {{/if}}
+        </div>
+
+        {{#if generalError}}
+        <p class="red-text bold">{{i18n.changeQuestionUnknownError}}</p>
+        {{/if}}
+        {{#if successMessage}}
+        <p class="green-text bold">{{i18n.changeQuestionSuccess}}</p>
+        {{/if}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="saveSettings()" {{buttonRunning}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.changeQuestionBtn}}{{/if}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Sign-up Modal -->

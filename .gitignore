@@ -1,0 +1,12 @@
+.DS_Store
+site/.DS_Store
+api/.DS_Store
+db/.DS_Store
+*.css
+site/.idea/*
+api/.idea/
+site/node_modules
+site/dist/
+api/system/ConstantsKeys.php
+api/system/EmailTemplates/
+api/system/Libraries/

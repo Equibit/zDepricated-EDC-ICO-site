@@ -1,0 +1,21 @@
+<!-- Modal -->
+<div id="admin-text-edit-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      {{#loadedText}}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myChangePasswordModal">{{i18n.adminTextEditTitle}} {{textKey}}</h4>
+        </div>
+        <div class="modal-body">
+          <textarea rows="20" class="form-control no-resize"{{#if inputDisabled}} disabled{{/if}} {($value)}="textText">{{textText}}</textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-custom btn-clear btn-sm" data-dismiss="modal" aria-label="Close">{{i18n.adminCommTemplatesCloseBtn}}</button>
+          <button ($click)="'saveComm(.)" type="button" class="btn btn-custom btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.adminCommTemplatesSaveBtn}}{{/if}}</button>
+        </div>
+      {{/loadedText}}
+    </div>
+  </div>
+</div>
+<!-- END Modal -->

@@ -1,0 +1,93 @@
+@import "colors";
+@import "mixins";
+
+.navbar-default {
+  & .media-body {
+    h4, span.text {
+      display: inline-block;
+      margin-bottom: 0;
+    }
+    h4 {
+      max-width: 230px;
+    }
+    span.text {
+      min-width: 250px;
+    }
+  }
+}
+
+.navbar-brand {
+  img {
+    height: 40px;
+    display: inline-block;
+  }
+  .ultra {
+    position: relative;
+    top: 3px;
+  }
+  padding: 5px 15px;
+  font-size: 30px;
+}
+
+.navbar-default,
+.navbar-default .navbar-nav .open>a:hover,
+.navbar-default .navbar-nav .open>a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  border-color: @brand-primary;
+  background-color: @grey-darkest;
+}
+.navbar-default .navbar-nav .dropdown-menu>li>a:hover {
+  background-color: @brand-primary-lightest;
+}
+.navbar-default .navbar-nav>li>a {
+  color: @white;
+}
+.navbar-default .navbar-nav>li>a:hover {
+  color: @brand-primary;
+}
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: @white;
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+  color: @white;
+  background-color: @brand-primary;
+}
+.navbar-default .navbar-toggle {
+  border-color: @brand-primary;
+  border-radius: 0;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: @brand-primary;
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  body {
+    margin-top:125px;
+  }
+}
+.navbar-default .navbar-nav>li>a:hover {
+  color: @white;
+  background-color: @brand-primary;
+}
+.dropdown .dropdown-toggle .badge {
+  position: relative;
+  background-color: @brand-primary;
+
+  .transition();
+}
+.dropdown:not(.open) .dropdown-toggle:hover .badge {
+  color: @brand-primary;
+  background-color: @white;
+}
+ul.pagination {
+  > li:last-child>a, > li:last-child>span, > li:first-child>a, > li:first-child>span {
+    border-radius: 0;
+  }
+  margin-bottom: 0;
+}

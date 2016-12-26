@@ -1,0 +1,32 @@
+<can-import from="easyapp/attrs/scrollstop.attr" />
+
+<ul class="nav navbar-nav navbar-right no-margin-right no-margin-left">
+  <li class="dropdown hidden-xs">
+    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="fa fa-envelope"></i>
+      {{#if notificationCount}} <span class="badge">{{notificationCount}}</span>{{/if}}</a>
+    <ul class="dropdown-menu notifications" scrollstop>
+      {{^if notifications.length}}
+        <li class="text-center bold"><br>{{i18n.notificationComponentNoMessages}}<br><br></li>
+      {{else}}
+        {{#each notifications}}
+          <li>
+            <a href="javascript:void(0);" ($click)="openNotification(.)">
+              <div class="media">
+                <div class="media-left">
+                  <i class="fa fa-envelope fa-3x"></i>
+                </div>
+                <div class="media-body">
+                  <button type="button" class="btn btn-xs btn-danger pull-right" ($click)="removeNotification(.)">{{i18n.notificationComponentDelete}}</button>
+                  <h4 class="media-heading">{{#if seen}}<i class="fa fa-eye"></i> {{/if}}{{title}}</h4><br>
+                  <span class="text">{{{text}}}</span>
+                  <span class="pull-right timestamp">{{timestampDetailed dateTime}}</span>
+                </div>
+              </div>
+            </a>
+          </li>
+        {{/each}}
+      {{/if}}
+    </ul>
+  </li>
+</ul>
+{{init}}

@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col-xs-8 col-md-9">
+    <div class="h1 no-top-margin">{{i18n.adminTextTitle}}</div>
+  </div>
+  <div class="col-xs-4 col-md-3">
+    {{#if languages.length}}
+      <div class="form-group">
+        <select selectpicker="large" {($value)}="useLanguages" class="selectpicker show-tick form-control border-bottom-primary">
+          {{#each languages}}
+            <option value="{{code}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    {{/if}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-8 col-md-9">
+    <div class="h3">{{i18n.adminTextEmailMe}}</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    {{#if loadedEmailData}}
+      <div class="btn-group btn-group-justified" role="group">
+        {{#each emailTemplates}}
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-sm btn-primary" ($click)="sendEmail('{{templateName}}')"{{#if buttonRunning}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{templateName}}{{/if}}</button>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <div class="row">
+        <div class="col-xs-12 col-md-12 text-center">
+          <span><span class="fa fa-3x fa-refresh fa-spin"></span></span>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</div>
+{{#if hasPhone}}
+  <div class="row">
+    <div class="col-xs-8 col-md-9">
+      <div class="h3">{{i18n.adminTextSMSMe}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      {{#if loadedSMSData}}
+        <div class="btn-group btn-group-justified" role="group">
+          {{#each smsTemplates}}
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-sm btn-primary" ($click)="sendEmail('{{templateName}}')"{{#if buttonRunning}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{templateName}}{{/if}}</button>
+            </div>
+          {{/each}}
+        </div>
+      {{else}}
+        <div class="row">
+          <div class="col-xs-12 col-md-12 text-center">
+            <span><span class="fa fa-3x fa-refresh fa-spin"></span></span>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+{{/if}}
+<div class="row">
+  <div class="col-xs-8 col-md-9">
+    <div class="h3">{{i18n.adminTextVariables}}</div>
+  </div>
+</div>
+{{#if loadedData}}
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <form>
+        <div class="panel">
+          <div class="panel-body">
+            <grid-component {(rows)}="textVariables">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th class="text-nowrap" ($click)="{sortBy 'textKey'}">{{i18n.adminTextKey}} {{{sortArrow 'textKey'}}}</th>
+                    <th class="text-nowrap" ($click)="{sortBy 'textLang'}">{{i18n.adminTextLang}} {{{sortArrow 'textLang'}}}</th>
+                    <th class="text-nowrap" ($click)="{sortBy 'textFound'}">{{i18n.adminTextFound}} {{{sortArrow 'textFound'}}}</th>
+                    <th class="text-nowrap" colspan="3">{{i18n.adminTextActions}}</th>
+                  </tr>
+                  </thead>
+                  {{#if textVariables.length}}
+                    <tbody>
+                    {{#each rows}}
+                      {{^if deleting}}
+                        <tr>
+                          <td>{{textKey}}</td>
+                          <td>{{textLang}}</td>
+                          <td>{{#if textFound}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
+                          <td>
+                            <dutton ($click)="editVariable(.)" class="btn btn-xs btn-warning">Edit</dutton>
+                            <dutton ($click)="deleteVariable(.)" class="btn btn-xs btn-danger">Delete</dutton>
+                          </td>
+                        </tr>
+                      {{else}}
+                        <tr>
+                          <td colspan="6" class="text-center">
+                            <span class="fa fa-refresh fa-spin fa-2x"></span>
+                          </td>
+                        </tr>
+                      {{/if}}
+                    {{/each}}
+                    </tbody>
+                  {{else}}
+                    <tbody>
+                    <tr>
+                      <td colspan="6" class="text-center bold">{{i18n.adminCommTemplatesNone}}</td>
+                    </tr>
+                    </tbody>
+                  {{/if}}
+                </table>
+              </div>
+            </grid-component>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 col-md-9">
+    </div>
+    <div class="col-xs-4 col-md-3">
+      <button ($click)="newVariable()" type="button" class="btn btn-sm btn-primary btn-block">{{i18n.adminTextCreateBtn}}</button>
+    </div>
+  </div>
+{{else}}
+  <div class="row">
+    <div class="col-xs-12 col-md-12 text-center">
+      <span class="huge"><span class="fa fa-refresh fa-spin"></span></span>
+    </div>
+  </div>
+{{/if}}
+<br><br>

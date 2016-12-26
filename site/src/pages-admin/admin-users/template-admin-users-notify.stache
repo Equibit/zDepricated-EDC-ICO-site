@@ -1,0 +1,37 @@
+<!-- Modal -->
+<div id="admin-users-notify-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myChangePasswordModal">{{i18n.userNotifyTitle}}</h4>
+            </div>
+            {{#newNotify}}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>{{i18n.userNotifySubject}}</label>
+                        <input type="text" class="form-control" {($value)}="title" {{inputDisabled}} placeholder="{{i18n.userNotifySubject}}" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.userNotifyMessage}}</label>
+                        <textarea class="form-control" {($value)}="text" {{inputDisabled}} placeholder="{{i18n.userNotifyMessage}}" autocomplete="off"></textarea>
+                    </div>
+
+                    {{#if successMessage}}
+                        <p class="green-text bold">{{i18n.userNotifySent}}</p>
+                    {{/if}}
+                    {{#if generalError}}
+                        <p class="red-text bold">{{i18n.userNotifyUnknownError}}</p>
+                    {{/if}}
+                    {{#if missingInformation}}
+                        <p class="red-text bold">{{i18n.userNotifyMissingInformation}}</p>
+                    {{/if}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="sendNotify(.)">{{i18n.userNotifySend}}</button>
+                </div>
+            {{/newNotify}}
+        </div>
+    </div>
+</div>
+<!-- END Modal -->

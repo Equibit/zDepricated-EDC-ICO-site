@@ -1,0 +1,45 @@
+<can-import from="easyapp/attrs/selectpicker.attr" />
+
+<!-- Sign-up Modal -->
+<div id="change-email-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myChangePasswordModal">{{i18n.changeEmailTitle}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="newEmail">{{i18n.changeEmailNew}}</label>
+                    <input type="email" class="form-control" id="newEmail" {($value)}="newEmail" ($blur)="emailCheckFunc()" ($enter)="saveChange()" {{inputDisabled}} placeholder="{{i18n.changeEmailNew}}" autocomplete="off" />
+                    {{#if emailCreateError}}
+                        <span class="red-text">{{i18n.changeEmailAlreadyUsedError}}</span>
+                    {{/if}}
+                    {{#if emailCreateInvalidError}}
+                        <span class="red-text">{{i18n.changeEmailInvalidError}}</span>
+                    {{/if}}
+                </div>
+
+                {{#if secondFactorVisible}}
+                    <div id="ask-for-second-factor" class="form-group">
+                        <label for="second_factor_login">{{i18n.changeEmailSecondFactor}}</label>
+                        <input type="text" class="form-control" id="second_factor_login" {($value)}="secondFactor" ($enter)="saveChange()" {{secondFactorDisabled}} placeholder="{{i18n.changeEmailSecondFactor}}" autocomplete="off" />
+                        <span class="green-text">{{i18n.changeEmailSecondFactorSent}}</span>
+                    </div>
+                {{/if}}
+
+                {{#if successMessage}}
+                    <p class="green-text bold">{{i18n.changeEmailSuccess}}</p>
+                {{/if}}
+                {{#if pleaseWaitMessage}}
+                    <p class="green-text bold">{{i18n.changeEmailPleaseWait}}</p>
+                {{/if}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="saveChange()" {{buttonRunning}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.changeEmailBtn}}{{/if}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Sign-up Modal -->

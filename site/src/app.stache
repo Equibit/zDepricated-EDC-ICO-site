@@ -1,0 +1,181 @@
+<can-import from="components/login-component/" />
+<can-import from="components/signup-component/" />
+<can-import from="components/forgot-password-component/" />
+
+<can-import from="components/settings-component/" />
+{{#if hasEmail}}<can-import from="components/change-email-component/" />{{/if}}
+{{#if hasPhone}}<can-import from="components/change-phone-component/" />{{/if}}
+<can-import from="components/change-password-component/" />
+<can-import from="components/change-question-component/" />
+
+{{#if hasSubUsers}}<can-import from="components/manage-child-users-component/" />{{/if}}
+{{#if hasAPI}}<can-import from="components/manage-api-keys-component/" />{{/if}}
+
+{{#if hasChat}}<can-import from="components/chat-component/" />{{/if}}
+<can-import from="components/notification-component/" />
+
+<can-import from="components/countdown-component/" />
+
+<can-import from="pages-admin/admin-users/" />
+<can-import from="pages-admin/admin-comm-templates/" />
+<can-import from="pages-admin/admin-text-variables/" />
+{{#if hasFAQs}}<can-import from="pages-admin/admin-faqs/" />{{/if}}
+{{#if hasBlog}}<can-import from="pages-admin/admin-blog/" />{{/if}}
+
+{{#if hasFAQs}}<can-import from="pages-site/page-faqs/" />{{/if}}
+{{#if hasBlog}}<can-import from="pages-site/page-blog/" />{{/if}}
+
+{{#if loaded}}
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand" ($click)="switchPage('pageHome')"><img src="/assets/img/logo.png"></a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        {{^if isLoggedIn}}
+          <ul class="nav navbar-nav">
+            {{#if hasBlog}}<li class="{{#is page 'pageBlog'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('pageBlog')">{{i18n.pageBlogNav}}</a></li>{{/if}}
+            {{#if hasFAQs}}<li class="{{#is page 'pageFAQs'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('pageFAQs')">{{i18n.pageFAQsNav}}</a></li>{{/if}}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="" data-toggle="modal" data-target="#sign-up-modal">{{i18n.signUpNav}}</a>
+            </li>
+            <li>
+              <a href="" data-toggle="modal" data-target="#login-modal">{{i18n.loginNav}}</a>
+            </li>
+            {{#if languages.length}}
+              <li class="dropdown">
+                <a href="javascript:void(0);" id="langDropDown" class="dropdown-toggle" data-toggle="dropdown" role="button">{{i18n.navSelectLanguage}} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  {{#each languages}}
+                    <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" ($click)="switchLang(code)">{{name}}</a></li>
+                  {{/each}}
+                </ul>
+              </li>
+            {{/if}}
+          </ul>
+        {{else}}
+          <ul class="nav navbar-nav">
+            {{#if hasBlog}}<li class="{{#is page 'pageBlog'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('pageBlog')">{{i18n.pageBlogNav}}</a></li>{{/if}}
+            {{#if hasFAQs}}<li class="{{#is page 'pageFAQs'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('pageFAQs')">{{i18n.pageFAQsNav}}</a></li>{{/if}}
+          </ul>
+          <ul class="nav navbar-nav navbar-right no-margin-left">
+            <li class="dropdown">
+              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">{{i18n.navUserMenu}} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                {{#if accountSettings.roles.i18nManage}}
+                  {{#if hasSubUsers}}<li><a href="" data-toggle="modal" data-target="#manage-users-modal">{{i18n.manageUsersNav}}</a></li>{{/if}}
+                  {{#if hasAPI}}<li><a href="" data-toggle="modal" data-target="#manage-api-keys-modal">{{i18n.manageKeysNav}}</a></li>{{/if}}
+                  {{#if (hasAPI || hasSubUsers)}}<li class="divider"></li>{{/if}}
+                {{/if}}
+                <li><a href="" data-toggle="modal" data-target="#settings-modal">{{i18n.settingsNav}}</a></li>
+                {{#if hasEmail}}<li><a href="" data-toggle="modal" data-target="#change-email-modal">{{i18n.changeEmailNav}}</a></li>{{/if}}
+                {{#if hasPhone}}<li><a href="" data-toggle="modal" data-target="#change-phone-modal">{{i18n.changePhoneNav}}</a></li>{{/if}}
+                <li><a href="" data-toggle="modal" data-target="#change-password-modal">{{i18n.changePasswordNav}}</a></li>
+                <li><a href="" data-toggle="modal" data-target="#change-question-modal">{{i18n.changeQuestionNav}}</a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:void(0);" ($click)="logoutFunc()">{{i18n.navLogout}}</a></li>
+              </ul>
+            </li>
+            {{#if accountSettings.roles.i18nAdmin}}
+              <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">{{i18n.navAdminMenu}} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="{{#is page 'adminUsers'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminUsers')">{{i18n.adminUserNav}}</a></li>
+                  <li class="{{#is page 'adminCommTemplates'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminCommTemplates')">{{i18n.adminCommTemplatesNav}}</a></li>
+                  <li class="{{#is page 'adminText'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminText')">{{i18n.adminTextNav}}</a></li>
+                  {{#if hasFAQs}}<li class="{{#is page 'adminFAQs'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminFAQs')">{{i18n.adminFAQsNav}}</a></li>{{/if}}
+                  {{#if hasBlog}}<li class="{{#is page 'adminBlog'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminBlog')">{{i18n.adminBlogNav}}</a></li>{{/if}}
+                </ul>
+              </li>
+            {{/if}}
+          </ul>
+          <notification-component></notification-component>
+          {{#if hasChat}}<chat-component></chat-component>{{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {{#if hasErrorMessage}}
+      <div class="alert alert-danger" role="alert">
+        <strong>{{i18n.error}}</strong> {{errorMessage}}
+      </div>
+    {{/if}}
+
+    {{#if isLoggedIn}}
+      {{#switch page}}
+        {{#case 'pageHome'}}
+          <div class="row">
+            <div class="col-xs-12 col-md-8 col-md-offset-2">
+              <countdown-component {(countdown)}="countdown"></countdown-component>
+              {{#if countdown}}Done{{else}}Not Done{{/if}}
+            </div>
+          </div>
+        {{/case}}
+        {{#case 'pageBlog'}}
+          <page-blog {lang}="lang"></page-blog>
+        {{/case}}
+        {{#case 'pageFAQs'}}
+          <page-faqs {lang}="lang"></page-faqs>
+        {{/case}}
+        {{#case 'adminUsers'}}
+          {{#if accountSettings.roles.i18nAdmin}}<admin-users {available-factors}="systemVariables.availableFactors" {available-roles}="systemVariables.availableRoles"></admin-users>{{/if}}
+        {{/case}}
+        {{#case 'adminCommTemplates'}}
+          {{#if accountSettings.roles.i18nAdmin}}<admin-comm-templates></admin-comm-templates>{{/if}}
+        {{/case}}
+        {{#case 'adminText'}}
+          {{#if accountSettings.roles.i18nAdmin}}<admin-text-variables></admin-text-variables>{{/if}}
+        {{/case}}
+        {{#case 'adminFAQs'}}
+          {{#if accountSettings.roles.i18nAdmin}}<admin-faqs></admin-faqs>{{/if}}
+        {{/case}}
+        {{#case 'adminBlog'}}
+          {{#if accountSettings.roles.i18nAdmin}}<admin-blog></admin-blog>{{/if}}
+        {{/case}}
+      {{/switch}}
+    {{else}}
+      {{#switch page}}
+        {{#case 'pageHome'}}
+          <div class="row">
+            <div class="col-xs-12 col-md-8 col-md-offset-2">
+              <countdown-component {(countdown)}="countdown"></countdown-component>
+              {{#if countdown}}Done{{else}}Not Done{{/if}}
+            </div>
+          </div>
+        {{/case}}
+        {{#case 'pageBlog'}}
+          <page-blog {lang}="lang"></page-blog>
+        {{/case}}
+        {{#case 'pageFAQs'}}
+          <page-faqs {lang}="lang"></page-faqs>
+        {{/case}}
+      {{/switch}}
+    {{/if}}
+  </div>
+
+  <login-component {(is-logged-in)}="isLoggedIn"></login-component>
+  <signup-component></signup-component>
+  <forgot-password-component></forgot-password-component>
+{{/if}}
+
+{{#if isAccountReady}}
+  <settings-component {account-settings}="accountSettings" {languages}="languages" {(lang)}="lang" {available-factors}="systemVariables.availableFactors"></settings-component>
+  {{#if hasEmail}}<change-email-component></change-email-component>{{/if}}
+  {{#if hasPhone}}<change-phone-component {account-settings}="accountSettings"></change-phone-component>{{/if}}
+  <change-password-component></change-password-component>
+  <change-question-component></change-question-component>
+  {{#if accountSettings.roles.i18nManage}}
+    <manage-child-users-component {available-factors}="systemVariables.availableFactors" {available-roles}="systemVariables.availableRoles"></manage-child-users-component>
+    <manage-api-keys-component></manage-api-keys-component>
+  {{/if}}
+{{/if}}

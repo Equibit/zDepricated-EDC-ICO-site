@@ -1,0 +1,5 @@
+*.css
+.idea
+/node_modules
+/deploy
+/dist/

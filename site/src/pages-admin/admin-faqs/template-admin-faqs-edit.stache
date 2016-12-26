@@ -1,0 +1,37 @@
+<!-- Modal -->
+<div id="admin-edit-faq-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{#editFAQ}}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myChangePasswordModal">{{i18n.editFAQTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>{{i18n.editFAQQuestion}}</label>
+                        <input type="text" class="form-control" {($value)}="question" {{inputDisabled}} placeholder="{{i18n.editFAQQuestion}}" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.editFAQAnswer}}</label>
+                        <textarea class="form-control" {($value)}="answer" {{inputDisabled}} placeholder="{{i18n.editFAQAnswer}}" autocomplete="off"></textarea>
+                    </div>
+
+                    {{#if successMessage}}
+                        <p class="green-text bold">{{i18n.editFAQSaved}}</p>
+                    {{/if}}
+                    {{#if generalError}}
+                        <p class="red-text bold">{{i18n.editFAQUnknownError}}</p>
+                    {{/if}}
+                    {{#if missingInformation}}
+                        <p class="red-text bold">{{i18n.editFAQMissingInformation}}</p>
+                    {{/if}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="saveFAQ(.)">{{i18n.editFAQSave}}</button>
+                </div>
+            {{/editFAQ}}
+        </div>
+    </div>
+</div>
+<!-- END Modal -->

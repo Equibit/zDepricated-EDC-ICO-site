@@ -1,0 +1,119 @@
+<can-import from="easyapp/attrs/selectpicker.attr" />
+<can-import from="easyapp/attrs/phonemask.attr" />
+
+<!-- Sign-up Modal -->
+<div id="sign-up-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="mySignUpModal">{{i18n.signUpTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="user_create">{{i18n.signUpUsername}}</label>
+          <input type="text" class="form-control" id="user_create" {($value)}="userCreate" ($blur)="usernameCheckFunc()" {{inputDisabled}} placeholder="{{i18n.signUpUsername}}" autocomplete="off" />
+          {{#if userCreateError}}
+            <span class="red-text">{{i18n.signUpUsernameNotAvailError}}</span>
+          {{/if}}
+          {{#if userCreateLengthError}}
+            <span class="red-text">{{i18n.signUpUsernameLengthError}}</span>
+          {{/if}}
+        </div>
+        {{#if hasEmail}}
+          <div class="form-group">
+            <label for="email_create">{{i18n.signUpEmail}}</label>
+            <input type="email" class="form-control" id="email_create" {($value)}="emailCreate" ($blur)="emailCheckFunc()" {{inputDisabled}} placeholder="{{i18n.signUpEmail}}" autocomplete="off" />
+            {{#if emailCreateError}}
+              <span class="red-text">{{i18n.signUpEmailAlreadyUsedError}}</span>
+            {{/if}}
+            {{#if emailCreateInvalidError}}
+              <span class="red-text">{{i18n.signUpEmailInvalidError}}</span>
+            {{/if}}
+          </div>
+        {{/if}}
+        {{#if hasPhone}}
+          <div class="form-group">
+            <label for="phone_create">{{i18n.signUpPhone}}</label>
+            <input phonemask type="text" class="form-control" id="phone_create" ($blur)="phoneCheckFunc()" {{inputDisabled}} placeholder="{{i18n.signUpPhone}}" autocomplete="off" />
+            {{#if phoneCreateError}}
+              <span class="red-text">{{i18n.signUpPhoneAlreadyUsedError}}</span>
+            {{/if}}
+            {{#if phoneCreateInvalidError}}
+              <span class="red-text">{{i18n.signUpPhoneInvalidError}}</span>
+            {{/if}}
+          </div>
+        {{/if}}
+        {{#if hasBoth}}
+          <div class="form-group">
+            <label for="phone_create">{{i18n.signUpConfirmWith}}</label>
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="radio checkbox-primary">
+                  <input type="radio" id="confirm_email" name="confirm_with" {{inputDisabled}} checked="checked" value="email">
+                  <label for="confirm_email">
+                    {{i18n.signUpEmail}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="radio checkbox-primary">
+                  <input type="radio" id="confirm_phone" name="confirm_with" {{inputDisabled}} value="phone">
+                  <label for="confirm_phone">
+                    {{i18n.signUpPhone}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+        <div class="form-group">
+          <label for="security_question_create">{{i18n.signUpSecurityQuestion}}</label>
+          <select selectpicker="large" id="security_question_create" {($value)}="securityQuestionCreate" {{inputDisabled}} class="selectpicker form-control">
+            {{#each i18n.changeQuestionQuestions}}
+              <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="security_answer_create">{{i18n.signUpSecurityAnswer}}</label>
+          <input type="text" class="form-control" id="security_answer_create" {($value)}="securityAnswerCreate" ($blur)="lengthAnswerFunc()" {{inputDisabled}} placeholder="{{i18n.signUpSecurityAnswer}}" autocomplete="off" />
+          {{#if securityAnswerError}}
+            <span class="red-text">{{i18n.signUpSecurityLengthError}}</span>
+          {{/if}}
+        </div>
+        <div class="form-group">
+          <label for="password_1_create">{{i18n.signUpPassword}}</label>
+          <input type="password" class="form-control" id="password_1_create" {($value)}="passwordCreate" ($keyup)="strongPassFunc(@element.val)" {{inputDisabled}} placeholder="{{i18n.signUpPassword}}" autocomplete="off" />
+          {{#if passwordStrengthText}}
+            <span class="{{passwordStrengthColor}}">{{passwordStrengthText}}</span>
+          {{/if}}
+        </div>
+        <div class="form-group">
+          <label for="password_2_create">{{i18n.signUpPasswordRetype}}</label>
+          <input type="password" class="form-control" id="password_2_create" {($value)}="passwordRetypedCreate" ($keyup)="comparePasswordFunc(@element.val)" {{inputDisabled}} ($enter)="signUpFunc()" placeholder="{{i18n.signUpPasswordRetype}}" autocomplete="off" />
+          {{#if passwordMismatchError}}
+            <span class="red-text">{{i18n.signUpPasswordMismatchError}}</span>
+          {{/if}}
+        </div>
+        {{#if secondFactorVisible}}
+          <div id="ask-for-second-factor" class="form-group">
+            <label for="second_factor_login">{{i18n.signUpSecondFactor}}</label>
+            <input type="text" class="form-control" id="second_factor_login" {($value)}="secondFactorSignUp" ($enter)="signUpFunc()" {{secondFactorDisabled}} placeholder="{{i18n.signUpSecondFactor}}" autocomplete="off" />
+            <span class="green-text">{{i18n.signUpSecondFactorSent}}</span>
+          </div>
+        {{/if}}
+        {{#if generalError}}
+          <p class="red-text bold">{{i18n.singUpUnknownError}}</p>
+        {{/if}}
+        {{#if pleaseWaitMessage}}
+          <p class="green-text bold">{{i18n.signUpPleaseWait}}</p>
+        {{/if}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="signUpFunc()" {{buttonRunning}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.signUpBtn}}{{/if}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Sign-up Modal -->

@@ -1,0 +1,47 @@
+<!-- Modal -->
+<div id="admin-new-faq-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{#newFAQ}}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myChangePasswordModal">{{i18n.newFAQTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>{{i18n.newFAQQuestion}}</label>
+                        <input type="text" class="form-control" {($value)}="question" {{inputDisabled}} placeholder="{{i18n.newFAQQuestion}}" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.newFAQAnswer}}</label>
+                        <textarea class="form-control" {($value)}="answer" {{inputDisabled}} placeholder="{{i18n.editFAQAnswer}}" autocomplete="off"></textarea>
+                    </div>
+                    {{#if languages.length}}
+                        <div class="form-group">
+                            <label>{{i18n.newFAQLanguage}}</label>
+                            <select selectpicker="large" {($value)}="lang" class="selectpicker show-tick form-control">
+                                {{#each languages}}
+                                    <option value="{{code}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    {{/if}}
+
+                    {{#if successMessage}}
+                        <p class="green-text bold">{{i18n.newFAQSaved}}</p>
+                    {{/if}}
+                    {{#if generalError}}
+                        <p class="red-text bold">{{i18n.newFAQUnknownError}}</p>
+                    {{/if}}
+                    {{#if missingInformation}}
+                        <p class="red-text bold">{{i18n.newFAQMissingInformation}}</p>
+                    {{/if}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="addFAQ(.)">{{i18n.newFAQSave}}</button>
+                </div>
+            {{/newFAQ}}
+        </div>
+    </div>
+</div>
+<!-- END Modal -->

@@ -1,0 +1,33 @@
+<can-import from="easyapp/attrs/scrollstop.attr" />
+
+<ul class="nav navbar-nav navbar-right no-margin-right">
+  <li class="dropdown hidden-xs">
+    <a href="javascript:void(0);" ($click)="readMessages(@element)" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="fa fa-comments-o"></i>
+      {{#if newMessage}} <span class="badge">{{i18n.chatComponentNew}}</span>{{/if}}</a>
+    <ul id="chat-dropdown" class="dropdown-menu">
+      <li class="chat-window" scrollstop>
+        {{#each messageData}}
+          <div class="media">
+            <div class="media-left media-middle">
+              <div>
+                <img class="media-object chat-size" src="https://robohash.org/{{username}}.png?size=96x96">
+              </div>
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading">{{username}} <span class="small text-muted">{{timestampDetailed dateTime}}</span></h5>
+              {{#is action 'message'}}<span class="chat-text">{{message}}</span>{{/is}}
+              {{#is action 'join'}}<span class="text-muted"><em>{{message}}</em></span>{{/is}}
+              {{#is action 'left'}}<span class="text-muted"><em>{{message}}</em></span>{{/is}}
+            </div>
+          </div>
+        {{/each}}
+      </li>
+      <li>
+        <div class="add-padding">
+          <input id="chat_box" type="text" {($value)}="message" ($enter)="sendMessage()" class="form-control" placeholder="{{i18n.chatComponentEnterSend}}">
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+{{init}}

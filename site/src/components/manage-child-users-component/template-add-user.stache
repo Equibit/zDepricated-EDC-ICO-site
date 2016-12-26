@@ -1,0 +1,73 @@
+<!-- Add User Modal -->
+<div id="add-user-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        {{#newUser}}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mySignUpModal">{{i18n.addUserTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="user_create">{{i18n.addUserUsername}}</label>
+                        <input type="text" class="form-control" id="user_create" placeholder="{{i18n.addUserUsername}}" autocomplete="off" {($value)}="userName" ($blur)="../usernameCheckFunc(.)"{{#inputDisabled}} disabled{{/inputDisabled}} />
+                        {{#if userNameError}}
+                            <span class="red-text">{{i18n.addUserUsernameNotAvailError}}</span>
+                        {{/if}}
+                        {{#if userNameLengthError}}
+                            <span class="red-text">{{i18n.addUserUsernameLengthError}}</span>
+                        {{/if}}
+                    </div>
+                    <div class="form-group">
+                        <label for="email_create">{{i18n.addUserEmail}}</label>
+                        <input type="email" class="form-control" id="email_create" placeholder="{{i18n.addUserEmail}}" autocomplete="off" {($value)}="email" ($blur)="../emailCheckFunc(.)"{{#inputDisabled}} disabled{{/inputDisabled}} />
+                        {{#if emailError}}
+                            <span class="red-text">{{i18n.addUserEmailAlreadyUsedError}}</span>
+                        {{/if}}
+                        {{#if emailInvalidError}}
+                            <span class="red-text">{{i18n.addUserEmailInvalidError}}</span>
+                        {{/if}}
+                    </div>
+                    <div class="form-group">
+                        <label for="password_1_create">{{i18n.addUserPassword}}</label>
+                        <input type="password" class="form-control" id="password_1_create" placeholder="{{i18n.addUserPassword}}" autocomplete="off" {($value)}="passwordNew" ($keyup)="../strongPassFunc(@element.val, .)" {{#inputDisabled}}disabled{{/inputDisabled}} />
+                        {{#if passwordStrengthText}}
+                            <span class="{{passwordStrengthColor}}">{{passwordStrengthText}}</span>
+                        {{/if}}
+                    </div>
+                    <div class="form-group">
+                        <label for="password_2_create">{{i18n.addUserPasswordRetype}}</label>
+                        <input type="password" class="form-control" id="password_2_create" placeholder="{{i18n.addUserPasswordRetype}}" autocomplete="off" {($value)}="passwordRetyped" ($keyup)="../comparePasswordFunc(@element.val, .)" ($enter)="signUpFunc()" {{#inputDisabled}}disabled{{/inputDisabled}} />
+                        {{#if passwordMismatchError}}
+                            <span class="red-text">{{i18n.addUserPasswordMismatchError}}</span>
+                        {{/if}}
+                    </div>
+                    <div class="form-group">
+                        <label for="manage_new_factor">{{i18n.addUserSecondFactorType}}</label>
+                        <select selectpicker="large" id="manage_new_factor" {($value)}="twoFactorType" class="selectpicker show-tick form-control manage-users-large" title="{{i18n.addUserNoFactorSelected}}">
+                            {{#each availableFactors}}
+                                <option data-subtext="{{factorDescValue}}" value="{{factorID}}" {{#is factorID '0'}}selected{{/is}} {{^if available}}disabled{{/if}}>{{factorTypeValue}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="manage_new_roles">{{i18n.addUserRoles}}</label>
+                        <select selectpicker="large" id="manage_new_roles" class="selectpicker manage-users-large form-control show-tick" multiple {($value)}="roles" title="{{i18n.addUserNoRolesSelected}}" data-container="body">
+                            {{#each availableRoles}}
+                                <option data-subtext="{{roleDescValue}}" value="{{roleName}}">{{roleNameValue}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    {{#if generalError}}
+                        <p class="red-text bold">{{i18n.addUserUnknownError}}</p>
+                    {{/if}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-clear btn-sm" ($click)="../cancelAddUser()" {{buttonRunning}}>{{i18n.addUserCancelBtn}}</button>
+                    <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="../addUser(.)" {{buttonRunning}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.addUserCreateBtn}}{{/if}}</button>
+                </div>
+            </div>
+        {{/newUser}}
+    </div>
+</div>
+<!-- END Sign-up Modal -->

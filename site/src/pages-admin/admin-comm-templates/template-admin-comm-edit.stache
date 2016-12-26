@@ -1,0 +1,42 @@
+<!-- Modal -->
+<div id="admin-comm-edit-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      {{#loadedComm}}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myChangePasswordModal">{{i18n.adminCommTemplatesEditTitle}} {{templateName}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <select selectpicker="large" {($value)}="edit" class="selectpicker show-tick form-control border-bottom-primary">
+                <option value="subject">subject</option>
+                <option value="htmlTemplate">htmlTemplate</option>
+                <option value="textTemplate">textTemplate</option>
+                <option value="smsTemplate">smsTemplate</option>
+            </select>
+          </div>
+          {{#switch edit}}
+            {{#case 'subject'}}
+              <input class="form-control" type="text" {($value)}="subject"{{#if inputDisabled}} disabled{{/if}}>
+            {{/case}}
+            {{#case 'htmlTemplate'}}
+              <textarea rows="20" class="form-control no-resize"{{#if inputDisabled}} disabled{{/if}} {($value)}="htmlTemplate">{{htmlTemplate}}</textarea>
+            {{/case}}
+            {{#case 'textTemplate'}}
+              <textarea rows="10" class="form-control no-resize"{{#if inputDisabled}} disabled{{/if}} {($value)}="textTemplate">{{textTemplate}}</textarea>
+            {{/case}}
+            {{#case 'smsTemplate'}}
+              <textarea rows="10" class="form-control no-resize"{{#if inputDisabled}} disabled{{/if}} {($value)}="smsTemplate">{{smsTemplate}}</textarea>
+            {{/case}}
+          {{/switch}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-custom btn-clear btn-sm" data-dismiss="modal" aria-label="Close">{{i18n.adminCommTemplatesCloseBtn}}</button>
+          <button ($click)="'saveComm(.)" type="button" class="btn btn-custom btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.adminCommTemplatesSaveBtn}}{{/if}}</button>
+        </div>
+      {{/loadedComm}}
+    </div>
+  </div>
+</div>
+<!-- END Modal -->

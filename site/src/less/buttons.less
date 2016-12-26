@@ -1,0 +1,141 @@
+@import "colors";
+
+.btn {
+  &.btn-sm {
+    font-size: 12px;
+    padding: 9px 25px;
+  }
+  &.btn-xs {
+    font-size: 10px !important;
+    padding: 6px 10px !important;
+  }
+  &.btn-xxs {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+  &.btn-custom {
+    min-width: 268px;
+  }
+  &.btn-red {
+    &:focus {
+      background-color: @red;
+      color: white;
+    }
+    &:hover {
+      background-color: @red-dark;
+      color: white;
+    }
+    &.disabled:hover, &[disabled]:hover {
+      background-color: @red;
+    }
+
+    background-color: @red;
+    border-color: @red-dark;
+    color: white;
+  }
+  &.btn-orange {
+    &:focus {
+      background-color: @orange;
+      color: white;
+    }
+    &:hover {
+      background-color: @orange-dark;
+      color: white;
+    }
+    &.disabled:hover, &[disabled]:hover {
+      background-color: @orange;
+    }
+
+    background-color: @orange;
+    border-color: @orange-dark;
+    color: white;
+  }
+  &.btn-blue {
+    &:focus {
+      background-color: @blue;
+      color: white;
+    }
+    &:hover {
+      background-color: @blue-dark;
+      color: white;
+    }
+    &.disabled:hover, &[disabled]:hover {
+      background-color: @blue;
+    }
+
+    background-color: @blue;
+    border-color: @blue-dark;
+    color: white;
+  }
+  &.btn-green {
+    &:focus {
+      background-color: @green;
+      color: white;
+    }
+    &:hover {
+      background-color: @green-dark;
+      color: white;
+    }
+    &.disabled:hover, &[disabled]:hover {
+      background-color: @green;
+    }
+
+    background-color: @green;
+    border-color: @green-dark;
+    color: white;
+  }
+  &.btn-primary {
+    &.border-bottom-primary {
+      & * {
+        border-bottom: none;
+      }
+      height: 41px;
+      border-bottom: 3px solid @brand-primary !important;
+    }
+    &:focus {
+      background-color: @brand-primary;
+      color: white;
+    }
+    &:hover {
+      background-color: @brand-primary-darkest;
+      border-color: @brand-primary-darkest;
+      color: white;
+    }
+    &.disabled:hover, &[disabled]:hover {
+      background-color: @brand-primary !important;
+    }
+
+    border-color: @brand-primary-darkest;
+    background-color: @brand-primary;
+    color: white;
+  }
+  &.btn-clear {
+    &:focus {
+      border-color: @grey-light;
+      background-color: transparent;
+      color: black;
+    }
+    &:hover {
+      background-color: @grey-light;
+    }
+
+    border-color: @grey-light;
+    background-color: transparent;
+    color: black;
+  }
+
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 0;
+  padding: 15px 25px;
+}
+.btn-group-vertical {
+  & > .btn:first-child:not(:last-child) {
+    border-radius: 0;
+  }
+  & > .btn:last-child:not(:first-child) {
+    border-radius: 0;
+  }
+}

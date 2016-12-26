@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12 col-lg-10 col-lg-offset-1">
+        <div class="h1 no-top-margin">{{i18n.pageBlogTitle}}</div>
+    </div>
+</div>
+{{#if loadedData}}
+    <div class="row">
+        <div class="col-md-12 col-lg-10 col-lg-offset-1">
+            <div class="panel">
+                {{#each blog}}
+                    <div class="panel-heading">
+                        <div class="pull-right text-center">
+                            {{timestamp dateTime}}
+                        </div>
+                        <h4><a href="{{link}}" target="_blank">{{title}}</a></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                {{#if img}}
+                                    <img src="{{img}}" class="img-responsive img-thumbnail">
+                                {{/if}}
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="pull-right text-center">
+                                    {{#if link}}
+                                        <a href="{{link}}" class="btn btn-primary btn-sm" target="_blank">{{i18n.pageBlogReadMore}}</a>
+                                    {{else}}
+                                        <!-- todo: when there isn't a link display full post ono click -->
+                                    {{/if}}
+                                </div>
+                                <div>{{{short}}}</div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+{{else}}
+    <div class="row">
+        <div class="col-md-12 col-lg-10 col-lg-offset-1 text-center">
+            <span class="huge"><span class="fa fa-refresh fa-spin"></span></span>
+        </div>
+    </div>
+{{/if}}

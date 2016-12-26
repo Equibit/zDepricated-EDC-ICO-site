@@ -1,0 +1,59 @@
+<!-- Modal -->
+<div id="admin-new-blog-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{#newBlog}}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myChangePasswordModal">{{i18n.newBlogTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>{{i18n.newBlogBlogTitle}}</label>
+                        <input type="text" class="form-control" {($value)}="title" {{inputDisabled}} placeholder="{{i18n.newBlogBlogTitle}}" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.newBlogImgLink}}</label>
+                        <input type="text" class="form-control" {($value)}="img" {{inputDisabled}} placeholder="{{i18n.newBlogImgLink}}" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.newBlogShortDesc}}</label>
+                        <textarea class="form-control" {($value)}="short" {{inputDisabled}} placeholder="{{i18n.newBlogShortDesc}}" autocomplete="off"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.newBlogPost}}</label>
+                        <textarea class="form-control" {($value)}="post" {{inputDisabled}} placeholder="{{i18n.newBlogPost}}" autocomplete="off"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.newBlogLink}}</label>
+                        <input type="text" class="form-control" {($value)}="link" {{inputDisabled}} placeholder="{{i18n.newBlogLink}}" autocomplete="off" />
+                    </div>
+                    {{#if languages.length}}
+                        <div class="form-group">
+                            <label>{{i18n.newBlogLanguage}}</label>
+                            <select selectpicker="large" {($value)}="lang" class="selectpicker show-tick form-control">
+                                {{#each languages}}
+                                    <option value="{{code}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    {{/if}}
+
+                    {{#if successMessage}}
+                        <p class="green-text bold">{{i18n.newBlogSaved}}</p>
+                    {{/if}}
+                    {{#if generalError}}
+                        <p class="red-text bold">{{i18n.newBlogUnknownError}}</p>
+                    {{/if}}
+                    {{#if missingInformation}}
+                        <p class="red-text bold">{{i18n.newBlogMissingInformation}}</p>
+                    {{/if}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="addBlog(.)">{{i18n.newBlogSave}}</button>
+                </div>
+            {{/newBlog}}
+        </div>
+    </div>
+</div>
+<!-- END Modal -->

@@ -1,0 +1,23 @@
+@import 'fonts';
+
+.table {
+  th, td {
+    text-align: center;
+  }
+  td {
+    line-height: 29px !important;
+  }
+  .collapse-td {
+    padding: 0 !important;
+  }
+  &.table-custom>tbody>tr:nth-of-type(even)>td,
+  &.table-custom>tbody>tr:nth-of-type(even)>th {
+    border-top: 1px solid transparent !important;
+  }
+  th {
+    font-family: 'gotham_boldregular', sans-serif;
+  }
+
+  min-width: 100%;
+  margin-bottom: 0;
+}

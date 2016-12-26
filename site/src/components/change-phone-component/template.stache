@@ -1,0 +1,46 @@
+<can-import from="easyapp/attrs/selectpicker.attr" />
+<can-import from="easyapp/attrs/phonemask.attr" />
+
+<!-- Sign-up Modal -->
+<div id="change-phone-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myChangePasswordModal">{{i18n.changePhoneTitle}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="new_phone">{{i18n.changePhoneNew}}</label>
+                    <input type="text" phonemask class="form-control" id="new_phone" ($blur)="phoneCheckFunc()" ($enter)="saveChange()" {{inputDisabled}} placeholder="{{i18n.changePhoneNew}}" autocomplete="off" />
+                    {{#if phoneCreateError}}
+                        <span class="red-text">{{i18n.changePhoneAlreadyUsedError}}</span>
+                    {{/if}}
+                    {{#if phoneCreateInvalidError}}
+                        <span class="red-text">{{i18n.changePhoneInvalidError}}</span>
+                    {{/if}}
+                </div>
+
+                {{#if secondFactorVisible}}
+                    <div id="ask-for-second-factor" class="form-group">
+                        <label for="second_factor_login">{{i18n.changePhoneSecondFactor}}</label>
+                        <input type="text" class="form-control" id="second_factor_login" {($value)}="secondFactor" ($enter)="saveChange()" {{secondFactorDisabled}} placeholder="{{i18n.changePhoneSecondFactor}}" autocomplete="off" />
+                        <span class="green-text">{{i18n.changePhoneSecondFactorSent}}</span>
+                    </div>
+                {{/if}}
+
+                {{#if successMessage}}
+                    <p class="green-text bold">{{i18n.changePhoneSuccess}}</p>
+                {{/if}}
+                {{#if pleaseWaitMessage}}
+                    <p class="green-text bold">{{i18n.changePhonePleaseWait}}</p>
+                {{/if}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="saveChange()" {{buttonRunning}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.changePhoneBtn}}{{/if}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Sign-up Modal -->

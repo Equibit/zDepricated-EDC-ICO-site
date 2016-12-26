@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-xs-8 col-md-9">
+    <div class="h1 no-top-margin">{{i18n.adminCommTemplatesTitle}}</div>
+  </div>
+</div>
+{{#if loadedData}}
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <div class="panel">
+        <div class="panel-body">
+          <grid-component {(rows)}="adminCommTemplatesData">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="text-nowrap" ($click)="{sortBy 'templateName'}">{{i18n.adminCommTemplatesTemplateName}} {{{sortArrow 'templateName'}}}</th>
+                  <th class="text-nowrap">{{i18n.adminCommTemplatesHasSubject}}</th>
+                  <th class="text-nowrap">{{i18n.adminCommTemplatesHasHTML}}</th>
+                  <th class="text-nowrap">{{i18n.adminCommTemplatesHasText}}</th>
+                  <th class="text-nowrap">{{i18n.adminCommTemplatesHasSMS}}</th>
+                  <th class="text-nowrap">{{i18n.adminCommTemplatesHasKeys}}</th>
+                  <th class="text-nowrap" colspan="3">{{i18n.adminCommTemplatesActions}}</th>
+                </tr>
+                </thead>
+                {{#if adminCommTemplatesData.length}}
+                  <tbody>
+                  {{#each rows}}
+                    {{^if deleting}}
+                      <tr>
+                        <td>{{templateName}}</td>
+                        <td>{{#if subject}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
+                        <td>{{#if htmlTemplate}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
+                        <td>{{#if textTemplate}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
+                        <td>{{#if smsTemplate}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
+                        <td>{{#if keysFound}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
+                        <td><dutton ($click)="copyComm(.)" class="btn btn-xs btn-primary">Copy</dutton>
+                          <dutton ($click)="editComm(.)" class="btn btn-xs btn-warning">Edit</dutton>
+                          <dutton ($click)="viewComm(.)" class="btn btn-xs btn-primary">View HTML</dutton>
+                          <dutton ($click)="deleteComm(.)" class="btn btn-xs btn-danger">Delete</dutton>
+                        </td>
+                      </tr>
+                    {{else}}
+                      <tr>
+                        <td colspan="6" class="text-center">
+                          <span class="fa fa-refresh fa-spin fa-2x"></span>
+                        </td>
+                      </tr>
+                    {{/if}}
+                  {{/each}}
+                  </tbody>
+                {{else}}
+                  <tbody>
+                  <tr>
+                    <td colspan="6" class="text-center bold">{{i18n.adminCommTemplatesNone}}</td>
+                  </tr>
+                  </tbody>
+                {{/if}}
+              </table>
+            </div>
+          </grid-component>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 col-md-9">
+    </div>
+    <div class="col-xs-4 col-md-3">
+      <button ($click)="newCommTemplate()" type="button" class="btn btn-sm btn-primary btn-block">{{i18n.adminCommTemplatesCreateBtn}}</button>
+    </div>
+  </div>
+{{else}}
+  <div class="row">
+    <div class="col-xs-12 col-md-12 text-center">
+      <span class="huge"><span class="fa fa-refresh fa-spin"></span></span>
+    </div>
+  </div>
+{{/if}}
+
+{{>templateAdminCommView}}
+{{>templateAdminCommEdit}}
+{{>templateAdminCommNew}}

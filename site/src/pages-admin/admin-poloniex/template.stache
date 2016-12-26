@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-xs-8 col-md-9">
+    <div class="h1 no-top-margin">{{i18n.adminTextTitle}}</div>
+  </div>
+</div>
+{{#if loadedData}}
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <form>
+        <div class="panel">
+          <div class="panel-body">
+            {{price}}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{{else}}
+  <div class="row">
+    <div class="col-xs-12 col-md-12 text-center">
+      <span class="huge"><span class="fa fa-refresh fa-spin"></span></span>
+    </div>
+  </div>
+{{/if}}
+<br><br>

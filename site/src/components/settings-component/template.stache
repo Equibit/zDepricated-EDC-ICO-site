@@ -1,0 +1,63 @@
+<can-import from="easyapp/attrs/selectpicker.attr" />
+
+<!-- Sign-up Modal -->
+<div id="settings-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="mySettingsModal">{{i18n.settingsTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        {{#if hasEmail}}
+          {{#if accountSettings.emailConfirmed}}
+            <div class="form-group">
+              <div class="checkbox checkbox-primary">
+                <input type="checkbox" id="email_notifications" {{inputDisabled}} {($checked)}="accountSettings.emailNotifications">
+                <label for="email_notifications">{{i18n.settingsEmailNotifications}}</label>
+              </div>
+            </div>
+          {{/if}}
+        {{/if}}
+        {{#if hasPhone}}
+          {{#if accountSettings.phoneConfirmed}}
+            <div class="form-group">
+              <div class="checkbox checkbox-primary">
+                <input type="checkbox" id="phone_notifications" {{inputDisabled}} {($checked)}="accountSettings.phoneNotifications">
+                <label for="phone_notifications">{{i18n.settingsPhoneNotifications}}</label>
+              </div>
+            </div>
+          {{/if}}
+        {{/if}}
+        <div class="form-group">
+          {{#if availableFactors}}
+            <label for="settings_factor">{{i18n.settingsSecondFactor}}</label>
+            <select selectpicker="large" id="settings_factor" {($value)}="accountSettings.twoFactorType" {{inputDisabled}} class="selectpicker show-tick form-control">
+              {{#each availableFactors}}
+                <option data-subtext="{{factorDescValue}}" value="{{factorID}}" {{#is accountSettings.twoFactorType factorID}}selected="selected"{{/is}} {{^if available}}disabled{{/if}}>{{factorTypeValue}}</option>
+              {{/each}}
+            </select>
+          {{/if}}
+        </div>
+        {{#if languages.length}}
+          <div class="form-group">
+            <label for="settings_new_language">{{i18n.settingsLanguage}}</label>
+            <select selectpicker="large" id="settings_new_language" {($value)}="newLanguage" {{inputDisabled}} class="selectpicker show-tick form-control">
+              {{#each languages}}
+                <option value="{{code}}" {{#is lang code}}selected="selected"{{/is}}>{{name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        {{/if}}
+
+        {{#if successMessage}}
+          <p class="green-text bold">{{i18n.settingsSaveSuccess}}</p>
+        {{/if}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="saveSettings()" {{buttonRunning}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.settingsSaveBtn}}{{/if}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Sign-up Modal -->

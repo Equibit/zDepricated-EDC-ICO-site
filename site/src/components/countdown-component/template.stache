@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-md-12 text-center">
+    {{#if hasMonths}}<h1><span>{{months}}</span> Month{{#if manyMonths}}s{{/if}}</h1>{{/if}}
+    {{#if hasDays}}<h1><span>{{days}}</span> Day{{#if manyDays}}s{{/if}}</h1>{{/if}}
+    {{#if hasHours}}<h1><span>{{hours}}</span> Hour{{#if manyHours}}s{{/if}}</h1>{{/if}}
+    {{#if hasMinutes}}<h1><span>{{minutes}}</span> Minute{{#if manyMinutes}}s{{/if}}</h1>{{/if}}
+    {{#if hasSeconds}}<h1><span>{{seconds}}</span> Second{{#if manySeconds}}s{{/if}}</h1>{{/if}}
+  </div>
+</div>

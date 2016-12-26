@@ -1,0 +1,43 @@
+<!-- Login Modal -->
+<div id="login-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myLoginModal">{{i18n.loginTitle}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="user_login">{{i18n.loginUsername}}</label>
+                    <input type="text" class="form-control" id="user_login" {($value)}="userLogin" {{inputDisabled}} placeholder="{{i18n.loginUsername}}" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <label for="password_login">{{i18n.loginPassword}}</label>
+                    <input type="password" class="form-control" id="password_login" {($value)}="passwordLogin" ($enter)="loginFunc()" {{inputDisabled}} placeholder="{{i18n.loginPassword}}" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <div class="checkbox checkbox-primary">
+                        <input type="checkbox" id="checkbox_share_login" {{inputDisabled}}>
+                        <label for="checkbox_share_login">
+                            {{i18n.loginStay}}
+                        </label>
+                    </div>
+                </div>
+                <a href="#" ($click)="openForgotPassword()">{{i18n.loginForgotPasswordLink}}</a>
+                {{#if secondFactorVisible}}
+                    <div id="ask-for-second-factor" class="form-group">
+                        <label for="second_factor_login">{{i18n.loginSecondFactor}}</label>
+                        <input type="text" class="form-control" id="second_factor_login" {($value)}="secondFactorLogin" ($enter)="loginFunc()" {{secondFactorDisabled}} placeholder="{{i18n.loginSecondFactor}}" autocomplete="off" />
+                    </div>
+                {{/if}}
+                {{#if loginErrorVisible}}
+                    <p class="red-text">{{i18n.loginGeneralError}}</p>
+                {{/if}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" ($click)="loginFunc()" {{buttonRunning}} class="btn btn-custom btn-primary btn-sm">{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.loginBtn}}{{/if}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Login Modal -->

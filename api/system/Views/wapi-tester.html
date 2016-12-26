@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Testing</title>
+    <style>
+        textarea {
+            width: 300px;
+            height: 50px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 6px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center">
+    <button type="button" class="logout">logout</button>
+</div>
+<hr>
+<table cellspacing="0" cellpadding="2" style="width:100%">
+    <thead>
+    <tr>
+        <th>EndPoint</th>
+        <th>Method</th>
+        <th>Post Data</th>
+        <th>Buttons</th>
+        <th>Results</th>
+    </tr>
+    <tr>
+        <td colspan="5" style="text-align: center"><hr></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td colspan="5" style="text-align: center">{Must have Role i18nAdmin or i18nUser to be able to login and use any singed requests)</td>
+    </tr>
+    <tr>
+        <td>/wapi/check-login/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/check-login/" data-method="GET" data-results="checkLoginResults">run</button></td>
+        <td><textarea id="checkLoginResults"></textarea></td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td colspan="5">Sign-up (/wapi/sign-up/) post data is preprocessed in this testing application. Sign-up is multi-step. User name and Email needs to be unique. Use the API below to check first.</td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td>/wapi/sign-up/</td>
+        <td>POST</td>
+        <td><textarea id="signUpData">{"user":"marc1234", "email":"godard.m@gmail.com", "pass":"123", "retype":"123", "question":"What is this or that", "answer":"nonsense", "factor":""}</textarea></td>
+        <td><button class="button" type="button" data-url="/wapi/sign-up/" data-method="POST" data-results="signUpResults" data-api-data="signUpData" data-unsigned="true">Sign Up</button></td>
+        <td><textarea id="signUpResults"></textarea></td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td colspan="5">Login (/wapi/initiate/) post data is preprocessed in this testing application. Login is multi-step and these post data variables has nothing to do with the login.</td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td>/wapi/initiate/</td>
+        <td>POST</td>
+        <td><textarea id="loginData">{"loginUserName":"marcmarc", "loginPassword":"1234"}</textarea></td>
+        <td><button class="button" type="button" data-url="/wapi/initiate/" data-method="POST" data-results="loginResults" data-api-data="loginData">login</button></td>
+        <td><textarea id="loginResults"></textarea></td>
+    </tr>
+    <tr>
+        <td>/wapi/system-variables/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/system-variables/" data-method="GET" data-results="variablesResults">run</button></td>
+        <td><textarea id="variablesResults"></textarea></td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td colspan="5">The following two calls can be done by unsigned requests.</td>
+    </tr>
+    <!---
+        CHECK USERNAME
+    --->
+    <tr style="background-color: #e1e1e1;">
+        <td>/wapi/check-username/<input id="checkUsernameData" type="text" placeholder="{userName}">/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/check-username/" data-method="GET" data-results="checkUsernameResults" data-url-data="checkUsernameData" data-unsigned="true">run</button></td>
+        <td><textarea id="checkUsernameResults"></textarea></td>
+    </tr>
+    <!---
+        CHECK EMAIL
+    --->
+    <tr style="background-color: #e1e1e1;">
+        <td>/wapi/check-email/<input id="checkEmailData" type="text" placeholder="{email}">/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/check-email/" data-method="GET" data-results="checkEmailResults" data-url-data="checkEmailData" data-unsigned="true">run</button></td>
+        <td><textarea id="checkEmailResults"></textarea></td>
+    </tr>
+    <!---
+        ACCOUNT SETTINGS
+    --->
+    <tr>
+        <td colspan="5" style="text-align: center"><hr><h3>Account Settings</h3>(Must Send Signed Request)</td>
+    </tr>
+    <tr>
+        <td>/wapi/account-settings/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/account-settings/" data-method="GET" data-results="getSettingsResults">run</button></td>
+        <td><textarea id="getSettingsResults"></textarea></td>
+    </tr>
+    <tr>
+        <td>/wapi/account-settings/</td>
+        <td>POST</td>
+        <td><textarea id="setSettingsData">{"baseLang":"en","twoFactorType":"0", "packages":[1,2]}</textarea></td>
+        <td><button class="button" type="button" data-url="/wapi/account-settings/" data-method="POST" data-results="setSettingsResults" data-api-data="setSettingsData">run</button></td>
+        <td><textarea id="setSettingsResults"></textarea></td>
+    </tr>
+    <!---
+        CHANGE PASSWORD
+    --->
+    <tr style="background-color: #e1e1e1;">
+        <td colspan="5">Password change (/wapi/change-password/) post data is preprocessed in this testing application. Both will be hashed with the restAPI.hashMe() function before sending.</td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td>/wapi/change-password/</td>
+        <td>POST</td>
+        <td><textarea id="setPasswordData">{"oldPassword":"1234","newPassword":"123"}</textarea></td>
+        <td><button class="button" type="button" data-url="/wapi/change-password/" data-method="POST" data-results="setPasswordResults" data-api-data="setPasswordData">run</button></td>
+        <td><textarea id="setPasswordResults"></textarea></td>
+    </tr>
+    <!---
+        CHANGE SECURITY QUESTION
+    --->
+    <tr>
+        <td>/wapi/change-question/</td>
+        <td>POST</td>
+        <td><textarea id="setQuestionData">{"question":"what is pi?","answer":"3.14159265358979323846264338327950288419716939937510582 for Ilya"}</textarea></td>
+        <td><button class="button" type="button" data-url="/wapi/change-question/" data-method="POST" data-results="setQuestionResults" data-api-data="setQuestionData">run</button></td>
+        <td><textarea id="setQuestionResults"></textarea></td>
+    </tr>
+    <!---
+        NOTIFICATION
+    --->
+    <tr>
+        <td colspan="5" style="text-align: center"><hr><h3>Notifications</h3></td>
+    </tr>
+    <tr>
+        <td>/wapi/notifications/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/notifications/" data-method="GET" data-results="getNotificationsResults">run</button></td>
+        <td><textarea id="getNotificationsResults"></textarea></td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td>/wapi/notifications/<input id="seenNotificationURLData" type="text" placeholder="{id}">/</td>
+        <td>PUT</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/notifications/" data-method="PUT" data-results="seenNotificationsResults" data-url-data="seenNotificationURLData">run</button></td>
+        <td><textarea id="seenNotificationsResults"></textarea></td>
+    </tr>
+    <tr>
+        <td>/wapi/notifications/<input id="delNotificationData" type="text" placeholder="{id}">/</td>
+        <td>DELETE</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/notifications/" data-method="DELETE" data-results="delNotificationsResults" data-url-data="delNotificationData">run</button></td>
+        <td><textarea id="delNotificationsResults"></textarea></td>
+    </tr>
+    <!---
+        MANAGE CHILD USERS
+    --->
+    <tr>
+        <td colspan="5" style="text-align: center"><hr><h3>Manage Child Users</h3>(Requires i18nManage Role and Must Send Signed Request)</td>
+    </tr>
+    <tr>
+        <td>/wapi/manage-child-users/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/manage-child-users/" data-method="GET" data-results="manageResults">run</button></td>
+        <td><textarea id="manageResults"></textarea></td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td colspan="5">Passwords is this call's (/wapi/manage-child-users/) post data is preprocessed in this testing application. Password will be hashed with the restAPI.hashMe() function before sending.</td>
+    </tr>
+    <tr style="background-color: #e1e1e1;">
+        <td>/wapi/manage-child-users/</td>
+        <td>POST</td>
+        <td><textarea id="createUserData">{"userName":"bobbob", "email": "something123@dkjh.com", "password":"1234", "twoFactorType":"1", "roles":["i18nUser"]}</textarea></td>
+        <td><button class="button" type="button" data-url="/wapi/manage-child-users/" data-method="POST" data-results="createUserResults" data-api-data="createUserData">run</button></td>
+        <td><textarea id="createUserResults"></textarea></td>
+    </tr>
+    <tr>
+        <td colspan="5">Password change in (/wapi/manage-child-users/{id}/) post data is preprocessed in this testing application. Both will be hashed with the restAPI.hashMe() function before sending.<br>Also, each option is optional, you can send just password, or just twoFactorType or just Roles. Sending any Roles will remove all other roles.</td>
+    </tr>
+    <tr>
+        <td>/wapi/manage-child-users/<input id="updateUserData" type="text" placeholder="{id}">/</td>
+        <td>POST</td>
+        <td><textarea id="updatePostUserData">{"newPassword":"1234", "twoFactorType":"0", "roles":["i18nUser"]}</textarea></td>
+        <td><button class="button" type="button" data-url="/wapi/manage-child-users/" data-method="POST" data-results="updateUserResults" data-api-data="updatePostUserData" data-url-data="updateUserData">run</button></td>
+        <td><textarea id="updateUserResults"></textarea></td>
+    </tr>
+    <tr>
+        <td>/wapi/manage-child-users/<input id="delUserData" type="text" placeholder="{id}">/</td>
+        <td>DELETE</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/manage-child-users/" data-method="DELETE" data-results="delUserResults" data-url-data="delUserData">run</button></td>
+        <td><textarea id="delUserResults"></textarea></td>
+    </tr>
+    <!---
+        ADMIN USERS
+    --->
+    <tr>
+        <td colspan="5" style="text-align: center"><hr><h3>Admin Users</h3>(Requires i18nAdmin Role and Must Send Signed Request)</td>
+    </tr>
+    <tr>
+        <td>/wapi/admin-users/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/admin-users/" data-method="GET" data-results="adminUsersResults">run</button></td>
+        <td><textarea id="adminUsersResults"></textarea></td>
+    </tr>
+    <tr>
+        <td>/wapi/admin-users/<input id="updateAdminUserData" type="text" placeholder="{id}">/</td>
+        <td>POST</td>
+        <td><textarea id="updatePostAdminUserData">{}</textarea></td>
+        <td><button class="button" type="button" data-url="/wapi/admin-users/" data-method="POST" data-results="updateAdminUserResults" data-api-data="updatePostAdminUserData" data-url-data="updateAdminUserData">run</button></td>
+        <td><textarea id="updateAdminUserResults"></textarea></td>
+    </tr>
+    <tr>
+        <td>/wapi/admin-users/<input id="delAdminUserData" type="text" placeholder="{id}">/</td>
+        <td>DELETE</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/wapi/admin-users/" data-method="DELETE" data-results="delAdminUserResults" data-url-data="delAdminUserData">run</button></td>
+        <td><textarea id="delAdminUserResults"></textarea></td>
+    </tr>
+    <!---
+        END
+    --->
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="5" style="text-align: center"><hr></td>
+    </tr>
+    <tr>
+        <th>EndPoint</th>
+        <th>Method</th>
+        <th>Post Data</th>
+        <th>Buttons</th>
+        <th>Results</th>
+    </tr>
+    <tr>
+        <td colspan="5" style="text-align: center"><hr></td>
+    </tr>
+    </tfoot>
+</table>
+
+<script src="/assets/js/api-tester/jquery-2.1.4.min.js"></script>
+<script src="/assets/js/api-tester/core-min.js"></script>
+<script src="/assets/js/api-tester/x64-core-min.js"></script>
+<script src="/assets/js/api-tester/enc-base64-min.js"></script>
+<script src="/assets/js/api-tester/sha512-min.js"></script>
+<script src="/assets/js/api-tester/hmac-min.js"></script>
+<script src="/assets/js/api-tester/pbkdf2-min.js"></script>
+<script src="/assets/js/api-tester/restfulapi.js"></script>
+<script src="/assets/js/api-tester/testing-api.js"></script>
+
+</body>
+</html>

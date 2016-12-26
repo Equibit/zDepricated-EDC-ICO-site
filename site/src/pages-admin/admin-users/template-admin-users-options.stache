@@ -1,0 +1,64 @@
+<!-- Modal -->
+<div id="admin-users-option-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{#loadedUser}}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myChangePasswordModal">{{i18n.userOptionsTitle}} {{userName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-5 col-sm-offset-1">
+                            <div class="form-group">
+                                <div class="checkbox checkbox-danger">
+                                    <input type="checkbox" id="edit_user0" {{inputDisabled}} {($checked)}="accountLocked">
+                                    <label for="edit_user0">{{i18n.userOptionsLock}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="checkbox checkbox-warning">
+                                    <input type="checkbox" id="edit_user1" {{inputDisabled}} {($checked)}="emailNotifications">
+                                    <label for="edit_user1">{{i18n.userOptionsNotifications}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5 col-sm-offset-1">
+                            <div class="form-group">
+                                <div class="checkbox checkbox-primary">
+                                    <input type="checkbox" id="edit_user2" {{inputDisabled}} {($checked)}="emailConfirmed">
+                                    <label for="edit_user2">{{i18n.userOptionsEmailConfirmed}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="checkbox checkbox-primary">
+                                    <input type="checkbox" id="edit_user3" {{inputDisabled}} {($checked)}="phoneConfirmed">
+                                    <label for="edit_user3">{{i18n.userOptionsPhoneConfirmed}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{^if emailConfirmed}}
+                        {{^if phoneConfirmed}}
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                                    <button class="btn btn-sm btn-danger btn-block" ($click)="deleteUser(.)">{{i18n.userOptionsDeleteBtn}}</button>
+                                </div>
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="saveOptions(.)">{{i18n.userOptionsSaveBtn}}</button>
+                </div>
+            {{/loadedUser}}
+        </div>
+    </div>
+</div>
+<!-- END Modal -->

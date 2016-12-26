@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div id="admin-edit-blog-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{#editBlog}}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myChangePasswordModal">{{i18n.editBlogTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>{{i18n.editBlogBlogTitle}}</label>
+                        <input type="text" class="form-control" {($value)}="title" {{inputDisabled}} placeholder="{{i18n.editBlogBlogTitle}}" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.editBlogImgLink}}</label>
+                        <input type="text" class="form-control" {($value)}="img" {{inputDisabled}} placeholder="{{i18n.editBlogImgLink}}" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.editBlogShortDesc}}</label>
+                        <textarea class="form-control" {($value)}="short" {{inputDisabled}} placeholder="{{i18n.editBlogShortDesc}}" autocomplete="off"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.editBlogPost}}</label>
+                        <textarea class="form-control" {($value)}="post" {{inputDisabled}} placeholder="{{i18n.editBlogPost}}" autocomplete="off"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>{{i18n.editBlogLink}}</label>
+                        <input type="text" class="form-control" {($value)}="link" {{inputDisabled}} placeholder="{{i18n.editBlogLink}}" autocomplete="off" />
+                    </div>
+
+                    {{#if successMessage}}
+                        <p class="green-text bold">{{i18n.editBlogSaved}}</p>
+                    {{/if}}
+                    {{#if generalError}}
+                        <p class="red-text bold">{{i18n.editBlogUnknownError}}</p>
+                    {{/if}}
+                    {{#if missingInformation}}
+                        <p class="red-text bold">{{i18n.editBlogMissingInformation}}</p>
+                    {{/if}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="saveBlog(.)">{{i18n.editBlogSave}}</button>
+                </div>
+            {{/editBlog}}
+        </div>
+    </div>
+</div>
+<!-- END Modal -->

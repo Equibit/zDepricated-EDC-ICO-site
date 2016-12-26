@@ -1,0 +1,24 @@
+<!-- Add Key Modal -->
+<div id="add-key-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    {{#newKey}}
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="mySignUpModal">{{i18n.addKeyTitle}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="user_create">{{i18n.addKeyDescription}}</label>
+            <input type="text" class="form-control" placeholder="{{i18n.addKeyDescription}}" autocomplete="off" {($value)}="keyDesc" {{#inputDisabled}} disabled{{/inputDisabled}} />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-clear btn-sm" ($click)="../cancelAddKey()" {{buttonRunning}}>{{i18n.addKeyCancelBtn}}</button>
+          <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="../addKey(.)" {{#if buttonRunning}}disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.addKeyCreateBtn}}{{/if}}</button>
+        </div>
+      </div>
+    {{/newKey}}
+  </div>
+</div>
+<!-- END Sign-up Modal -->

@@ -1,0 +1,102 @@
+<can-import from="grid-component"/>
+
+<div class="row">
+    <div class="col-xs-8 col-md-9">
+        <div class="h1 no-top-margin">{{i18n.adminUserTitle}}</div>
+    </div>
+    <div class="col-xs-4 col-md-3">
+        <div class="input-group">
+            <div class="input-group-addon"><span class="fa fa-search"></span></div>
+            <input type="text" class="form-control" {($value)}="search" ($keyup)="updateSearch(@element.val)" placeholder="{{i18n.adminUsersSearch}}">
+        </div>
+    </div>
+</div>
+{{#if loadedData}}
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <grid-component {(rows)}="users" pagination="20">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="text-nowrap" ($click)="{sortBy 'userName'}">{{i18n.adminUsersUsername}} {{{sortArrow 'userName'}}}</th>
+                                    <th class="text-nowrap"><span ($click)="{sortBy 'emailConfirmed'}">{{i18n.adminUsersEmailConfirmed}} {{{sortArrow 'emailConfirmed'}}}</span> <span ($click)="{sortBy 'email'}">{{i18n.adminUsersEmail}} {{{sortArrow 'email'}}}</span></th>
+                                    <th class="text-nowrap"><span ($click)="{sortBy 'phoneConfirmed'}">{{i18n.adminUsersPhoneConfirmed}} {{{sortArrow 'phoneConfirmed'}}}</span> <span ($click)="{sortBy 'phone'}">{{i18n.adminUsersPhone}} {{{sortArrow 'phone'}}}</span></th>
+                                    <th class="text-nowrap" ($click)="{sortBy 'accountLocked'}">{{i18n.adminUsersLock}} {{{sortArrow 'accountLocked'}}}</th>
+                                    {{#if languages.length}}<th class="text-nowrap" ($click)="{sortBy 'baseLang'}">{{i18n.adminUsersLanguage}} {{{sortArrow 'baseLang'}}}</th>{{/if}}
+                                    <th class="text-nowrap" ($click)="{sortBy 'accountCreated'}">{{i18n.adminUsersCreated}} {{{sortArrow 'accountCreated'}}}</th>
+                                    <th class="text-nowrap">{{i18n.adminUsersOptions}}</th>
+                                    <th class="text-nowrap">{{i18n.adminUsersNotify}}</th>
+                                </tr>
+                                </thead>
+                                {{#if users.length}}
+                                    <tbody>
+                                    {{#each rows}}
+                                        {{^if deleting}}
+                                            <tr>
+                                                <td>{{userName}}</td>
+                                                <td class="text-nowrap">{{#if emailConfirmed}}<span class="fa fa-check"></span> {{else}}<span class="red-text fa fa-times"></span> {{/if}}<a href="mailto:{{email}}">{{email}}</a></td>
+                                                <td class="text-nowrap">{{#if phoneConfirmed}}<span class="fa fa-check"></span> {{else}}<span class="red-text fa fa-times"></span> {{/if}}<a href="tel:{{phone}}">{{phone}}</a></td>
+                                                <td class="text-nowrap">{{#if accountLocked}}<span class="red-text bold">{{i18n.adminUsersLocked}}</span>{{else}}{{i18n.adminUsersNotLocked}}{{/if}}</td>
+                                                {{#if languages.length}}<td>{{baseLang}}</td>{{/if}}
+                                                <td class="text-nowrap">{{timestamp accountCreated}}</td>
+                                                <td><button type="button" class="btn btn-xs btn-primary" ($click)="openUserOptions(.)">{{i18n.adminUsersUserOptions}}</button></td>
+                                                <td><button type="button" class="btn btn-xs btn-warning" ($click)="openUserNotify(id)">{{i18n.adminUsersUserNotify}}</button></td>
+                                            </tr>
+                                        {{else}}
+                                            <tr>
+                                                <td {{#if languages.length}}colspan="8"{{else}}colspan="7"{{/if}} class="text-center">
+                                                    <span class="fa fa-refresh fa-spin fa-2x"></span>
+                                                </td>
+                                            </tr>
+                                        {{/if}}
+                                    {{/each}}
+                                    </tbody>
+                                {{else}}
+                                    <tbody>
+                                    <tr>
+                                        <td {{#if languages.length}}colspan="8"{{else}}colspan="7"{{/if}} class="text-center bold">{{i18n.adminUsersNoUsers}}</td>
+                                    </tr>
+                                    </tbody>
+                                {{/if}}
+                            </table>
+
+                            {{#if hasPages}}
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li{{^if isPrevActive}} class="disabled"{{/if}}>
+                                            <a href="#" ($click)="prev()" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        {{#each pages}}
+                                            <li class="{{#if isActive}}active{{/if}}"><a href="#" ($click)=changePage(pageNumber)>
+                                                {{pageTitle}}
+                                            </a></li>
+                                        {{/each}}
+                                        <li{{^if isNextActive}} class="disabled"{{/if}}>
+                                            <a href="#" ($click)="next()" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            {{/if}}
+                        </div>
+                    </grid-component>
+                </div>
+            </div>
+        </div>
+    </div>
+{{else}}
+    <div class="row">
+        <div class="col-xs-12 col-md-12 text-center">
+            <span class="huge"><span class="fa fa-refresh fa-spin"></span></span>
+        </div>
+    </div>
+{{/if}}
+
+{{>templateAdminUsersOptions}}
+{{>templateAdminUsersNotify}}

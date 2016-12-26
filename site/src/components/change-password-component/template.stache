@@ -1,0 +1,42 @@
+<!-- Sign-up Modal -->
+<div id="change-password-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myChangePasswordModal">{{i18n.changePasswordTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="password_0_create">{{i18n.changePasswordCurrent}}</label>
+          <input type="password" class="form-control" id="password_0_create" {($value)}="passwordOldChange" {{inputDisabled}} placeholder="{{i18n.changePasswordCurrent}}" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="password_1_create">{{i18n.changePasswordNew}}</label>
+          <input type="password" class="form-control" id="password_1_create" {($value)}="passwordChange" ($keyup)="strongPassFunc(@element.val)" {{inputDisabled}} placeholder="{{i18n.changePasswordNew}}" autocomplete="off" />
+          {{#if passwordStrengthText}}
+          <span class="{{passwordStrengthColor}}">{{passwordStrengthText}}</span>
+          {{/if}}
+        </div>
+        <div class="form-group">
+          <label for="password_2_create">{{i18n.changePasswordRetype}}</label>
+          <input type="password" class="form-control" id="password_2_create" {($value)}="passwordRetypedChange" ($keyup)="comparePasswordFunc(@element.val)" {{inputDisabled}} placeholder="{{i18n.changePasswordRetype}}" autocomplete="off" />
+          {{#if passwordMismatchError}}
+          <span class="red-text">{{i18n.changePasswordMismatchError}}</span>
+          {{/if}}
+        </div>
+
+        {{#if generalError}}
+        <p class="red-text bold">{{i18n.changePasswordError}}</p>
+        {{/if}}
+        {{#if successMessage}}
+        <p class="green-text bold">{{i18n.changePasswordSuccess}}</p>
+        {{/if}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="saveSettings()" {{buttonRunning}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.changePasswordBtn}}{{/if}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Sign-up Modal -->

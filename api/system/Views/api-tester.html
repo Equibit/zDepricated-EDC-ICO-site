@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Testing</title>
+    <style>
+        textarea {
+            width: 300px;
+            height: 50px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 6px;
+            border: none;
+        }
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center">
+    API Public Key <input id="public" type="text"> API Secret Key <input id="secret" type="password"> <button id="saveKey" type="button">save</button>
+</div>
+<hr>
+<table cellspacing="0" cellpadding="2" style="width:100%">
+    <thead>
+    <tr>
+        <th>EndPoint</th>
+        <th>Method</th>
+        <th>Post Data</th>
+        <th>Buttons</th>
+        <th>Results</th>
+    </tr>
+    <tr>
+        <td colspan="5" style="text-align: center"><hr></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td colspan="5" style="text-align: center">Check API connection!</td>
+    </tr>
+    <tr>
+        <td>/api/v0/test/</td>
+        <td>GET</td>
+        <td></td>
+        <td><button class="button" type="button" data-url="/api/v0/test/" data-method="GET" data-results="checkLoginResults" data-api="true">run</button></td>
+        <td><textarea id="checkLoginResults"></textarea></td>
+    </tr>
+    <!---
+        END
+    --->
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="5" style="text-align: center"><hr></td>
+    </tr>
+    <tr>
+        <th>EndPoint</th>
+        <th>Method</th>
+        <th>Post Data</th>
+        <th>Buttons</th>
+        <th>Results</th>
+    </tr>
+    <tr>
+        <td colspan="5" style="text-align: center"><hr></td>
+    </tr>
+    </tfoot>
+</table>
+
+<script src="/assets/js/api-tester/jquery-2.1.4.min.js"></script>
+<script src="/assets/js/api-tester/core-min.js"></script>
+<script src="/assets/js/api-tester/x64-core-min.js"></script>
+<script src="/assets/js/api-tester/enc-base64-min.js"></script>
+<script src="/assets/js/api-tester/sha512-min.js"></script>
+<script src="/assets/js/api-tester/hmac-min.js"></script>
+<script src="/assets/js/api-tester/pbkdf2-min.js"></script>
+<script src="/assets/js/api-tester/restfulapi.js"></script>
+<script src="/assets/js/api-tester/testing-api.js"></script>
+
+</body>
+</html>

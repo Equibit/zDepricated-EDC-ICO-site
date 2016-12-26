@@ -1,0 +1,138 @@
+<can-import from="easyapp/attrs/selectpicker.attr" />
+
+<!-- Sign-up Modal -->
+<div id="manage-users-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mySettingsModal">{{i18n.manageUsersTitle}}</h4>
+            </div>
+            <div class="modal-body table-responsive">
+                {{^if loadingData}}
+                    <table class="table table-custom">
+                        {{^if myUsers.length}}
+                            <tr>
+                                <td colspan="4"><strong>{{i18n.manageUsersNoUsers}}</strong></td>
+                            </tr>
+                        {{else}}
+                            <thead>
+                            <tr>
+                                <th>{{i18n.manageUsersUsername}}</th>
+                                <th>{{i18n.manageUsersSecondFactorType}}</th>
+                                <th>{{i18n.manageUsersRoles}}</th>
+                                <th>{{i18n.manageUsersActions}}</th>
+                            </tr>
+                            </thead>
+                        <tbody>
+                            {{#each myUsers}}
+                            <tr id="{{userName}}">
+                                <td>{{userName}}</td>
+                                <td>
+                                    {{#if ../availableFactors}}
+                                        <select selectpicker class="selectpicker show-tick manage-users" {($value)}="twoFactorType" title="{{i18n.manageUsersNoFactorSelected}}" data-container="body">
+                                            {{#each ../availableFactors}}
+                                                <option data-subtext="{{factorDescValue}}" value="{{factorID}}" {{#is twoFactorType factorID}}selected="selected"{{/is}} {{^if available}}disabled{{/if}}>{{factorTypeValue}}</option>
+                                            {{/each}}
+                                        </select>
+                                    {{/if}}
+                                </td>
+                                <td>
+                                    {{#if ../availableRoles}}
+                                        <select selectpicker class="selectpicker manage-users" multiple {($value)}="roles" title="{{i18n.manageUsersNoRolesSelected}}" data-container="body">
+                                            {{#each ../availableRoles}}
+                                                <option data-subtext="{{roleDescValue}}" value="{{roleName}}">{{roleNameValue}}</option>
+                                            {{/each}}
+                                        </select>
+                                    {{/if}}
+                                </td>
+                                <td style="padding-right:0">
+                                    <a href="#" ($click)="collapse('collapseDelete', 'collapsePassword', '{{%index}}')" class="btn btn-xs btn-red" data-toggle="collapse" data-parent="#accordion{{%index}}">{{i18n.manageUsersDeleteBtn}}</a>
+                                    <a href="#" ($click)="collapse('collapsePassword', 'collapseDelete', '{{%index}}')" class="btn btn-xs btn-clear" data-toggle="collapse" data-parent="#accordion{{%index}}">{{i18n.manageUsersNewPasswordBtn}}</a>
+                                    <a href="#" ($click)="saveUser(.)" {{#if isSaving}}disabled{{/if}} class="btn btn-xs btn-green">{{#if isSaving}}&nbsp;&nbsp;&nbsp;<i class="fa fa-spin fa-spinner"></i>&nbsp;&nbsp;{{else}}<span>{{i18n.manageUsersSaveBtn}}</span>{{/if}}</a>
+                                </td>
+                            </tr>
+                            <tr id="{{userName}}extra">
+                                <td class="collapse-td" colspan="4">
+                                    <div id="accordion{{%index}}">
+                                        <!-- delete user section -->
+                                        <div class="panel panel-collapse">
+                                            <div class="collapse text-center" id="collapseDelete{{%index}}">
+                                                <div class="collapse-wrapper">
+                                                    {{^if deleting}}
+                                                        <h4>{{i18n.manageUsersAreYouSureDelete}}</h4>
+                                                        <a href="#" ($click)="delUser(.)" class="btn btn-xs btn-red" style="margin-right:20px">{{i18n.manageUsersYesBtn}}</a>
+                                                        <a href="#" ($click)="collapse('collapseDelete', 'collapsePassword', '{{%index}}')" class="btn btn-xs btn-green" data-toggle="collapse">{{i18n.manageUsersNoBtn}}</a>
+                                                    {{else}}
+                                                        <div class="text-center">
+                                                            <i class="fa fa-spin fa-spinner fa-5x text-muted"></i>
+                                                        </div>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--- change user password section -->
+                                        <div class="panel panel-collapse">
+                                            <div class="collapse text-center" id="collapsePassword{{%index}}">
+                                                <div class="collapse-wrapper">
+                                                    <form class="form-inline">
+                                                        <div class="form-group">
+                                                            <label for="user_change_password">{{i18n.manageUsersNewPassword}}</label>
+                                                            <input type="password" class="form-control input-xs" id="user_change_password"{{#inputDisabled}} disabled{{/inputDisabled}} {($value)}="passwordNew" ($keyup)="strongPassFunc(@element.val, .)" placeholder="{{i18n.manageUsersNewPassword}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="user_change_password_retype">{{i18n.manageUsersNewPasswordRetype}}</label>
+                                                            <input type="password" class="form-control input-xs" id="user_change_password_retype"{{#inputDisabled}} disabled{{/inputDisabled}} {($value)}="passwordRetyped" ($keyup)="comparePasswordFunc(@element.val, .)" placeholder="{{i18n.manageUsersNewPasswordRetype}}">
+                                                        </div>
+                                                        <button type="button" class="btn btn-xs btn-green"{{#inputDisabled}}disabled{{/inputDisabled}} ($click)="changePassword(.)" style="min-width:145px;">{{#if inputDisabled}}<i class="fa fa-spin fa-spinner"></i>{{else}}{{i18n.manageUsersChangePasswordBtn}}{{/if}}</button>
+                                                    </form>
+                                                    {{#if passwordStrengthText}}
+                                                        <span class="{{passwordStrengthColor}}">{{passwordStrengthText}}</span>
+                                                    {{/if}}
+                                                    {{#if passwordMismatchError}}
+                                                        <span class="red-text">{{i18n.manageUsersPasswordMismatchError}}</span>
+                                                    {{/if}}
+                                                    {{#if generalError}}
+                                                        <p class="red-text bold">{{i18n.manageUsersPasswordUnknownError}}</p>
+                                                    {{/if}}
+                                                    {{#if successMessage}}
+                                                        <p class="green-text bold">{{i18n.manageUsersPasswordSuccess}}</p>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        {{/if}}
+                    </tbody>
+                        {{#if userCountAboveTen}}
+                            <tfoot>
+                            <tr>
+                                <th>{{i18n.managerUserUsername}}</th>
+                                <th>{{i18n.manageUserSecondFactorType}}</th>
+                                <th>{{i18n.manageUserRoles}}</th>
+                                <th>{{i18n.manageUserActions}}</th>
+                            </tr>
+                            </tfoot>
+                        {{/if}}
+                    </table>
+                {{else}}
+                    <br><br>
+                    <div class="text-center">
+                        <i class="fa fa-spin fa-spinner fa-5x text-muted"></i>
+                    </div>
+                    <br><br>
+                {{/if}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-custom btn-primary btn-sm" ($click)="openAddUser()">{{i18n.manageUsersAddUserBtn}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Sign-up Modal -->
+
+{{! Add New User Modal }}
+{{>templateAddUser}}
