@@ -11,7 +11,6 @@ can.Component.extend({
     inserted() {
       var startInterval = setInterval(() => {
         if (typeof this.viewModel.attr("timestamp") != 'undefined') {
-          console.log("starting " + this.viewModel.attr("timestamp"));
           clearInterval(startInterval);
           var eventTime = this.viewModel.attr("timestamp"),
             currentTime = Math.floor(Date.now() / 1000),
@@ -55,8 +54,6 @@ can.Component.extend({
             this.viewModel.attr("countdown", true);
             this.viewModel.attr("loaded", true);
           }
-        } else {
-          console.log("failed to start " + this.viewModel.attr("timestamp"));
         }
       }, 1000);
     }

@@ -116,12 +116,17 @@
       {{#switch page}}
         {{#case 'pageHome'}}
 
-          <h1 class="text-center">Equibit (EQB) ICO</h1>
-          <p class="text-center">EDC (Equibit Development Corporation) is building several applications that are decentralizing the securities industry. Just some of the features are outlined here.</p>
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 text-center">
+              <p class="text-center">RESERVE UNITS AMONG THE FIRST MILLION OF A 22 MILLION UNIT SYSTEM</p>
+              <p class="text-center">Early adopters can reserve equibit units through an upcoming crowdsale! The planned opening date for this opportunity is on February 1, 2017.</p>
+              <p class="text-center">Please review our ICO Terms and Conditions for detailed information on this opportunity. If you would like to receive more information about this offering as it comes, please sign up for our newsletter.</p>
+            </div>
+          </div>
 
           {{#if countdown}}
             <div class="h2 text-center">Crowd sale ends in</div>
-            <countdown-component {timestamp}="1485907200"></countdown-component>
+            <countdown-component {timestamp}="1485925200"></countdown-component>
           {{else}}
             <div class="h2 text-center">Crowd sale starts in</div>
             <countdown-component {(countdown)}="countdown" {timestamp}="1483228800"></countdown-component>
@@ -156,15 +161,16 @@
         {{#case 'pageHome'}}
 
           <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 text-center">
-              <h1 class="text-center">Equibit (EQB) ICO</h1>
-              <p class="text-center">EDC (Equibit Development Corporation) is building several applications that are decentralizing the securities industry. Just some of the features are outlined here.</p>
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+              <h4 class="text-center bold">RESERVE UNITS AMONG THE FIRST MILLION OF A 22 MILLION UNIT SYSTEM</h4>
+              <p class="text-center">Early adopters can reserve equibit units through an upcoming crowdsale! The planned opening date for this opportunity is on February 1, 2017.</p>
+              <p class="text-center">Please review our ICO Terms and Conditions for detailed information on this opportunity. If you would like to receive more information about this offering as it comes, please sign up for our newsletter.</p>
             </div>
           </div>
 
           {{#if countdown}}
             <div class="h2 text-center">Crowd sale ends in</div>
-            <countdown-component {timestamp}="1485907200"></countdown-component>
+            <countdown-component {timestamp}="1485925200"></countdown-component>
           {{else}}
             <div class="h2 text-center">Crowd sale starts in</div>
             <countdown-component {^countdown}="countdown" {timestamp}="1483228800"></countdown-component>

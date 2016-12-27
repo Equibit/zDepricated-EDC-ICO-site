@@ -3,6 +3,9 @@ import 'can/map/define/';
 
 export default can.Map.extend({
   define: {
+    loaded: {
+      value: false
+    },
     btcPrices: {
       value: [{"price": 0.000023},{"price": 0.00010023},{"price": 0.01000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023}]
     },
