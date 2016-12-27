@@ -4,16 +4,18 @@ namespace PHP_REST_API\Models;
 use \PHP_REST_API\Data\BitcoinPricesData;
 
 class BitcoinChartsModel {
-    private $lastUpdated;
     private $lastPrice;
 
     public function __construct() {
         $data = BitcoinPricesData::getPriceFromSource('BitcoinCharts');
 
-        // get data
-        // if too old
-            // $jsonData = json_decode(file_get_contents("http://api.bitcoincharts.com/v1/weighted_prices.json"))
-            // update
+        if (count($data) == 0 || $data['lastUpdate'] < time() - 900) {
+            $jsonData = json_decode(file_get_contents("http://api.bitcoincharts.com/v1/weighted_prices.json"), true);
+            $this->lastPrice = $jsonData['USD']['24h'];
+            BitcoinPricesData::updatePriceForSource($this->lastPrice, 'BitcoinCharts');
+        } else {
+            $this->lastPrice = $data['lastPrice'];
+        }
     }
 
     public function getBitCoinPrice() {

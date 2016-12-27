@@ -13,8 +13,19 @@ class CrowdSaleProgress extends BaseAPIController {
             $bitcoinPrice = $bitcoinCharts->getBitCoinPricePerDollar();
 
             $data = Array(
-                "btcPrices" => Array(2*$bitcoinPrice, 2.50*$bitcoinPrice, 3.13*$bitcoinPrice, 3.91*$bitcoinPrice, 4.89*$bitcoinPrice, 6.11*$bitcoinPrice, 7.64*$bitcoinPrice, 9.55*$bitcoinPrice, 11.94*$bitcoinPrice, 14.93*$bitcoinPrice),
-                "eqbRemaining" => Array(0, 0, 50000, 100000, 100000, 100000, 100000, 100000, 100000, 100000)
+                "btcPrices" => Array(
+                    number_format(2*$bitcoinPrice,5),
+                    number_format(2.50*$bitcoinPrice,5),
+                    number_format(3.13*$bitcoinPrice,5),
+                    number_format(3.91*$bitcoinPrice,5),
+                    number_format(4.89*$bitcoinPrice,5),
+                    number_format(6.11*$bitcoinPrice,5),
+                    number_format(7.64*$bitcoinPrice,5),
+                    number_format(9.55*$bitcoinPrice,5),
+                    number_format(11.94*$bitcoinPrice,5),
+                    number_format(14.93*$bitcoinPrice,5)
+                ),
+                "eqbRemaining" => Array(50000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000)
             );
 
             echo json_encode(StatusReturn::S200($data));
