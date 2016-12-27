@@ -24,6 +24,9 @@ export default can.Map.extend({
     seconds: {
       value: "00"
     },
+    loaded: {
+      value: false
+    },
     hasMonths: {
       get() {
         return parseInt(this.attr("months"))

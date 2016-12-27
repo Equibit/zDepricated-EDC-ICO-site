@@ -18,6 +18,14 @@ const AppViewModel = can.Map.extend({
       value: false,
       serialize: false
     },
+    salesStart: {
+      value: 1483228800,
+      serialize: false
+    },
+    salesEnds: {
+      value: 1485907200,
+      serialize: false
+    },
     hasChat: {
       value: config.general.hasChat,
       serialize: false

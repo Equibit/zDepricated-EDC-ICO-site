@@ -1,38 +1,44 @@
 <div class="row">
   <div class="col-sm-4 col-sm-offset-4 text-center">
-    {{#if hasMonths}}
-      <h1><span class="ultra">{{months}}</span> <small>Month{{#if manyMonths}}s{{/if}}</small></h1>
-      <div class="progress text-center">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{yearProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{yearProgress}}%">
+    {{#if loaded}}
+      {{#if hasMonths}}
+        <h1><span class="ultra">{{months}}</span> <small>Month{{#if manyMonths}}s{{/if}}</small></h1>
+        <div class="progress text-center">
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{yearProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{yearProgress}}%">
+          </div>
         </div>
-      </div>
-    {{/if}}
-    {{#if hasDays}}
-      <h1><span class="ultra">{{days}}</span> <small>Day{{#if manyDays}}s{{/if}}</small></h1>
-      <div class="progress">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{monthProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{monthProgress}}%">
+      {{/if}}
+      {{#if hasDays}}
+        <h1><span class="ultra">{{days}}</span> <small>Day{{#if manyDays}}s{{/if}}</small></h1>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{monthProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{monthProgress}}%">
+          </div>
         </div>
-      </div>
-    {{/if}}
-    {{#if hasHours}}
-      <h1><span class="ultra">{{hours}}</span> <small>Hour{{#if manyHours}}s{{/if}}</small></h1>
-      <div class="progress">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{dayProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{dayProgress}}%">
+      {{/if}}
+      {{#if hasHours}}
+        <h1><span class="ultra">{{hours}}</span> <small>Hour{{#if manyHours}}s{{/if}}</small></h1>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{dayProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{dayProgress}}%">
+          </div>
         </div>
-      </div>
-    {{/if}}
-    {{#if hasMinutes}}
-      <h1><span class="ultra">{{minutes}}</span> <small>Minute{{#if manyMinutes}}s{{/if}}</small></h1>
-      <div class="progress">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{hourProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{hourProgress}}%">
+      {{/if}}
+      {{#if hasMinutes}}
+        <h1><span class="ultra">{{minutes}}</span> <small>Minute{{#if manyMinutes}}s{{/if}}</small></h1>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{hourProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{hourProgress}}%">
+          </div>
         </div>
-      </div>
-    {{/if}}
-    {{#if hasSeconds}}
-      <h1><span class="ultra">{{seconds}}</span> <small>Second{{#if manySeconds}}s{{/if}}</small></h1>
-      <div class="progress">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{minuteProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{minuteProgress}}%">
+      {{/if}}
+      {{#if hasSeconds}}
+        <h1><span class="ultra">{{seconds}}</span> <small>Second{{#if manySeconds}}s{{/if}}</small></h1>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{minuteProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{minuteProgress}}%">
+          </div>
         </div>
+      {{/if}}
+    {{else}}
+      <div class="text-center">
+        <span class="huge"><span class="fa fa-refresh fa-spin"></span></span>
       </div>
     {{/if}}
   </div>

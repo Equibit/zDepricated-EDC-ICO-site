@@ -7,16 +7,28 @@ export default can.Map.extend({
       value: [{"price": 0.000023},{"price": 0.00010023},{"price": 0.01000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023}]
     },
     eqbRemaining: {
-      value: [{"remaining": 50000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000}]
+      value: [{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000}]
     },
     currentTranche: {
-      value: 1
+      get() {
+        var highestZero = 0;
+        this.attr("eqbRemaining").forEach((item, index) => {
+          if (item.remaining == 0) highestZero = index + 1;
+        });
+
+        return highestZero + 1;
+      }
     },
     progress: {
       get() {
         var total = 0;
         this.attr("eqbRemaining").forEach(item => total += item.remaining);
-        return total/1000000
+        return ((1000000-total)/1000000)*100
+      }
+    },
+    progressOverHalf: {
+      get() {
+        return this.attr("progress") > 50
       }
     },
     showMoreStart: {

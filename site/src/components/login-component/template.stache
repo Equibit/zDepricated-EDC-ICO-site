@@ -31,7 +31,7 @@
           </div>
         {{/if}}
         {{#if loginErrorVisible}}
-          <br>
+          <br><br>
           <p class="red-text">{{i18n.loginGeneralError}}</p>
         {{/if}}
       </div>

@@ -121,9 +121,10 @@
 
           {{#if countdown}}
             <div class="h2 text-center">Crowd sale ends in</div>
+            <countdown-component {timestamp}="1485907200"></countdown-component>
           {{else}}
             <div class="h2 text-center">Crowd sale starts in</div>
-            <countdown-component {(countdown)}="countdown"></countdown-component>
+            <countdown-component {(countdown)}="countdown" {timestamp}="1483228800"></countdown-component>
           {{/if}}
 
           <ico-progress-component></ico-progress-component>
@@ -163,9 +164,10 @@
 
           {{#if countdown}}
             <div class="h2 text-center">Crowd sale ends in</div>
+            <countdown-component {timestamp}="1485907200"></countdown-component>
           {{else}}
             <div class="h2 text-center">Crowd sale starts in</div>
-            <countdown-component {(countdown)}="countdown"></countdown-component>
+            <countdown-component {^countdown}="countdown" {timestamp}="1483228800"></countdown-component>
           {{/if}}
 
           <ico-progress-component></ico-progress-component>
