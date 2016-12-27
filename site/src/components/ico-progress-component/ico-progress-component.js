@@ -15,6 +15,9 @@ can.Component.extend({
         this.viewModel.startInternal();
       }
 
+    },
+    removed() {
+      clearInterval(this.viewModel.attr("interval"));
     }
   }
 });

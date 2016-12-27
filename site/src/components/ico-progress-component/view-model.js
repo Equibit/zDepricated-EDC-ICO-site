@@ -175,5 +175,7 @@ export default can.Map.extend({
       );
     }, 30000);
 
+    this.attr("interval", startInterval);
+
   }
 });

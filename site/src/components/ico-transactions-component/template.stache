@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-12 text-center">
+
+    <div class="h2">Your Transactions</div>
+
+    <div class="panel">
+      <div class="panel-body">
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>EQB Purchased</th>
+              <th>Funding Level</th>
+              <th>Paid</th>
+              <th>Time and Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

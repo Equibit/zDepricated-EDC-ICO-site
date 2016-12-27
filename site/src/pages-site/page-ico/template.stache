@@ -1,7 +1,10 @@
 <can-import from="components/countdown-component/" />
 <can-import from="components/ico-progress-component/" />
+<can-import from="components/ico-transactions-component/" />
 
-{{^if isLoggedIn}}
+{{#if isLoggedIn}}
+  <ico-transactions-component></ico-transactions-component>
+{{else}}
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2 text-center">
     <h4 class="text-center bold">RESERVE UNITS AMONG THE FIRST MILLION OF A 22 MILLION UNIT SYSTEM</h4>
@@ -35,7 +38,7 @@
   <div class="col-sm-6 col-sm-offset-3 text-center">
     {{#if isLoggedIn}}
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Number of EQB Tokens">
+        <input type="number" class="form-control" placeholder="Number of EQB Tokens">
         <span class="input-group-btn">
         <button class="btn btn-primary btn-sm" type="button">Buy!</button>
       </span>
@@ -49,7 +52,6 @@
 <br>
 
 <ico-progress-component></ico-progress-component>
-
 
 {{#if countdown}}
   <div class="h2 text-center">Crowd sale ends in</div>
