@@ -1,5 +1,6 @@
 import can from 'can';
 import 'can/map/define/';
+import restAPI from 'rest-api';
 
 export default can.Map.extend({
   define: {
@@ -7,16 +8,16 @@ export default can.Map.extend({
       value: false
     },
     btcPrices: {
-      value: [{"price": 0.000023},{"price": 0.00010023},{"price": 0.01000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023},{"price": 0.10000023}]
+      value: []
     },
     eqbRemaining: {
-      value: [{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000},{"remaining": 100000}]
+      value: []
     },
     currentTranche: {
       get() {
         var highestZero = 0;
         this.attr("eqbRemaining").forEach((item, index) => {
-          if (item.remaining == 0) highestZero = index + 1;
+          if (item == 0) highestZero = index + 1;
         });
 
         return highestZero + 1;
@@ -25,7 +26,7 @@ export default can.Map.extend({
     progress: {
       get() {
         var total = 0;
-        this.attr("eqbRemaining").forEach(item => total += item.remaining);
+        this.attr("eqbRemaining").forEach(item => total += item);
         return ((1000000-total)/1000000)*100
       }
     },
@@ -144,5 +145,35 @@ export default can.Map.extend({
         return this.attr("currentTranche") <= 10
       }
     }
+  },
+  updateData() {
+
+    restAPI.requestUnsigned('GET', '/wapi/crowd-sale-progress/', {},
+      data => {
+        this.attr('eqbRemaining', data.eqbRemaining);
+        this.attr('btcPrices', data.btcPrices);
+        this.attr('loaded', true);
+      },
+      err => console.log('FAILED to load email', err)
+    );
+
+  },
+  startInternal() {
+
+    var _self = this;
+
+    var startInterval = setInterval(() => {
+      restAPI.requestUnsigned('GET', '/wapi/crowd-sale-progress/', {},
+        data => {
+          _self.attr('eqbRemaining', data.eqbRemaining);
+          _self.attr('btcPrices', data.btcPrices);
+        },
+        err => {
+          console.log('FAILED to load email', err);
+          clearInterval(startInterval);
+        }
+      );
+    }, 30000);
+
   }
 });

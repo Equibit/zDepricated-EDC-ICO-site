@@ -2,6 +2,7 @@ import can from 'can';
 import template from './template.stache!';
 import viewModel from './view-model';
 import AdminText from 'easyapp/models/admin-text-variables/';
+import restAPI from 'rest-api';
 
 can.Component.extend({
   tag: 'admin-text-variables',

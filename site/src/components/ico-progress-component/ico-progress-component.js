@@ -1,7 +1,7 @@
 import can from 'can';
 import template from './template.stache!';
 import viewModel from './view-model';
-import moment from 'moment';
+import isSsr from 'easyapp/utils/isSsr';
 
 can.Component.extend({
   tag: 'ico-progress-component',
@@ -9,6 +9,9 @@ can.Component.extend({
   template: template,
   events: {
     inserted() {
+
+      this.viewModel.updateData();
+      if (!isSsr) this.viewModel.startInternal();
 
     }
   }

@@ -72,6 +72,9 @@ if (!isset($argv[1])) {
         '/wapi/blog/:locale/'
         => Array('controller' => 'Blog', 'auth' => false),
 
+        '/wapi/crowd-sale-progress/'
+        => Array('controller' => 'CrowdSaleProgress', 'auth' => false),
+
         '/wapi/initiate/'
         => Array('controller' => 'InitiateConnection', 'roles' => Array('i18nAdmin', 'i18nUser'), 'whenLocked' => true, 'initialize' => true),
 
