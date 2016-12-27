@@ -19,7 +19,7 @@ define(function() {
       phoneMask: '+1(###) ###-####',
       hasBlog: false,
       hasFAQs: false,
-      hasSubUsers: false,
+      hasSubUsers: true,
       hasAPI: false,
       hasChat: false,
       usernameMinLength: 4,

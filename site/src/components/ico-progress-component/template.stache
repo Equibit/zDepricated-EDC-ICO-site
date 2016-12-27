@@ -1,8 +1,6 @@
 <div class="row">
   <div class="col-md-12 text-center">
 
-    <br><br>
-
     <div class="h2">Crowd Sale Progress</div>
 
     {{#if loaded}}

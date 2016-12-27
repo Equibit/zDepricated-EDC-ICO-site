@@ -2,35 +2,35 @@
   <div class="col-sm-4 col-sm-offset-4 text-center">
     {{#if loaded}}
       {{#if hasMonths}}
-        <h1><span class="ultra">{{months}}</span> <small>Month{{#if manyMonths}}s{{/if}}</small></h1>
+        <div class="h1"><span class="ultra">{{months}}</span> <small>Month{{#if manyMonths}}s{{/if}}</small></div>
         <div class="progress text-center">
           <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{yearProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{yearProgress}}%">
           </div>
         </div>
       {{/if}}
       {{#if hasDays}}
-        <h1><span class="ultra">{{days}}</span> <small>Day{{#if manyDays}}s{{/if}}</small></h1>
+        <div class="h1"><span class="ultra">{{days}}</span> <small>Day{{#if manyDays}}s{{/if}}</small></div>
         <div class="progress">
           <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{monthProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{monthProgress}}%">
           </div>
         </div>
       {{/if}}
       {{#if hasHours}}
-        <h1><span class="ultra">{{hours}}</span> <small>Hour{{#if manyHours}}s{{/if}}</small></h1>
+        <div class="h1"><span class="ultra">{{hours}}</span> <small>Hour{{#if manyHours}}s{{/if}}</small></div>
         <div class="progress">
           <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{dayProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{dayProgress}}%">
           </div>
         </div>
       {{/if}}
       {{#if hasMinutes}}
-        <h1><span class="ultra">{{minutes}}</span> <small>Minute{{#if manyMinutes}}s{{/if}}</small></h1>
+        <div class="h1"><span class="ultra">{{minutes}}</span> <small>Minute{{#if manyMinutes}}s{{/if}}</small></div>
         <div class="progress">
           <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{hourProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{hourProgress}}%">
           </div>
         </div>
       {{/if}}
       {{#if hasSeconds}}
-        <h1><span class="ultra">{{seconds}}</span> <small>Second{{#if manySeconds}}s{{/if}}</small></h1>
+        <div class="h1"><span class="ultra">{{seconds}}</span> <small>Second{{#if manySeconds}}s{{/if}}</small></div>
         <div class="progress">
           <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{minuteProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{minuteProgress}}%">
           </div>

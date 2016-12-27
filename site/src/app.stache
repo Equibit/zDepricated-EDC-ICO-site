@@ -70,9 +70,10 @@
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">{{i18n.navUserMenu}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 {{#if accountSettings.roles.i18nManage}}
-                  {{#if hasSubUsers}}<li><a href="" data-toggle="modal" data-target="#manage-users-modal">{{i18n.manageUsersNav}}</a></li>{{/if}}
-                  {{#if hasAPI}}<li><a href="" data-toggle="modal" data-target="#manage-api-keys-modal">{{i18n.manageKeysNav}}</a></li>{{/if}}
-                  {{#if (hasAPI || hasSubUsers)}}<li class="divider"></li>{{/if}}
+                  {{#if hasAPI}}
+                    <li><a href="" data-toggle="modal" data-target="#manage-api-keys-modal">{{i18n.manageKeysNav}}</a></li>
+                    <li class="divider"></li>
+                  {{/if}}
                 {{/if}}
                 <li><a href="" data-toggle="modal" data-target="#settings-modal">{{i18n.settingsNav}}</a></li>
                 {{#if hasEmail}}<li><a href="" data-toggle="modal" data-target="#change-email-modal">{{i18n.changeEmailNav}}</a></li>{{/if}}
@@ -87,6 +88,12 @@
               <li class="dropdown">
                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">{{i18n.navAdminMenu}} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                  {{#if accountSettings.roles.i18nManage}}
+                    {{#if hasSubUsers}}
+                      <li><a href="" data-toggle="modal" data-target="#manage-users-modal">{{i18n.manageUsersNav}}</a></li>
+                      <li class="divider"></li>
+                    {{/if}}
+                  {{/if}}
                   <li class="{{#is page 'adminUsers'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminUsers')">{{i18n.adminUserNav}}</a></li>
                   <li class="{{#is page 'adminCommTemplates'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminCommTemplates')">{{i18n.adminCommTemplatesNav}}</a></li>
                   <li class="{{#is page 'adminText'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminText')">{{i18n.adminTextNav}}</a></li>
@@ -113,7 +120,7 @@
     {{#if isLoggedIn}}
       {{#switch page}}
         {{#case 'pageHome'}}
-          <page-ico></page-ico>
+          <page-ico {isLoggedIn}="isLoggedIn"></page-ico>
         {{/case}}
         {{#case 'pageBlog'}}
           <page-blog {lang}="lang"></page-blog>
@@ -140,7 +147,7 @@
     {{else}}
       {{#switch page}}
         {{#case 'pageHome'}}
-          <page-ico></page-ico>
+          <page-ico {isLoggedIn}="isLoggedIn"></page-ico>
         {{/case}}
         {{#case 'pageBlog'}}
           <page-blog {lang}="lang"></page-blog>

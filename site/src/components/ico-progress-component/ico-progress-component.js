@@ -10,8 +10,10 @@ can.Component.extend({
   events: {
     inserted() {
 
-      this.viewModel.updateData();
-      if (!isSsr) this.viewModel.startInternal();
+      if (!isSsr) {
+        this.viewModel.updateData();
+        this.viewModel.startInternal();
+      }
 
     }
   }

@@ -336,8 +336,8 @@ define({
   settingsSaveBtn: "Save Settings",
 
   // ----------[component] sign up
-  signUpNav: "Sign Up",
-  signUpTitle: "Sign Up",
+  signUpNav: "Register",
+  signUpTitle: "Register",
   signUpUsername: "Username",
   signUpUsernameNotAvailError: "Username is not available.",
   signUpUsernameLengthError: "Username must be at least 8 characters long!",
@@ -358,7 +358,7 @@ define({
   signUpSecondFactorSent: "We sent you a pin, please enter it here and submit the form again.",
   singUpUnknownError: "Unknown Error, please try again.",
   signUpPleaseWait: "Please wait and do not close this. We are preparing your account and will send you a pin that will need to be entered in this form.",
-  signUpBtn: "Sign Up",
+  signUpBtn: "Register",
 
   // -------------------------------------------------------------------------------------------------------------------
 });
