@@ -10,13 +10,13 @@ require_once('ConstantsKeys.php');
 /*
  * 	Business Variables
  */
-define('_COMPANY_NAME_', 'Easy App Framework');
+define('_COMPANY_NAME_', 'Initial EQB Offering');
 define('_DEFAULT_LANGUAGE_', 'en');
 
 /*
  * 	General Variables
  */
-define('_DOMAIN_NAME_', 'easyappframework.com');
+define('_DOMAIN_NAME_', 'ico.equibit.org');
 define('_DOMAIN_API_HOST_', ( _USE_HTTPS_ONLY_ ? 'https://' : 'http://' ) . _DOMAIN_NAME_);
 define('_DOMAIN_WS_HOST_', ( _USE_HTTPS_ONLY_ ? 'wss://' : 'ws://' ) . _DOMAIN_NAME_ . ( _USE_HTTPS_ONLY_ ? '/wss' : '/ws' ));
 
