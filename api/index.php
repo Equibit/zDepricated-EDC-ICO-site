@@ -157,6 +157,9 @@ if (!isset($argv[1])) {
 
         '/api/v0/test/'
         => Array('controller' => 'CheckLogin', 'roles' => Array('i18nUser'), 'api' => true),
+
+        '/wapi/ico-transactions/'
+        => Array('controller' => 'ICOTransaction', 'roles' => Array('i18nUser')),
     );
 
     ApiAuthRouter::serve($controllersArray);
