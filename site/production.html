@@ -66,7 +66,11 @@
       font-weight: normal;
       font-style: normal;
     }
+    html, body {
+      height: 100%;
+    }
     body {
+      background-color: black;
       font-family: 'gotham_bookregular', sans-serif;
     }
     .ultra {
@@ -79,8 +83,19 @@
       font-family: 'gotham_boldregular', sans-serif;
     }
   </style>
+
+  <link rel="stylesheet" href="/assets/css/pace.css">
+
 </head>
 <body>
+
+  <div class="pace pace-active">
+    <div class="pace-progress">
+      <div class="pace-progress-inner" data-progress-text="Loading..."></div>
+    </div>
+    <div class="pace-activity"></div>
+  </div>
+
   <script src="node_modules/steal/steal.production.js" main="easyapp/index.stache!done-autorender"></script>
 </body>
 </html>

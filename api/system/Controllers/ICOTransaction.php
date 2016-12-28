@@ -10,7 +10,7 @@ class ICOTransaction extends BaseAPIController {
     function get_xhr() {
         if ($this->checkAuth()) {
             $headers = getallheaders();
-            echo json_encode(StatusReturn::S200(ICOTransactionsData::getUserTransactions(AuthUserData::getUserIDByUserName($headers['Auth-User']))));
+            echo json_encode(StatusReturn::S200(ICOTransactionsData::getUserTransactions(AuthUserData::getUserIDByUserName($headers['Auth-User']))), JSON_NUMERIC_CHECK);
         }
     }
 }

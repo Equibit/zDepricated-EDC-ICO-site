@@ -6,8 +6,15 @@ use \PDO;
 
 class ICOTransactionsData {
 
+    public static function getTotalEQBSold() {
+        $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) AS numberEQB FROM tokenSales");
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return $temp['numberEQB'];
+    }
+
     public static function getUserTransactions($userID) {
-        $query = MySQL::getInstance()->prepare("SELECT fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate FROM tokenSales WHERE userID=:userID");
+        $query = MySQL::getInstance()->prepare("SELECT fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed FROM tokenSales WHERE userID=:userID");
         $query->bindValue(':userID', $userID);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);

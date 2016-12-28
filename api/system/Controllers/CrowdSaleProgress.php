@@ -4,6 +4,7 @@ namespace PHP_REST_API\Controllers;
 use \PHP_REST_API\Helpers\StatusReturn;
 use \PHP_REST_API\Helpers\BaseAPIController;
 use \PHP_REST_API\Models\BitcoinChartsModel;
+use \PHP_REST_API\Data\ICOTransactionsData;
 
 class CrowdSaleProgress extends BaseAPIController {
     function get_xhr() {
@@ -11,6 +12,7 @@ class CrowdSaleProgress extends BaseAPIController {
 
             $bitcoinCharts = new BitcoinChartsModel();
             $bitcoinPrice = $bitcoinCharts->getBitCoinPricePerDollar();
+            $totalEQBSold = ICOTransactionsData::getTotalEQBSold();
 
             $data = Array(
                 "btcPrices" => Array(
@@ -28,7 +30,7 @@ class CrowdSaleProgress extends BaseAPIController {
                 "eqbRemaining" => Array(50000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000)
             );
 
-            echo json_encode(StatusReturn::S200($data));
+            echo json_encode(StatusReturn::S200($data), JSON_NUMERIC_CHECK);
         }
     }
 }
