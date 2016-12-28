@@ -30,11 +30,9 @@
 {{/if}}
 
 {{#if countdown}}
-  <div class="h2 text-center">Crowd sale ends in</div>
-  <countdown-component {timestamp}="1485925200"></countdown-component>
+  <countdown-component timestamp="1491019200" title="Crowd sale ends in"></countdown-component>
 {{else}}
-  <div class="h2 text-center">Crowd sale starts in</div>
-  <countdown-component {^countdown}="countdown" {timestamp}="1480020800"></countdown-component>
+  <countdown-component {^countdown}="countdown" timestamp="1485925200" title="Crowd sale starts in"></countdown-component>
 {{/if}}
 
 <br><br>
