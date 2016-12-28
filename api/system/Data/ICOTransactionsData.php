@@ -10,7 +10,7 @@ class ICOTransactionsData {
         $query = MySQL::getInstance()->prepare("SELECT fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate FROM tokenSales WHERE userID=:userID");
         $query->bindValue(':userID', $userID);
         $query->execute();
-        return $query->fetch(PDO::FETCH_ASSOC);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

@@ -12,7 +12,7 @@ can.Component.extend({
       ICOTransactionModels.findAll({})
         .then(data => {
           this.viewModel.attr('data', data);
-          this.viewModel.attr('loaded', false);
+          this.viewModel.attr('loaded', true);
         })
         .fail(err => {
           console.log('FAILED to load keys', err);
