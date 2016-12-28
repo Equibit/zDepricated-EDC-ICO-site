@@ -41,9 +41,10 @@
     {{#if isLoggedIn}}
       <div class="input-group">
         <input type="number" class="form-control" placeholder="Number of EQB Tokens">
+        <span class="input-group-addon" id="basic-addon2">BTC</span>
         <span class="input-group-btn">
-        <button class="btn btn-primary btn-sm" type="button">Buy!</button>
-      </span>
+          <button class="btn btn-primary btn-sm" type="button">Buy!</button>
+        </span>
       </div><!-- /input-group -->
     {{else}}
       <a href="" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Register {{^if countdown}}to be ready{{/if}} to Buy!</a>

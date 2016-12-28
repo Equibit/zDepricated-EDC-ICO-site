@@ -55,7 +55,7 @@ can.Component.extend({
             this.viewModel.attr("loaded", true);
           }
         }
-      }, 1000);
+      }, 10);
     }
   }
 });

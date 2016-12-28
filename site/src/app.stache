@@ -15,6 +15,7 @@
 <can-import from="components/notification-component/" />
 
 <can-import from="pages-admin/admin-users/" />
+<can-import from="pages-admin/admin-transactions/" />
 <can-import from="pages-admin/admin-comm-templates/" />
 <can-import from="pages-admin/admin-text-variables/" />
 {{#if hasFAQs}}<can-import from="pages-admin/admin-faqs/" />{{/if}}
@@ -33,7 +34,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="/" class="navbar-brand" ($click)="switchPage('pageHome')"><img src="/assets/img/logo.png"> <span>Initial <strong>EQB</strong> Offering</span></a>
+        <a href="/" class="navbar-brand" ($click)="switchPage('pageHome')"><img src="/assets/img/logo.png"> <span><strong>EQB</strong> Offering</span></a>
       </div>
 
       <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -95,6 +96,7 @@
                     {{/if}}
                   {{/if}}
                   <li class="{{#is page 'adminUsers'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminUsers')">{{i18n.adminUserNav}}</a></li>
+                  <li class="{{#is page 'adminTransactions'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminTransactions')">All Transactions</a></li>
                   <li class="{{#is page 'adminCommTemplates'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminCommTemplates')">{{i18n.adminCommTemplatesNav}}</a></li>
                   <li class="{{#is page 'adminText'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminText')">{{i18n.adminTextNav}}</a></li>
                   {{#if hasFAQs}}<li class="{{#is page 'adminFAQs'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminFAQs')">{{i18n.adminFAQsNav}}</a></li>{{/if}}
@@ -130,6 +132,9 @@
         {{/case}}
         {{#case 'adminUsers'}}
           {{#if accountSettings.roles.i18nAdmin}}<admin-users {available-factors}="systemVariables.availableFactors" {available-roles}="systemVariables.availableRoles"></admin-users>{{/if}}
+        {{/case}}
+        {{#case 'adminTransactions'}}
+          {{#if accountSettings.roles.i18nAdmin}}<admin-transactions></admin-transactions>{{/if}}
         {{/case}}
         {{#case 'adminCommTemplates'}}
           {{#if accountSettings.roles.i18nAdmin}}<admin-comm-templates></admin-comm-templates>{{/if}}

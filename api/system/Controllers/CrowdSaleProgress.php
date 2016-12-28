@@ -13,6 +13,19 @@ class CrowdSaleProgress extends BaseAPIController {
             $bitcoinCharts = new BitcoinChartsModel();
             $bitcoinPrice = $bitcoinCharts->getBitCoinPricePerDollar();
             $totalEQBSold = ICOTransactionsData::getTotalEQBSold();
+            $remainingArr = Array(100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000);
+
+            $totalLeft = 1000000 - $totalEQBSold;
+
+            foreach ($remainingArr AS &$amount) {
+                if ($totalLeft > 100000) $totalLeft -= 100000;
+                else if ($totalLeft > 0) {
+                    $amount = $totalLeft;
+                    $totalLeft = 0;
+                } else {
+                    $amount = 0;
+                }
+            }
 
             $data = Array(
                 "btcPrices" => Array(
@@ -27,8 +40,7 @@ class CrowdSaleProgress extends BaseAPIController {
                     number_format(11.94*$bitcoinPrice,6),
                     number_format(14.93*$bitcoinPrice,6)
                 ),
-                "eqbRemaining" => Array(100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000),
-                "purchased" => $totalEQBSold
+                "eqbRemaining" => array_reverse($remainingArr)
             );
 
             echo json_encode(StatusReturn::S200($data), JSON_NUMERIC_CHECK);
