@@ -161,6 +161,8 @@ if (!isset($argv[1])) {
         '/wapi/ico-transactions/'
         => Array('controller' => 'ICOTransaction', 'roles' => Array('i18nUser')),
 
+        '/wapi/admin-transactions/:num/'
+        => Array('controller' => 'AdminTransaction', 'roles' => Array('i18nAdmin')),
         '/wapi/admin-transactions/'
         => Array('controller' => 'AdminTransaction', 'roles' => Array('i18nAdmin')),
     );

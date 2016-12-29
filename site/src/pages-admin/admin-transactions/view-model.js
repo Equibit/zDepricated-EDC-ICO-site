@@ -1,10 +1,10 @@
 import can from 'can';
 import 'can/map/define/';
-import NewTransactionModel from './template-admin-new-transaction.stache';
+import templateNewTransactionModel from './template-admin-new-transaction.stache!';
 import AdminTransactionModels from 'easyapp/models/admin-transactions/';
 
 export default can.Map.extend({
-  NewTransactionModel: NewTransactionModel,
+  templateNewTransactionModel: templateNewTransactionModel,
   define: {
     loaded: {
       value: false
@@ -33,4 +33,9 @@ export default can.Map.extend({
     var newData = this.attr("usersData").filter((elem, index, arr) =>  elem.username.includes(searchStr));
     this.attr("data", newData);
   },
+  revokeTransaction(transaction) {
+    transaction.save(() => {
+      transaction.attr("rejected", true);
+    });
+  }
 });

@@ -44,7 +44,14 @@
                       <td class="text-nowrap">{{timestampDetailed timeDate}}</td>
                       <td>{{#if completed}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                       <td>{{^if rejected}}<span class="red-text fa fa-times"></span>{{else}}<span class="green-text fa fa-check"></span>{{/if}}</td>
-                      <td class="text-nowrap">{{^if completed}}<!--button class="btn btn-primary btn-xs">Confirm</button--> <button class="btn btn-danger btn-xs">Revoke</button>{{/if}}</td>
+                      <td class="text-nowrap">
+                        {{^if completed}}
+                          <!--button class="btn btn-primary btn-xs">Confirm</button-->
+                          {{^if rejected}}
+                            <button ($click)="revokeTransaction(.)" class="btn btn-danger btn-xs">Revoke</button>
+                          {{/if}}
+                        {{/if}}
+                      </td>
                     </tr>
                   {{/each}}
                 {{else}}
@@ -98,4 +105,4 @@
 </div>
 <br>
 
-{{>NewTransactionModel}}
+{{>templateNewTransactionModel}}

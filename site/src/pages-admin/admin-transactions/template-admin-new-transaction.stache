@@ -13,8 +13,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-custom btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
-          <button ($click)="'addTransaction(.)" type="button" class="btn btn-custom btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}Add New Transaction{{/if}}</button>
+          <button type="button" class="btn btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
+          <button ($click)="'addTransaction(.)" type="button" class="btn btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}Add New Transaction{{/if}}</button>
         </div>
       {{/newTransaction}}
     </div>
