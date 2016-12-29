@@ -12,6 +12,9 @@ can.Component.extend({
       ICOTransactionModels.findAll({})
         .then(data => {
           this.viewModel.attr('data', data);
+          data.forEach(item => {
+            if (item.completed == 0) this.viewModel.attr("confirmed", false);
+          });
           this.viewModel.attr('loaded', true);
         })
         .fail(err => {

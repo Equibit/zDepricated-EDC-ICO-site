@@ -3,8 +3,8 @@ define({
 
   // ----------[system] variables
   locale: 'en',
-  timestamp: 'MMMM D, YYYY',
-  timestampDetailed: 'MMMM Do YYYY, h:mm:ss a',
+  timestamp: 'MMM D, YYYY',
+  timestampDetailed: 'MMM Do YYYY, h:mm:ss a',
 
   // ----------[navigation] extras
   navSelectLanguage: "Select Language",

@@ -8,6 +8,9 @@ export default can.Map.extend({
     },
     loaded: {
       value: false
+    },
+    confirmed: {
+      value: true
     }
   }
 });

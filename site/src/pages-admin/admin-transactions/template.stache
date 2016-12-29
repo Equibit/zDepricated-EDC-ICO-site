@@ -16,50 +16,83 @@
     <div class="col-md-12">
       <div class="panel">
         <div class="panel-body">
-
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-              <tr>
-                <th>User</th>
-                <th>EQB Purchased</th>
-                <th>Funding Level</th>
-                <th>Paid</th>
-                <th>Time and Date</th>
-                <th>Confirmed</th>
-                <th>Actions</th>
-              </tr>
-              </thead>
-              <tbody>
-              {{#if loaded}}
-                {{#each data}}
-                  <tr>
-                    <td>{{username}}</td>
-                    <td>{{numberEQB}}</td>
-                    <td>{{fundingLevel}}</td>
-                    <td>{{#if paidUSD}}${{paidUSD}} USD{{/if}}{{#if paidBTC}}{{paidBTC}} BTC{{/if}}</td>
-                    <td>{{timestampDetailed timeDate}}</td>
-                    <td>{{#if completed}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
-                    <td>{{^if completed}}<button class="btn btn-danger btn-sm">Revoke</button>{{/if}}</td>
-                  </tr>
-                {{/each}}
-              {{else}}
+          <grid-component {(rows)}="data" pagination="20">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
                 <tr>
-                  <td colspan="4" class="text-center">
-                    <br>
-                    <span class="fa fa-refresh fa-3x fa-spin"></span>
-                    <br><br>
-                  </td>
+                  <th class="text-nowrap" ($click)="{sortBy 'username'}">User {{{sortArrow 'username'}}}</th>
+                  <th class="text-nowrap" ($click)="{sortBy 'numberEQB'}">EQB Purchased {{{sortArrow 'numberEQB'}}}</th>
+                  <th class="text-nowrap" ($click)="{sortBy 'fundingLevel'}">Funding Level {{{sortArrow 'fundingLevel'}}}</th>
+                  <th class="text-nowrap" ($click)="{sortBy 'paidUSD'}">Paid USD {{{sortArrow 'paidUSD'}}}</th>
+                  <th class="text-nowrap" ($click)="{sortBy 'paidBTC'}">Paid BTC {{{sortArrow 'paidBTC'}}}</th>
+                  <th class="text-nowrap" ($click)="{sortBy 'timeDate'}">Time and Date {{{sortArrow 'timeDate'}}}</th>
+                  <th class="text-nowrap" ($click)="{sortBy 'completed'}">Confirmed {{{sortArrow 'completed'}}}</th>
+                  <th class="text-nowrap" ($click)="{sortBy 'rejected'}">Revoked {{{sortArrow 'rejected'}}}</th>
+                  <th>Actions</th>
                 </tr>
-              {{/if}}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                {{#if loaded}}
+                  {{#each rows}}
+                    <tr>
+                      <td>{{username}}</td>
+                      <td>{{numberEQB}}</td>
+                      <td>{{fundingLevel}}</td>
+                      <td class="text-nowrap">{{#if paidUSD}}${{paidUSD}} USD{{/if}}</td>
+                      <td class="text-nowrap">{{#if paidBTC}}{{paidBTC}} BTC{{/if}}</td>
+                      <td class="text-nowrap">{{timestampDetailed timeDate}}</td>
+                      <td>{{#if completed}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
+                      <td>{{^if rejected}}<span class="red-text fa fa-times"></span>{{else}}<span class="green-text fa fa-check"></span>{{/if}}</td>
+                      <td class="text-nowrap">{{^if completed}}<!--button class="btn btn-primary btn-xs">Confirm</button--> <button class="btn btn-danger btn-xs">Revoke</button>{{/if}}</td>
+                    </tr>
+                  {{/each}}
+                {{else}}
+                  <tr>
+                    <td colspan="4" class="text-center">
+                      <br>
+                      <span class="fa fa-refresh fa-3x fa-spin"></span>
+                      <br><br>
+                    </td>
+                  </tr>
+                {{/if}}
+                </tbody>
+              </table>
 
+              {{#if hasPages}}
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    <li{{^if isPrevActive}} class="disabled"{{/if}}>
+                      <a href="#" ($click)="prev()" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    {{#each pages}}
+                      <li class="{{#if isActive}}active{{/if}}"><a href="#" ($click)=changePage(pageNumber)>
+                        {{pageTitle}}
+                      </a></li>
+                    {{/each}}
+                    <li{{^if isNextActive}} class="disabled"{{/if}}>
+                      <a href="#" ($click)="next()" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              {{/if}}
+
+            </div>
+          </grid-component>
         </div>
       </div>
     </div>
   </div>
-
-  <br>
+  <div class="row">
+    <div class="col-xs-8 col-md-9">
+    </div>
+    <div class="col-xs-4 col-md-3">
+      <button ($click)="newTransaction()" type="button" class="btn btn-sm btn-primary btn-block">Add New Transaction</button>
+    </div>
+  </div>
 {{/if}}
+<br>
