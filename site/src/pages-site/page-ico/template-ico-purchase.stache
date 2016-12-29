@@ -4,18 +4,31 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">EQB Purchase</h4>
+        <h4 class="modal-title">EQB Purchase Confirmation</h4>
       </div>
       <div class="modal-body">
-        {{#if countdown}}
-          hello?
+        {{^if countdown}}
+          {{#if eqbNumberPositive}}
+            <p><strong>Purchase of {{eqbNumber}} EQB Units</strong></p>
+
+            <p>By purchasing I confirm that I have read and agreed to the Terms and Conditions.</p>
+
+            <p>We will provide a bitcoin address and final price once you click Buy!</p>
+          {{else}}
+            <p><strong>Please Enter a Number before clicking buy!</strong></p>
+          {{/if}}
         {{else}}
           <h3 class="text-center" style="margin-top:10px;">Come back once the offering starts!</h3>
         {{/if}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-custom btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
-        {{#if countdown}}<button type="button" class="btn btn-custom btn-primary btn-sm">Buy Equibits!</button>{{/if}}
+        <button type="button" class="btn btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Close</button>
+        {{^if countdown}}
+          {{#if eqbNumberPositive}}
+            <a href="http://equibit.org/equibitico.pdf" target="_blank" class="btn btn-primary btn-sm">Terms & Conditions</a>
+            <button type="button" class="btn btn-primary btn-sm">Buy EQB</button>
+          {{/if}}
+        {{/if}}
       </div>
     </div>
   </div>

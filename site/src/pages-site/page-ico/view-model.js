@@ -16,6 +16,12 @@ export default can.Map.extend({
     },
     eqbNumber: {
       value: ''
+    },
+    eqbNumberPositive: {
+      get() {
+        var num = this.attr("eqbNumber");
+        return Number(parseFloat(num)) == num && num != 0
+      }
     }
   },
   updateEstimation(btc) {
