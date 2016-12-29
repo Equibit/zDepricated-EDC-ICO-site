@@ -7,7 +7,7 @@
         <h4 class="modal-title">EQB Purchase Confirmation</h4>
       </div>
       <div class="modal-body">
-        {{^if countdown}}
+        {{#if countdown}}
           {{#if eqbNumberPositive}}
             <p><strong>Purchase of {{eqbNumber}} EQB Units</strong></p>
 
@@ -23,7 +23,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Close</button>
-        {{^if countdown}}
+        {{#if countdown}}
           {{#if eqbNumberPositive}}
             <a href="http://equibit.org/equibitico.pdf" target="_blank" class="btn btn-primary btn-sm">Terms & Conditions</a>
             <button type="button" class="btn btn-primary btn-sm">Buy EQB</button>
