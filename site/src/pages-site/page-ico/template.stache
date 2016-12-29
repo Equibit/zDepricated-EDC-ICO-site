@@ -45,7 +45,7 @@
         <input id="removeFocus" type="text" class="form-control" {($value)}="eqbNumber" ($keyup)="updateEstimation(@element.val)" placeholder="Number of EQB Tokens" maxlength="4">
         <span class="input-group-addon" id="basic-addon2">{{btcPrediction}} BTC Estimated</span>
         <span class="input-group-btn">
-          <button class="btn btn-primary btn-sm" type="button">Buy!</button>
+          <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#ico-purchase-modal">Buy!</button>
         </span>
       </div><!-- /input-group -->
       {{else}}
@@ -77,3 +77,5 @@
 
 
 <br><br>
+
+{{>ICOPurchase}}

@@ -1,7 +1,9 @@
 import can from 'can';
 import 'can/map/define/';
+import ICOPurchase from './template-ico-purchase.stache'
 
 export default can.Map.extend({
+  ICOPurchase:ICOPurchase,
   define: {
     countdown: {
       value: false

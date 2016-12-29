@@ -1,0 +1,23 @@
+<!-- Modal -->
+<div id="ico-purchase-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">EQB Purchase</h4>
+      </div>
+      <div class="modal-body">
+        {{#if countdown}}
+          hello?
+        {{else}}
+          <h3 class="text-center" style="margin-top:10px;">Come back once the offering starts!</h3>
+        {{/if}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
+        {{#if countdown}}<button type="button" class="btn btn-custom btn-primary btn-sm">Buy Equibits!</button>{{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Modal -->
