@@ -87,12 +87,15 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-8 col-md-9">
-    </div>
-    <div class="col-xs-4 col-md-3">
-      <button ($click)="newTransaction()" type="button" class="btn btn-sm btn-primary btn-block">Add New Transaction</button>
-    </div>
-  </div>
 {{/if}}
+
+<div class="row">
+  <div class="col-xs-8 col-md-9">
+  </div>
+  <div class="col-xs-4 col-md-3">
+    <button type="button" class="btn btn-sm btn-primary btn-block"  data-toggle="modal" data-target="#admin-new-transaction">Add New Transaction</button>
+  </div>
+</div>
 <br>
+
+{{>NewTransactionModel}}

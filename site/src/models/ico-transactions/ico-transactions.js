@@ -8,6 +8,12 @@ let ICOTransactionModel = can.Model.extend({
   create(attrs){
     return restAPI.requestPromise('POST', '/wapi/ico-transactions/', attrs);
   }
-}, {});
+}, {
+  define: {
+    manualTransaction: {
+      value: true
+    }
+  }
+});
 
 export default ICOTransactionModel;
