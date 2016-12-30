@@ -22,7 +22,7 @@ can.Component.extend({
       AdminUsers.findAll({})
         .then(data => {
           this.viewModel.attr('users', data);
-          this.viewModel.attr('loadedData', true);
+          this.viewModel.attr('usersLoaded', true);
         })
         .fail(err => {
           console.log('FAILED to load', err);

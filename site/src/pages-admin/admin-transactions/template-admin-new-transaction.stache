@@ -8,8 +8,72 @@
           <h4 class="modal-title" id="myChangePasswordModal">Add A New Transaction</h4>
         </div>
         <div class="modal-body">
-
-
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Number of EQB</label>
+                <input type="number" {($value)}="numberEQB" class="form-control" placeholder="Number of EQB">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              {{#if ../usersLoaded}}
+                <div class="form-group">
+                  <label>User</label>
+                  <select selectpicker="large" {($value)}="userID" data-live-search="true" class="selectpicker show-tick form-control">
+                    {{#each ../users}}
+                      <option value="{{id}}">{{userName}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              {{/if}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Funding Level</label>
+                <select selectpicker="large" {($value)}="fundingLevel" class="selectpicker form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Mark Order As</label>
+                <div class="row">
+                  <div class="col-xs-6">
+                    <div class="checkbox checkbox-primary">
+                      <input type="checkbox" id="markAsComplete" name="mark_as" {{inputDisabled}} {($checked)}="completed">
+                      <label for="markAsComplete">
+                        Complete
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Paid in USD</label>
+                <input type="number" class="form-control" {($value)}="paidUSD" placeholder="Paid in USD">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label>Paid in BTC</label>
+              <input type="number" class="form-control" {($value)}="paidBTC" placeholder="Paid in BTC">
+            </div>
+          </div>
 
         </div>
         <div class="modal-footer">

@@ -19,8 +19,8 @@ can.view.attr('selectpicker', (el, attrData) => {
   }
 
   let $el = $(el),
-      value = el.getAttribute('selectpicker'),
-      style = value === 'large' ? 'btn-form btn-sm' : 'btn-form btn-xs';
+    value = el.getAttribute('selectpicker'),
+    style = value === 'large' ? 'btn-form btn-sm' : 'btn-form btn-xs';
 
   // todo: if on mobile add .selectpicker('mobile');
 
