@@ -20,6 +20,14 @@ class ICOTransactionsData {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getTotalUserTransactions($userID) {
+        $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) as numberEQB FROM tokenSales WHERE userID=:userID AND rejected=0");
+        $query->bindValue(':userID', $userID);
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return $temp['numberEQB'];
+    }
+
     public static function getAllTransactions() {
         $query = MySQL::getInstance()->prepare("SELECT id, userID, fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed, rejected FROM tokenSales");
         $query->execute();

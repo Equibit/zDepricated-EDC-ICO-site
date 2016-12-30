@@ -40,7 +40,7 @@
                         <td>{{userName}}</td>
                         <td class="text-nowrap">{{#if emailConfirmed}}<span class="fa fa-check"></span> {{else}}<span class="red-text fa fa-times"></span> {{/if}}<a href="mailto:{{email}}">{{email}}</a></td>
                         <!--td class="text-nowrap">{{#if phoneConfirmed}}<span class="fa fa-check"></span> {{else}}<span class="red-text fa fa-times"></span> {{/if}}<a href="tel:{{phone}}">{{phone}}</a></td-->
-                        <td>{{eqbPurchased}}</td>
+                        <td>{{addCommas eqbPurchased}}</td>
                         <td class="text-nowrap">{{#if accountLocked}}<span class="red-text bold">{{i18n.adminUsersLocked}}</span>{{else}}{{i18n.adminUsersNotLocked}}{{/if}}</td>
                         {{#if languages.length}}<td>{{baseLang}}</td>{{/if}}
                         <td class="text-nowrap">{{timestamp accountCreated}}</td>

@@ -37,9 +37,9 @@
                   {{#each rows}}
                     <tr>
                       <td>{{username}}</td>
-                      <td>{{numberEQB}}</td>
+                      <td>{{addCommas numberEQB}}</td>
                       <td>{{fundingLevel}}</td>
-                      <td class="text-nowrap">{{#if paidUSD}}${{paidUSD}} USD{{/if}}</td>
+                      <td class="text-nowrap">{{#if paidUSD}}${{addCommas paidUSD}} USD{{/if}}</td>
                       <td class="text-nowrap">{{#if paidBTC}}{{paidBTC}} BTC{{/if}}</td>
                       <td class="text-nowrap">{{timestampDetailed timeDate}}</td>
                       <td>{{#if completed}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>

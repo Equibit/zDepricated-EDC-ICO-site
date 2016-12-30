@@ -1,6 +1,7 @@
 <?php
 namespace PHP_REST_API\Controllers;
 
+use PHP_REST_API\Data\ICOTransactionsData;
 use \PHP_REST_API\Helpers\StatusReturn;
 use \PHP_REST_API\Helpers\BaseAPIController;
 use \PHP_REST_API\Data\AuthUserData;
@@ -9,7 +10,10 @@ use \PHP_REST_API\Data\AuthUserRolesData;
 class AdminUsers extends BaseAPIController {
     function get_xhr() {
         if ($this->checkAuth()) {
-            echo json_encode(StatusReturn::S200(AuthUserData::getAllUserData()), JSON_NUMERIC_CHECK);
+            $data = AuthUserData::getAllUserData();
+            foreach ($data AS &$datum) $datum['eqbPurchased'] = ICOTransactionsData::getTotalUserTransactions($datum['id']);
+            unset($datum);
+            echo json_encode(StatusReturn::S200($data), JSON_NUMERIC_CHECK);
         }
     }
     function post_xhr($userID = null) {

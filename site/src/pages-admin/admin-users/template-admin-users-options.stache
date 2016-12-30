@@ -35,14 +35,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <!--div class="col-sm-6">
                             <div class="form-group">
                                 <div class="checkbox checkbox-primary">
                                     <input type="checkbox" id="edit_user3" {{inputDisabled}} {($checked)}="phoneConfirmed">
                                     <label for="edit_user3">{{i18n.userOptionsPhoneConfirmed}}</label>
                                 </div>
                             </div>
-                        </div>
+                        </div-->
                     </div>
                     {{^if emailConfirmed}}
                         {{^if phoneConfirmed}}
