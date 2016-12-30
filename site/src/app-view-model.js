@@ -15,7 +15,8 @@ const AppViewModel = can.Map.extend({
   contentTemplate: contentTemplate,
   define: {
     ref: {
-      value: null
+      value: null,
+      serialize: false
     },
     hasChat: {
       value: config.general.hasChat,
