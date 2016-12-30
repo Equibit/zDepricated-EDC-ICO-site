@@ -144,6 +144,7 @@ export default can.Map.extend({
         retype: restAPI.hashMe(this.attr("passwordRetypedCreate")),
         factor: this.attr("secondFactorSignUp"),
         lang: localStorage.getItem('locale'),
+        ref: this.attr("ref")
       };
 
       if (this.attr("hasEmail") && this.attr("hasPhone")) {

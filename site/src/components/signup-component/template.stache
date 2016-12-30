@@ -10,6 +10,7 @@
         <h4 class="modal-title" id="mySignUpModal">{{i18n.signUpTitle}}</h4>
       </div>
       <div class="modal-body">
+        <input type="hidden" {($value)}="ref">
         <div class="form-group">
           <label for="user_create">{{i18n.signUpUsername}}</label>
           <input type="text" class="form-control" id="user_create" {($value)}="userCreate" ($blur)="usernameCheckFunc()" {{inputDisabled}} placeholder="{{i18n.signUpUsername}}" autocomplete="off" />

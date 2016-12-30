@@ -165,7 +165,7 @@
   </div>
 
   <login-component {(is-logged-in)}="isLoggedIn"></login-component>
-  <signup-component></signup-component>
+  <signup-component {ref}="ref"></signup-component>
   <forgot-password-component></forgot-password-component>
 {{/if}}
 

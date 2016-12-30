@@ -31,7 +31,9 @@ class SignUp extends BaseAPIController {
                 $confirm = null;
                 if (_EMAIL_CONFIRMATION_ && _PHONE_CONFIRMATION_ && isset($_POST['confirm']) && ($_POST['confirm'] == 'phone' || $_POST['confirm'] == 'email')) $confirm = $_POST['confirm'];
 
-                if ($newUser->createUser(mb_strtolower($_POST['user']), $email, $phone, $_POST['pass'], $_POST['question'], mb_strtolower(trim($_POST['answer'])), trim($_POST['factor']), $lang, $confirm)) {
+                $ref = (!empty($_POST['ref']) ? $_POST['ref'] : null );
+
+                if ($newUser->createUser(mb_strtolower($_POST['user']), $email, $phone, $_POST['pass'], $_POST['question'], mb_strtolower(trim($_POST['answer'])), trim($_POST['factor']), $lang, $confirm, $ref)) {
                     echo json_encode(StatusReturn::S200());
                 } else {
                     echo json_encode(StatusReturn::E400('Unknown Error: su 37'));

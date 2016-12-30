@@ -86,9 +86,9 @@ class AuthUserData {
     /*
      *      Setters
      */
-    public static function addNewUser($userName, $email, $phone, $password, $salt, $securityQuestion, $securityAnswer) {
+    public static function addNewUser($userName, $email, $phone, $password, $salt, $securityQuestion, $securityAnswer, $ref) {
         $dataInstance = MySQL::getInstance();
-        $query = $dataInstance->prepare("INSERT INTO AuthUser (userName, email, phone, password, salt, securityQuestion, securityAnswer, accountCreated) VALUES (:userName, :email, :phone, :password, :salt, :securityQuestion, :securityAnswer, FROM_UNIXTIME(:accountCreated))");
+        $query = $dataInstance->prepare("INSERT INTO AuthUser (userName, email, phone, password, salt, securityQuestion, securityAnswer, accountCreated, ref) VALUES (:userName, :email, :phone, :password, :salt, :securityQuestion, :securityAnswer, FROM_UNIXTIME(:accountCreated), :ref)");
         $query->bindValue(':userName', $userName);
         $query->bindValue(':email', $email);
         $query->bindValue(':phone', $phone);
@@ -97,6 +97,7 @@ class AuthUserData {
         $query->bindValue(':securityQuestion', $securityQuestion);
         $query->bindValue(':securityAnswer', $securityAnswer);
         $query->bindValue(':accountCreated', time());
+        $query->bindValue(':ref', $ref);
         $query->execute();
         return $dataInstance->lastInsertId();
     }

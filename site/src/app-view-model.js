@@ -14,6 +14,9 @@ import contentTemplate from './app.stache!';
 const AppViewModel = can.Map.extend({
   contentTemplate: contentTemplate,
   define: {
+    ref: {
+      value: null
+    },
     hasChat: {
       value: config.general.hasChat,
       serialize: false

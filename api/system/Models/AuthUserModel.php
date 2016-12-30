@@ -18,7 +18,7 @@ class AuthUserModel {
 
     public function __construct() {}
 
-    public function createUser($authUser, $authEmail, $authPhone, $authPass, $authQuestion, $authAnswer, $extraKey, $lang, $confirm) {
+    public function createUser($authUser, $authEmail, $authPhone, $authPass, $authQuestion, $authAnswer, $extraKey, $lang, $confirm, $ref = null) {
         $emailExists = AuthUserData::emailExist($authEmail);
         $phoneExists = AuthUserData::phoneExist($authPhone);
         $userExists = AuthUserData::userExist($authUser);
@@ -55,7 +55,7 @@ class AuthUserModel {
                 else if (_EMAIL_CONFIRMATION_) $newExtraKey = $this->createPin(_PIN_SIGN_UP_PLUS_CHARS_);
                 else if (_PHONE_CONFIRMATION_) $newExtraKey = $this->createPin(0, true);
                 $salt = bin2hex(mcrypt_create_iv(_PASSWORD_SALT_IV_SIZE_, MCRYPT_DEV_URANDOM));
-                $newUserID = AuthUserData::addNewUser($authUser, $authEmail, $authPhone, $authPass, $salt, $authQuestion, mb_strtolower($authAnswer));
+                $newUserID = AuthUserData::addNewUser($authUser, $authEmail, $authPhone, $authPass, $salt, $authQuestion, mb_strtolower($authAnswer), $ref);
                 $this->setLanguage($lang);
 
                 $this->loadUserForced($authUser);

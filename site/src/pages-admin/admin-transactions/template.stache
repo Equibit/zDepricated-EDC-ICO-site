@@ -62,9 +62,7 @@
               {{else}}
                 <tr>
                   <td colspan="9" class="text-center">
-                    <br>
                     <span class="fa fa-refresh fa-2x fa-spin"></span>
-                    <br><br>
                   </td>
                 </tr>
               {{/if}}
