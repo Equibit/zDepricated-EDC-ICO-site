@@ -9,7 +9,7 @@
     <div class="col-sm-8 col-sm-offset-2 text-center">
       <h4 class="text-center bold">RESERVE UNITS AMONG THE FIRST MILLION OF A 22 MILLION UNIT SYSTEM</h4>
       <p class="text-center">Early adopters can reserve equibit units through an upcoming crowdsale! The planned opening date for this opportunity is on February 1, 2017.</p>
-      <p class="text-center">Please review our ICO Terms and Conditions for detailed information on this opportunity. If you would like to receive more information about this offering as it comes, please sign up for our newsletter.</p>
+      <p class="text-center">Please review our ICO Terms and Conditions for detailed information on this opportunity. If you would like to receive more information about this offering as it comes, please register.</p>
     </div>
   </div>
   <br>
@@ -52,14 +52,14 @@
         <h2>Transaction Needs to be confirmed before you can order more.</h2>
       {{/if}}
     {{else}}
-      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Register {{^if countdown}}to be ready{{/if}} to Buy!</a>
+      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Register for ICO!</a>
     {{/if}}
   </div>
 </div>
 
 <br>
 
-<ico-progress-component {^btc-prices}="btcPrices" {^eqb-remaining}="eqbRemaining" {^current-tranche}="currentTranche"></ico-progress-component>
+<ico-progress-component {^btc-prices}="btcPrices" {^eqb-remaining}="eqbRemaining" {^current-tranche}="currentTranche" {countdown}="countdown"></ico-progress-component>
 
 {{#if isLoggedIn}}
   <div class="row">

@@ -24,7 +24,8 @@ class AdminTransaction extends BaseAPIController {
                 $paidBTC = (isset($_POST['paidBTC']) ? $_POST['paidBTC'] : null);
                 echo json_encode(StatusReturn::S200(Array("id" => ICOTransactionsData::insertNewTransaction($_POST['userID'], $_POST['fundingLevel'], $_POST['numberEQB'], $paidBTC, $paidUSD, ($_POST['completed'] ? 1 : 0), ($_POST['manualTransaction'] ? 1 : 0 )))), JSON_NUMERIC_CHECK);
             } else {
-                ICOTransactionsData::revokeTransaction($id);
+                if (isset($_POST['completed']) && $_POST['completed'] == 1) ICOTransactionsData::confirmTransaction($id);
+                if (isset($_POST['rejected']) && $_POST['rejected'] == 1) ICOTransactionsData::revokeTransaction($id);
                 echo json_encode(StatusReturn::S200(Array("id" => $id)));
             }
         }

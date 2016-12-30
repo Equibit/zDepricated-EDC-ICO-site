@@ -27,7 +27,7 @@
               <th>Available</th>
               <th>Funding Level</th>
               <th>EQB Offered</th>
-              <th>Remaining</th>
+              {{#if countdown}}<th>Remaining</th>{{/if}}
               <th>Cumulative EQB</th>
               <th>Price per EQB (USD)</th>
               <th>Price per EQB (BTC)</th>
@@ -45,7 +45,7 @@
                   <td>{{#if oneAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>1</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.0}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.0}}</td>{{/if}}
                   <td>100,000</td>
                   <td>$2.00</td>
                   <td>{{btcPrices.0}}</td>
@@ -56,7 +56,7 @@
                   <td>{{#if twoAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>2</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.1}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.1}}</td>{{/if}}
                   <td>200,000</td>
                   <td>$2.50</td>
                   <td>{{btcPrices.1}}</td>
@@ -67,7 +67,7 @@
                   <td>{{#if threeAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>3</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.2}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.2}}</td>{{/if}}
                   <td>300,000</td>
                   <td>$3.13</td>
                   <td>{{btcPrices.2}}</td>
@@ -78,7 +78,7 @@
                   <td>{{#if fourAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>4</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.3}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.3}}</td>{{/if}}
                   <td>400,000</td>
                   <td>$3.91</td>
                   <td>{{btcPrices.3}}</td>
@@ -89,7 +89,7 @@
                   <td>{{#if fiveAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>5</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.4}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.4}}</td>{{/if}}
                   <td>500,000</td>
                   <td>$4.89</td>
                   <td>{{btcPrices.4}}</td>
@@ -100,7 +100,7 @@
                   <td>{{#if sixAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>6</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.5}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.5}}</td>{{/if}}
                   <td>600,000</td>
                   <td>$6.11</td>
                   <td>{{btcPrices.5}}</td>
@@ -111,7 +111,7 @@
                   <td>{{#if sevenAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>7</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.6}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.6}}</td>{{/if}}
                   <td>700,000</td>
                   <td>$7.64</td>
                   <td>{{btcPrices.6}}</td>
@@ -122,7 +122,7 @@
                   <td>{{#if eightAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>8</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.7}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.7}}</td>{{/if}}
                   <td>800,000</td>
                   <td>$9.55</td>
                   <td>{{btcPrices.7}}</td>
@@ -133,7 +133,7 @@
                   <td>{{#if nineAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>9</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.8}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.8}}</td>{{/if}}
                   <td>900,000</td>
                   <td>$11.94</td>
                   <td>{{btcPrices.8}}</td>
@@ -144,7 +144,7 @@
                   <td>{{#if tenAvailable}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
                   <td>10</td>
                   <td>100,000</td>
-                  <td>{{addCommas eqbRemaining.9}}</td>
+                  {{#if countdown}}<td>{{addCommas eqbRemaining.9}}</td>{{/if}}
                   <td>1,000,000</td>
                   <td>$14.93</td>
                   <td>{{btcPrices.9}}</td>
@@ -157,7 +157,7 @@
               {{/if}}
             {{else}}
               <tr>
-                <td colspan="7" class="text-center">
+                <td colspan="{{#if countdown}}6{{else}}7{{/if}}" class="text-center">
                   <br>
                   <span class="fa fa-refresh fa-3x fa-spin"></span>
                   <br><br>

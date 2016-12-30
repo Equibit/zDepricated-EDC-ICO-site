@@ -46,9 +46,11 @@
                       <td>{{^if rejected}}<span class="red-text fa fa-times"></span>{{else}}<span class="green-text fa fa-check"></span>{{/if}}</td>
                       <td class="text-nowrap">
                         {{^if completed}}
-                          <!--button class="btn btn-primary btn-xs">Confirm</button-->
                           {{^if rejected}}
-                            <button ($click)="revokeTransaction(.)" class="btn btn-danger btn-xs">Revoke</button>
+                            {{#if manualTransaction}}
+                              <button ($click)="confirmTransaction(.)" class="btn btn-primary btn-xs">Confirm</button>
+                              <button ($click)="revokeTransaction(.)" class="btn btn-danger btn-xs">Revoke</button>
+                            {{/if}}
                           {{/if}}
                         {{/if}}
                       </td>

@@ -21,7 +21,7 @@ class ICOTransactionsData {
     }
 
     public static function getTotalUserTransactions($userID) {
-        $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) as numberEQB FROM tokenSales WHERE userID=:userID AND rejected=0");
+        $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) as numberEQB FROM tokenSales WHERE userID=:userID AND rejected=0 AND completed=1");
         $query->bindValue(':userID', $userID);
         $query->execute();
         $temp = $query->fetch(PDO::FETCH_ASSOC);
@@ -51,6 +51,12 @@ class ICOTransactionsData {
 
     public static function revokeTransaction($id) {
         $query = MySQL::getInstance()->prepare("UPDATE tokenSales SET rejected=1 WHERE id=:id");
+        $query->bindValue(':id', $id);
+        return $query->execute();
+    }
+
+    public static function confirmTransaction($id) {
+        $query = MySQL::getInstance()->prepare("UPDATE tokenSales SET completed=1 WHERE id=:id");
         $query->bindValue(':id', $id);
         return $query->execute();
     }

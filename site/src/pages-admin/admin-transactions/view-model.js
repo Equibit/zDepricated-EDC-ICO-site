@@ -40,9 +40,12 @@ export default can.Map.extend({
     this.attr("data", newData);
   },
   revokeTransaction(transaction) {
-    transaction.save(() => {
-      transaction.attr("rejected", true);
-    });
+    transaction.attr("rejected", 1);
+    transaction.save();
+  },
+  confirmTransaction(transaction) {
+    transaction.attr("completed", 1);
+    transaction.save();
   },
   addTransaction(transaction) {
     transaction.save(() => {
