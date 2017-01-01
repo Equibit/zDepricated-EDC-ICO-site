@@ -7,8 +7,8 @@ define(function() {
       {name: "Français", code: "fr"}
     ],
     server: {
-      domain: "http://ico.equibit.org",
-      sockets: "ws://ico.equibit.org/ws/"
+      domain: "https://ico.equibit.org",
+      sockets: "wss://ico.equibit.org/ws/"
     },
     webSockets: false,
     general: {

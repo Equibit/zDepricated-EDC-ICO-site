@@ -3,7 +3,7 @@
 define('_ALLOW_CORS_', true);
 define('_IN_DEVELOPMENT_', true);
 define('_FULL_DEBUG_', false);
-define('_USE_HTTPS_ONLY_', false);
+define('_USE_HTTPS_ONLY_', true);
 
 require_once('ConstantsKeys.php');
 

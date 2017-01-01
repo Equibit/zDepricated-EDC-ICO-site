@@ -59,8 +59,8 @@ deny from all
 Options +FollowSymlinks
 RewriteEngine On
 
-#RewriteCond %{HTTPS} off
-#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Remove www
 RewriteCond %{HTTP_HOST}//s%{HTTPS} ^www.(.*)//((s)on|s.*)$ [NC]
