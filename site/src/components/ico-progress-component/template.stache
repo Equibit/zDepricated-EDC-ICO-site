@@ -3,18 +3,20 @@
 
     <div class="h2">Crowd Sale Progress</div>
 
-    {{#if loaded}}
-    <div class="progress">
-      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">
-        {{#if progressOverHalf}}<span>{{progress}}%</span>{{/if}}
-      </div>
-      {{^if progressOverHalf}}<span>{{progress}}%</span>{{/if}}
-    </div>
-    {{else}}
-      <div>
-        <span class="fa fa-refresh fa-spin"></span>
-        <br><br>
-      </div>
+    {{#if countdown}}
+      {{#if loaded}}
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">
+            {{#if progressOverHalf}}<span>{{progress}}%</span>{{/if}}
+          </div>
+          {{^if progressOverHalf}}<span>{{progress}}%</span>{{/if}}
+        </div>
+      {{else}}
+        <div>
+          <span class="fa fa-refresh fa-spin"></span>
+          <br><br>
+        </div>
+      {{/if}}
     {{/if}}
 
     <div class="panel">
