@@ -34,7 +34,7 @@
                 </thead>
                 {{#if users.length}}
                   <tbody>
-                  {{#each rows}}
+                  {{#each pagedRows}}
                     {{^if deleting}}
                       <tr>
                         <td>{{userName}}</td>

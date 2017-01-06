@@ -2,7 +2,7 @@
 <div id="admin-new-transaction" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      {{#newTransaction}}
+      {{#newUserTransaction}}
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myChangePasswordModal">Add A New Transaction</h4>
@@ -80,7 +80,7 @@
           <button type="button" class="btn btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
           <button ($click)="'addTransaction(.)" type="button" class="btn btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}Add New Transaction{{/if}}</button>
         </div>
-      {{/newTransaction}}
+      {{/newUserTransaction}}
     </div>
   </div>
 </div>

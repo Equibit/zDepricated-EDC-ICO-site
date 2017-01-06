@@ -30,31 +30,32 @@ export default can.Map.extend({
       type: 'string',
       serialize: false
     },
-    newTransaction: {
-      Type: AdminTransactionModels,
-      value: new AdminTransactionModels({})
+		newUserTransaction: {
+			value: new AdminTransactionModels({}),
+      Type: AdminTransactionModels
     }
   },
   updateSearch(searchStr) {
-    var newData = this.attr("usersData").filter((elem, index, arr) =>  elem.username.includes(searchStr));
+    let newData = this.attr("usersData").filter((elem, index, arr) =>  elem.username.includes(searchStr));
     this.attr("data", newData);
   },
-  revokeTransaction(transaction) {
-    transaction.attr("rejected", 1);
-    transaction.save();
+  revokeTransaction(transactionRejected) {
+		transactionRejected.attr("rejected", 1);
+		transactionRejected.save();
   },
-  confirmTransaction(transaction) {
-    transaction.attr("completed", 1);
-    transaction.save();
+  confirmTransaction(transactionCompleted) {
+		transactionCompleted.attr("completed", 1);
+		transactionCompleted.save();
   },
   addTransaction(transaction) {
-    transaction.save(() => {
-      transaction.attr("timeDate", Math.floor(Date.now() / 1000));
+    transaction.save(data => {
+			data.attr("timeDate", Math.floor(Date.now() / 1000));
       this.attr("users").forEach(item => {
-        if (item.id == transaction.userID) transaction.attr("username", item.userName);
+        if (item.id == data.userID) data.attr("username", item.userName);
       });
-      this.attr("data").push(transaction);
-      this.attr("newTransaction", {});
+      this.attr("data").push(data);
+			this.attr("newUserTransaction.id", null);
+			this.attr("newUserTransaction", {});
       $('#admin-new-transaction').modal('hide');
     });
   }
