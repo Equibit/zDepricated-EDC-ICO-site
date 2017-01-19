@@ -1,0 +1,97 @@
+<can-import from="grid-component"/>
+
+<div class="row">
+  <div class="col-xs-8 col-md-9">
+    <div class="h1 no-top-margin">Transactions</div>
+  </div>
+  <div class="col-xs-4 col-md-3">
+    <div class="input-group">
+      <div class="input-group-addon"><span class="fa fa-search"></span></div>
+      <input type="text" class="form-control" {($value)}="search" ($keyup)="updateSearch(@element.val)" placeholder="User {{i18n.adminUsersSearch}}">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <grid-component {(rows)}="data" pagination="20">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th class="text-nowrap" ($click)="{sortBy 'address'}">Address {{{sortArrow 'address'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'expectedPayment'}">Expected Payment {{{sortArrow 'expectedPayment'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'receivedPayment'}">Received Payment {{{sortArrow 'receivedPayment'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'blocksConfirmed'}">Blocks Confirmed {{{sortArrow 'blocksConfirmed'}}}</th>
+                <th class="text-nowrap">Transaction ID</th>
+                <th class="text-nowrap" ($click)="{sortBy 'timeDate'}">Time and Date {{{sortArrow 'timeDate'}}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              {{#if loaded}}
+                {{#if data.length}}
+                  {{#each rows}}
+                    <tr>
+                      <td>{{address}}</td>
+                      <td>{{expectedPayment}}</td>
+                      <td>{{receivedPayment}}</td>
+                      <td>{{blocksConfirmed}}</td>
+                      <td>{{transactionHash}}</td>
+                      <td class="text-nowrap">{{timestampDetailed timeDate}}</td>
+                    </tr>
+                  {{/each}}
+                {{else}}
+                  <tr>
+                    <td colspan="6" class="text-center"><strong>No Current Addresses Available</strong></td>
+                  </tr>
+                {{/if}}
+              {{else}}
+                <tr>
+                  <td colspan="6" class="text-center">
+                    <span class="fa fa-refresh fa-2x fa-spin"></span>
+                  </td>
+                </tr>
+              {{/if}}
+              </tbody>
+            </table>
+
+            {{#if hasPages}}
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li{{^if isPrevActive}} class="disabled"{{/if}}>
+                    <a href="#" ($click)="prev()" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  {{#each pages}}
+                    <li class="{{#if isActive}}active{{/if}}"><a href="#" ($click)=changePage(pageNumber)>
+                      {{pageTitle}}
+                    </a></li>
+                  {{/each}}
+                  <li{{^if isNextActive}} class="disabled"{{/if}}>
+                    <a href="#" ($click)="next()" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            {{/if}}
+
+          </div>
+        </grid-component>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-8 col-md-9">
+  </div>
+  <div class="col-xs-4 col-md-3">
+    <button type="button" class="btn btn-sm btn-primary btn-block"  data-toggle="modal" data-target="#admin-new-address">Create a Receive Address</button>
+  </div>
+</div>
+<br>
+
+{{>templateNewAddressModel}}

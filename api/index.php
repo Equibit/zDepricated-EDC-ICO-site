@@ -51,6 +51,9 @@ if (!isset($argv[1])) {
         '/bit-pay-ipn/'
         => Array('controller' => 'BitPayIPN', 'auth' => false),
 
+        '/blockchain-ipn/'
+        => Array('controller' => 'BlockchainIPN', 'auth' => false),
+
         '/wapi/check-username/:alphaNumPlus/'
         => Array('controller' => 'CheckUsername', 'auth' => false),
 
@@ -160,6 +163,9 @@ if (!isset($argv[1])) {
 
         '/wapi/ico-transactions/'
         => Array('controller' => 'ICOTransaction', 'roles' => Array('i18nUser')),
+
+        '/wapi/admin-bitcoin-transactions/'
+        => Array('controller' => 'AdminBitcoinTransaction', 'roles' => Array('i18nAdmin')),
 
         '/wapi/admin-transactions/:num/'
         => Array('controller' => 'AdminTransaction', 'roles' => Array('i18nAdmin')),

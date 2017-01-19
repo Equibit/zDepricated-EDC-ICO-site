@@ -9,21 +9,26 @@ can.Component.extend({
   template: template,
   events: {
     inserted() {
-      var startInterval = setInterval(() => {
+      let startInterval = setInterval(() => {
         if (typeof this.viewModel.attr("timestamp") != 'undefined') {
           clearInterval(startInterval);
-          var eventTime = this.viewModel.attr("timestamp"),
+					let eventTime = this.viewModel.attr("timestamp"),
             currentTime = Math.floor(Date.now() / 1000),
             diffTime = eventTime - currentTime,
             duration = moment.duration(diffTime * 1000, 'milliseconds'),
             interval = 1000;
 
           if (diffTime > 0) {
-            var countdownInterval = setInterval(() => {
+						let countdownInterval = setInterval(() => {
+
+							currentTime = Math.floor(Date.now() / 1000);
+							diffTime = eventTime - currentTime;
+							duration = moment.duration(diffTime * 1000, 'milliseconds');
+
               duration = moment.duration(duration.asMilliseconds() - interval, 'milliseconds');
               //console.log(duration._milliseconds);
               if (duration._milliseconds >= 0) {
-                var o = moment.duration(duration).months(),
+								let o = moment.duration(duration).months(),
                   d = moment.duration(duration).days(),
                   h = moment.duration(duration).hours(),
                   m = moment.duration(duration).minutes(),

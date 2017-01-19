@@ -39,7 +39,7 @@
             {{#if loaded}}
               {{#if showMoreStart}}
                 <tr>
-                  <td colspan="{{#if countdown}}6{{else}}7{{/if}}" class="text-center ultra">. . .</td>
+                  <td colspan="7" class="text-center ultra">. . .</td>
                 </tr>
               {{/if}}
               {{#if showOne}}
@@ -154,12 +154,12 @@
               {{/if}}
               {{#if showMoreEnd}}
                 <tr>
-                  <td colspan="{{#if countdown}}6{{else}}7{{/if}}" class="text-center ultra">. . .</td>
+                  <td colspan="7" class="text-center ultra">. . .</td>
                 </tr>
               {{/if}}
             {{else}}
               <tr>
-                <td colspan="{{#if countdown}}6{{else}}7{{/if}}" class="text-center">
+                <td colspan="7" class="text-center">
                   <br>
                   <span class="fa fa-refresh fa-3x fa-spin"></span>
                   <br><br>

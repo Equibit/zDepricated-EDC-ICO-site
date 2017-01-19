@@ -22,6 +22,14 @@ class AvailablePaymentMethodsData {
         return ($temp['count'] >= 1);
     }
 
+    public static function hasBlockchain() {
+        $query = MySQL::getInstance()->prepare("SELECT COUNT(*) AS count FROM AvailablePaymentMethods WHERE paymentMethodName=:paymentMethodName AND paymentMethodAvailable=1");
+        $query->bindValue(':paymentMethodName', 'blockchain');
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return ($temp['count'] >= 1);
+    }
+
     public static function turnOffBitPay() {
         $query = MySQL::getInstance()->prepare("UPDATE AvailablePaymentMethods SET paymentMethodAvailable=0 WHERE paymentMethodName=:paymentMethodName");
         $query->bindValue(':paymentMethodName', 'bitPay');

@@ -12,7 +12,9 @@ class BitcoinChartsModel {
         if (count($data) == 0 || $data['lastUpdate'] < time() - 900) {
             $jsonData = json_decode(file_get_contents("http://api.bitcoincharts.com/v1/weighted_prices.json"), true);
             $this->lastPrice = $jsonData['USD']['24h'];
-            BitcoinPricesData::updatePriceForSource($this->lastPrice, 'BitcoinCharts');
+            if (!is_null($this->lastPrice)) {
+                BitcoinPricesData::updatePriceForSource($this->lastPrice, 'BitcoinCharts');
+            }
         } else {
             $this->lastPrice = $data['lastPrice'];
         }

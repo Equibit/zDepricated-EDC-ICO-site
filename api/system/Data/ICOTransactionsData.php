@@ -6,6 +6,12 @@ use \PDO;
 
 class ICOTransactionsData {
 
+    public static function getBitcoinTransactions() {
+        $query = MySQL::getInstance()->prepare("SELECT address, indexReturned, expectedPayment, receivedPayment, blocksConfirmed, transactionHash, UNIX_TIMESTAMP(timeDate) AS timeDate FROM BlockchainAddresses");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getTotalEQBSold() {
         $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) AS numberEQB FROM tokenSales WHERE rejected=0");
         $query->execute();
@@ -18,6 +24,13 @@ class ICOTransactionsData {
         $query->bindValue(':userID', $userID);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getTransactions($id) {
+        $query = MySQL::getInstance()->prepare("SELECT fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed FROM tokenSales WHERE id=:id");
+        $query->bindValue(':id', $id);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function getTotalUserTransactions($userID) {
@@ -58,6 +71,13 @@ class ICOTransactionsData {
     public static function confirmTransaction($id) {
         $query = MySQL::getInstance()->prepare("UPDATE tokenSales SET completed=1 WHERE id=:id");
         $query->bindValue(':id', $id);
+        return $query->execute();
+    }
+
+    public static function updateEQBNumber($id, $numberEQB) {
+        $query = MySQL::getInstance()->prepare("UPDATE tokenSales SET numberEQB=:numberEQB WHERE id=:id");
+        $query->bindValue(':id', $id);
+        $query->bindValue(':numberEQB', $numberEQB);
         return $query->execute();
     }
 

@@ -18,6 +18,7 @@
 <can-import from="pages-admin/admin-transactions/" />
 <can-import from="pages-admin/admin-comm-templates/" />
 <can-import from="pages-admin/admin-text-variables/" />
+<can-import from="pages-admin/admin-bitcoin-payment/" />
 {{#if hasFAQs}}<can-import from="pages-admin/admin-faqs/" />{{/if}}
 {{#if hasBlog}}<can-import from="pages-admin/admin-blog/" />{{/if}}
 
@@ -97,6 +98,7 @@
                   {{/if}}
                   <li class="{{#is page 'adminUsers'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminUsers')">{{i18n.adminUserNav}}</a></li>
                   <li class="{{#is page 'adminTransactions'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminTransactions')">All Transactions</a></li>
+                  <li class="{{#is page 'adminBitcoin'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminBitcoin')">Bitcoin Addresses</a></li>
                   <li class="{{#is page 'adminCommTemplates'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminCommTemplates')">{{i18n.adminCommTemplatesNav}}</a></li>
                   <li class="{{#is page 'adminText'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminText')">{{i18n.adminTextNav}}</a></li>
                   {{#if hasFAQs}}<li class="{{#is page 'adminFAQs'}}active{{/is}}"><a href="/" class="internalLink" ($click)="switchPage('adminFAQs')">{{i18n.adminFAQsNav}}</a></li>{{/if}}
@@ -147,6 +149,9 @@
         {{/case}}
         {{#case 'adminBlog'}}
           {{#if accountSettings.roles.i18nAdmin}}<admin-blog></admin-blog>{{/if}}
+        {{/case}}
+        {{#case 'adminBitcoin'}}
+          {{#if accountSettings.roles.i18nAdmin}}<admin-bitcoin-payment></admin-bitcoin-payment>{{/if}}
         {{/case}}
       {{/switch}}
     {{else}}
