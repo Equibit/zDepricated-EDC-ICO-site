@@ -12,6 +12,12 @@ class ICOTransactionsData {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getXPubs() {
+        $query = MySQL::getInstance()->prepare("SELECT id, xPub, gap FROM BlockchainxPubs");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getTotalEQBSold() {
         $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) AS numberEQB FROM tokenSales WHERE rejected=0");
         $query->execute();

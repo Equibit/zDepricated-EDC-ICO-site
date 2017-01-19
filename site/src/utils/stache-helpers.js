@@ -11,6 +11,10 @@ can.stache.registerSimpleHelper('leading', num => {
   return s.substr(s.length-8);
 });
 
+can.stache.registerSimpleHelper('shorten', s => {
+  return s.substr(0,50);
+});
+
 can.stache.registerSimpleHelper('addCommas', num => {
   var nf = new Intl.NumberFormat();
   return nf.format(num)

@@ -1,7 +1,7 @@
 import can from 'can';
 import 'can/map/define/';
-import templateNewAddressModel from './template-admin-new-address.stache!';
-import AdminTransactionModels from 'easyapp/models/admin-bitcoin-transactions/';
+import templateNewAddressModel from './template-admin-new-xpub.stache!';
+import AdminXPubsModels from 'easyapp/models/admin-xpubs/';
 
 export default can.Map.extend({
 	templateNewAddressModel: templateNewAddressModel,
@@ -9,7 +9,7 @@ export default can.Map.extend({
 		loaded: {
 			value: false
 		},
-		bitcoinData: {
+		xPubData: {
 			value: [],
 			set(newValue) {
 				this.attr("data", newValue);
@@ -20,9 +20,9 @@ export default can.Map.extend({
 		data: {
 			value: []
 		},
-		newBitcoinAddress: {
-			Type: AdminTransactionModels,
-      value: new AdminTransactionModels({})
+		newXPub: {
+			Type: AdminXPubsModels,
+      value: new AdminXPubsModels({})
 		}
 	}
 });

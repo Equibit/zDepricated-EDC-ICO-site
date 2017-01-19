@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-xs-8 col-md-9">
-    <div class="h1 no-top-margin">Bitcoin Addresses</div>
+    <div class="h1 no-top-margin">xPubs</div>
   </div>
 </div>
 <div class="row">
@@ -14,12 +14,9 @@
             <table class="table table-striped">
               <thead>
               <tr>
-                <th class="text-nowrap" ($click)="{sortBy 'address'}">Address {{{sortArrow 'address'}}}</th>
-                <th class="text-nowrap" ($click)="{sortBy 'expectedPayment'}">Expected Payment {{{sortArrow 'expectedPayment'}}}</th>
-                <th class="text-nowrap" ($click)="{sortBy 'receivedPayment'}">Received Payment {{{sortArrow 'receivedPayment'}}}</th>
-                <th class="text-nowrap" ($click)="{sortBy 'blocksConfirmed'}">Blocks Confirmed {{{sortArrow 'blocksConfirmed'}}}</th>
-                <th class="text-nowrap">Transaction ID</th>
-                <th class="text-nowrap" ($click)="{sortBy 'timeDate'}">Time and Date {{{sortArrow 'timeDate'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'id'}">xPub ID {{{sortArrow 'id'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'xPub'}">xPubt {{{sortArrow 'xPub'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'gap'}">Gap {{{sortArrow 'gap'}}}</th>
               </tr>
               </thead>
               <tbody>
@@ -27,22 +24,19 @@
                 {{#if data.length}}
                   {{#each rows}}
                     <tr>
-                      <td>{{address}}</td>
-                      <td>{{expectedPayment}}</td>
-                      <td>{{receivedPayment}}</td>
-                      <td>{{blocksConfirmed}}</td>
-                      <td>{{transactionHash}}</td>
-                      <td class="text-nowrap">{{timestampDetailed timeDate}}</td>
+                      <td>{{id}}</td>
+                      <td>{{shorten xPub}}</td>
+                      <td>{{gap}}</td>
                     </tr>
                   {{/each}}
                 {{else}}
                   <tr>
-                    <td colspan="6" class="text-center"><strong>No Current Addresses Available</strong></td>
+                    <td colspan="3" class="text-center"><strong>No Current xPubs Available</strong></td>
                   </tr>
                 {{/if}}
               {{else}}
                 <tr>
-                  <td colspan="6" class="text-center">
+                  <td colspan="3" class="text-center">
                     <span class="fa fa-refresh fa-2x fa-spin"></span>
                   </td>
                 </tr>
