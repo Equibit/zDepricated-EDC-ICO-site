@@ -1,7 +1,8 @@
 import can from 'can';
 import template from './template.stache!';
 import viewModel from './view-model';
-import AdminTransactionModels from 'easyapp/models/admin-bitcoin-transactions/';
+import AdminBitcoinModels from 'easyapp/models/admin-bitcoin-transactions/';
+import AdminTransactionModels from 'easyapp/models/admin-transactions/';
 
 can.Component.extend({
   tag: 'admin-bitcoin-payment',
@@ -9,7 +10,7 @@ can.Component.extend({
   template: template,
   events: {
     inserted() {
-      AdminTransactionModels.findAll({})
+			AdminBitcoinModels.findAll({})
         .then(data => {
           this.viewModel.attr('bitcoinData', data);
           this.viewModel.attr('loaded', true);
@@ -18,6 +19,14 @@ can.Component.extend({
           console.log('FAILED to load keys', err);
         });
 
+			AdminTransactionModels.findAll({})
+				.then(data => {
+					this.viewModel.attr('transactionData', data);
+					this.viewModel.attr('txLoaded', true);
+				})
+				.fail(err => {
+					console.log('FAILED to load keys', err);
+				});
     }
   }
 });

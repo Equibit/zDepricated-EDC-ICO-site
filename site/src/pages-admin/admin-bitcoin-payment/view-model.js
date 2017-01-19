@@ -9,6 +9,12 @@ export default can.Map.extend({
 		loaded: {
 			value: false
 		},
+		txLoaded: {
+			value: false
+		},
+		transactionData: {
+			value: []
+		},
 		bitcoinData: {
 			value: [],
 			set(newValue) {

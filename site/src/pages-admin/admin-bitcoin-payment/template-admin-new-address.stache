@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div id="admin-new-address" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       {{#newBitcoinAddress}}
         <div class="modal-header">
@@ -11,12 +11,16 @@
 
           <div class="row">
             <div class="col-sm-12">
-              {{#if ../usersLoaded}}
+              {{#if ../txLoaded}}
                 <div class="form-group">
-                  <label>User</label>
-                  <select selectpicker="large" {($value)}="userID" data-live-search="true" class="selectpicker show-tick form-control">
-                    {{#each ../users}}
-                      <option value="{{id}}">{{userName}}</option>
+                  <label>Create Payment for this Transaction</label>
+                  <select selectpicker="large" {($value)}="tokenSaleID" class="selectpicker show-tick form-control">
+                    {{#each ../transactionData}}
+                      {{^if completed}}
+                        {{^if rejected}}
+                          <option value="{{id}}">{{username}} Buying {{addCommas numberEQB}} EQBs</option>
+                        {{/if}}
+                      {{/if}}
                     {{/each}}
                   </select>
                 </div>
