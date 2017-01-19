@@ -18,6 +18,14 @@ class ICOTransactionsData {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function insertXPub($xPub) {
+        $dataInstance = MySQL::getInstance();
+        $query = $dataInstance->prepare("INSERT INTO BlockchainxPubs (xPub) VALUES (:xPub)");
+        $query->bindValue(':xPub', $xPub);
+        $query->execute();
+        return $dataInstance->lastInsertId();
+    }
+
     public static function getTotalEQBSold() {
         $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) AS numberEQB FROM tokenSales WHERE rejected=0");
         $query->execute();

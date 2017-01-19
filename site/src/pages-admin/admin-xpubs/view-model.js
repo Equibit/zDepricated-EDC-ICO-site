@@ -24,5 +24,12 @@ export default can.Map.extend({
 			Type: AdminXPubsModels,
       value: new AdminXPubsModels({})
 		}
+	},
+	addXPub(xpub) {
+		xpub.save(saved => {
+			saved.attr("gap", 0);
+			this.attr("data").push(saved);
+			$('#admin-new-xpub').modal('hide');
+		});
 	}
 });
