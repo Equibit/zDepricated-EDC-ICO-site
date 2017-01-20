@@ -2,38 +2,36 @@
 <div id="admin-new-address" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      {{#newBitcoinAddress}}
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myChangePasswordModal">Create a New Receive Bitcoin Address</h4>
-        </div>
-        <div class="modal-body">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myChangePasswordModal">Create a New Receive Bitcoin Address</h4>
+      </div>
+      <div class="modal-body">
 
-          <div class="row">
-            <div class="col-sm-12">
-              {{#if ../txLoaded}}
-                <div class="form-group">
-                  <label>Create Payment for this Transaction</label>
-                  <select selectpicker="large" {($value)}="tokenSaleID" class="selectpicker show-tick form-control">
-                    {{#each ../transactionData}}
-                      {{^if completed}}
-                        {{^if rejected}}
-                          <option value="{{id}}">{{username}} Buying {{addCommas numberEQB}} EQBs</option>
-                        {{/if}}
+        <div class="row">
+          <div class="col-sm-12">
+            {{#if ../txLoaded}}
+              <div class="form-group">
+                <label>Create Payment for this Transaction</label>
+                <select selectpicker="large" {($value)}="tokenSaleID" class="selectpicker show-tick form-control">
+                  {{#each ../transactionData}}
+                    {{^if completed}}
+                      {{^if rejected}}
+                        <option value="{{id}}">{{username}} Buying {{addCommas numberEQB}} EQBs for {{paidBTC}} BTC</option>
                       {{/if}}
-                    {{/each}}
-                  </select>
-                </div>
-              {{/if}}
-            </div>
+                    {{/if}}
+                  {{/each}}
+                </select>
+              </div>
+            {{/if}}
           </div>
+        </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
-          <button ($click)="'addAddress(.)" type="button" class="btn btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}Create Address{{/if}}</button>
-        </div>
-      {{/newBitcoinAddress}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
+        <button ($click)="'addAddress()" type="button" class="btn btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}Create Address{{/if}}</button>
+      </div>
     </div>
   </div>
 </div>

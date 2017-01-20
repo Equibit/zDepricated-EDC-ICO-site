@@ -26,9 +26,11 @@ export default can.Map.extend({
 		data: {
 			value: []
 		},
-		newBitcoinAddress: {
-			Type: AdminTransactionModels,
-      value: new AdminTransactionModels({})
+		tokenSaleID: {
+			value: null
 		}
+	},
+	addAddress() {
+		console.log(this.attr("tokenSaleID"));
 	}
 });
