@@ -8,6 +8,12 @@ let AdminBitcoinTransactionModel = can.Model.extend({
   create(attrs){
     return restAPI.requestPromise('POST', '/wapi/admin-bitcoin-transactions/', attrs);
   }
-}, {});
+}, {
+  define: {
+		noAddress: {
+		  value: true
+    }
+  }
+});
 
 export default AdminBitcoinTransactionModel;

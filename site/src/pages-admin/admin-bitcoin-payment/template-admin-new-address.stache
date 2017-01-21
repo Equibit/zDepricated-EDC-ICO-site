@@ -9,30 +9,48 @@
       {{#newBitcoinAddress}}
         <div class="modal-body">
 
-          <div class="row">
-            <div class="col-sm-12">
-              {{#if ../txLoaded}}
-                <div class="form-group">
-                  <label>Create Payment for this Transaction</label>
-                  <select selectpicker="large" {($value)}="tokenSaleID" title="Select Transaction for new Address" class="selectpicker show-tick form-control">
-                    <option value="0">No Token Sale</option>
-                    {{#each ../transactionData}}
-                      {{^if completed}}
-                        {{^if rejected}}
-                          <option value="{{id}}">{{username}} Buying {{addCommas numberEQB}} EQBs for {{paidBTC}} BTC</option>
+          {{#if noAddress}}
+            <div class="row">
+              <div class="col-sm-12">
+                {{#if ../txLoaded}}
+                  <div class="form-group">
+                    <label>Create Payment for this Transaction</label>
+                    <select selectpicker="large" {($value)}="tokenSaleID" title="Select Transaction for new Address" class="selectpicker show-tick form-control">
+                      <option value="0">No Token Sale</option>
+                      {{#each ../transactionData}}
+                        {{^if completed}}
+                          {{^if rejected}}
+                            <option value="{{id}}">{{username}} Buying {{addCommas numberEQB}} EQBs for {{paidBTC}} BTC</option>
+                          {{/if}}
                         {{/if}}
-                      {{/if}}
-                    {{/each}}
-                  </select>
-                </div>
-              {{/if}}
+                      {{/each}}
+                    </select>
+                  </div>
+                {{/if}}
+              </div>
             </div>
-          </div>
+          {{else}}
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:{{address}}" class="img-responsive">
+              </div>
+              <div class="col-sm-8 text-center">
+                <br><br>
+                <span style="background-color: #eee; padding: 2px">{{address}}</span>
+                <br><br>
+                Send {{toBTC expectedPayment}} BTC
+              </div>
+            </div>
+          {{/if}}
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
-          <button ($click)="'addAddress(.)" type="button" class="btn btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}Create Address{{/if}}</button>
+          {{#if noAddress}}
+            <button ($click)="'addAddress(.)" type="button" class="btn btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}}>{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}Create Address{{/if}}</button>
+          {{else}}
+            <button ($click)="'resetAddress(.)" type="button" class="btn btn-primary btn-sm">Create Another</button>
+          {{/if}}
         </div>
       {{/newBitcoinAddress}}
     </div>

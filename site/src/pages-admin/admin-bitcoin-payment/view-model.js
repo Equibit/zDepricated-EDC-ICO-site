@@ -37,9 +37,14 @@ export default can.Map.extend({
 		if (tokenSaleID != 0 && tokenSaleID != '') {
 			sale.save(saved => {
 				saved.attr("timeDate", Math.floor(Date.now() / 1000));
+				saved.attr("expectedPayment", saved.attr("expectedPayment") * 100000000);
+				sale.attr("noAddress", false);
 				this.attr("data").push(saved);
 				console.log(saved);
 			});
 		}
+	},
+	resetAddress() {
+		this.attr("newBitcoinAddress", {});
 	}
 });

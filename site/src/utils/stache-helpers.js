@@ -7,21 +7,23 @@ can.stache.registerSimpleHelper('lookup', key => {
 });
 
 can.stache.registerSimpleHelper('leading', num => {
-  var s = "000000000" + num;
+  let s = "000000000" + num;
   return s.substr(s.length-8);
 });
 
 can.stache.registerSimpleHelper('shorten', s => {
-  return s.substr(0,25);
+	if (s != 'undefined' && s) return s.substr(0,25);
+  else return 'None';
 });
 
 can.stache.registerSimpleHelper('addCommas', num => {
-  var nf = new Intl.NumberFormat();
+  let nf = new Intl.NumberFormat();
   return nf.format(num)
 });
 
 can.stache.registerSimpleHelper('toBTC', num => {
-  return num / 100000000
+  if (num != 'undefined' && num) return num / 100000000;
+  else return 0
 });
 
 can.stache.registerSimpleHelper('cleanKey', str => {
