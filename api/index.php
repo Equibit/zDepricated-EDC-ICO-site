@@ -170,9 +170,6 @@ if (!isset($argv[1])) {
         '/wapi/admin-xpubs/'
         => Array('controller' => 'AdminXPubs', 'roles' => Array('i18nAdmin')),
 
-        '/wapi/admin-get-bitcoin-address/'
-        => Array('controller' => 'AdminGetBitcoinAddress', 'roles' => Array('i18nAdmin')),
-
         '/wapi/admin-transactions/:num/'
         => Array('controller' => 'AdminTransaction', 'roles' => Array('i18nAdmin')),
         '/wapi/admin-transactions/'

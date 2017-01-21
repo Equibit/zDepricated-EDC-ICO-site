@@ -8,18 +8,28 @@ use \PHP_REST_API\Helpers\StatusReturn;
 use \PHP_REST_API\Data\AvailablePaymentMethodsData;
 
 class BlockchainIPN extends BaseAPIController {
-    function post() {
+    function get() {
         if ($this->checkAuth()) {
             if (AvailablePaymentMethodsData::hasBlockchain()) {
-                $secret = $_GET['secret'];
-                $tsid = $_GET['tsid'];
-                $address = $_GET['address'];
 
-                if (BlockchainData::findTransaction($tsid, $secret, $address)) {
+                $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $vari = Array();
+
+                file_put_contents("calledIPN.txt", $url . "\n\n", FILE_APPEND);
+
+                parse_str(parse_url($url, PHP_URL_QUERY), $vari);
+
+                $secret = (isset($vari['secret']) ? $vari['secret'] : '');
+                $tsid = (isset($vari['tsid']) ? $vari['tsid'] : '');
+                $address = (isset($vari['address']) ? $vari['address'] : '');
+
+                file_put_contents("calledIPN.txt","SECRET: " . $secret . " tokenSaleID: " . $tsid . " ADDRESS: " . $address . "\n\n", FILE_APPEND);
+
+                if ($secret != '' && $tsid != '' && $address != '' && BlockchainData::findTransaction($tsid, $secret, $address)) {
                     $expected_payment = BlockchainData::getTransactionExpectedAmount($tsid, $secret, $address);
-                    $value_in_satoshi = $_GET['value'];
-                    $transaction_hash = $_GET['transaction_hash'];
-                    $confirmation = $_GET['confirmations'];
+                    $value_in_satoshi = $vari['value'];
+                    $transaction_hash = $vari['transaction_hash'];
+                    $confirmation = $vari['confirmations'];
 
                     BlockchainData::updateTransaction($tsid, $value_in_satoshi, $transaction_hash, $confirmation);
 
@@ -30,7 +40,7 @@ class BlockchainIPN extends BaseAPIController {
                         ICOTransactionsData::updateEQBNumber($tsid, $newNumber);
                     }
 
-                    if ($_GET['confirmations'] >= 4) {
+                    if ($vari['confirmations'] >= 4) {
                         ICOTransactionsData::confirmTransaction($tsid);
                         echo "*ok*";
                     } else {

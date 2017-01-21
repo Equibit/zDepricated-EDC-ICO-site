@@ -41,7 +41,7 @@ class ICOTransactionsData {
     }
 
     public static function getTransactions($id) {
-        $query = MySQL::getInstance()->prepare("SELECT fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed FROM tokenSales WHERE id=:id");
+        $query = MySQL::getInstance()->prepare("SELECT userID, fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed FROM tokenSales WHERE id=:id");
         $query->bindValue(':id', $id);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);

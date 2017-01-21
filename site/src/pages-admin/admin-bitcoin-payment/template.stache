@@ -27,11 +27,11 @@
                 {{#if data.length}}
                   {{#each rows}}
                     <tr>
-                      <td>{{address}}</td>
-                      <td>{{expectedPayment}}</td>
-                      <td>{{receivedPayment}}</td>
+                      <td>{{shorten address}}...</td>
+                      <td>{{toBTC expectedPayment}}</td>
+                      <td>{{toBTC receivedPayment}}</td>
                       <td>{{blocksConfirmed}}</td>
-                      <td>{{transactionHash}}</td>
+                      <td>{{shorten transactionHash}}...</td>
                       <td class="text-nowrap">{{timestampDetailed timeDate}}</td>
                     </tr>
                   {{/each}}

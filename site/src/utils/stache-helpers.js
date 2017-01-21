@@ -12,12 +12,16 @@ can.stache.registerSimpleHelper('leading', num => {
 });
 
 can.stache.registerSimpleHelper('shorten', s => {
-  return s.substr(0,50);
+  return s.substr(0,25);
 });
 
 can.stache.registerSimpleHelper('addCommas', num => {
   var nf = new Intl.NumberFormat();
   return nf.format(num)
+});
+
+can.stache.registerSimpleHelper('toBTC', num => {
+  return num / 100000000
 });
 
 can.stache.registerSimpleHelper('cleanKey', str => {

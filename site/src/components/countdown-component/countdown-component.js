@@ -10,22 +10,23 @@ can.Component.extend({
   events: {
     inserted() {
 
-      let currentTime = Math.floor(Date.now() / 1000);
-
-			$.getJSON('http://www.convert-unix-time.com/api?timestamp=now', data => {
-				currentTime = data.timestamp;
-			});
+			//$.getJSON('http://www.convert-unix-time.com/api?timestamp=now', data => {
+			//	currentTime = data.timestamp;
+			//});
 
       let startInterval = setInterval(() => {
         if (typeof this.viewModel.attr("timestamp") != 'undefined') {
           clearInterval(startInterval);
 					let eventTime = this.viewModel.attr("timestamp"),
+            currentTime = Math.floor(Date.now() / 1000),
             diffTime = eventTime - currentTime,
             duration = moment.duration(diffTime * 1000, 'milliseconds'),
             interval = 1000;
 
           if (diffTime > 0) {
 						let countdownInterval = setInterval(() => {
+
+							currentTime = Math.floor(Date.now() / 1000);
 							diffTime = eventTime - currentTime;
 							duration = moment.duration(diffTime * 1000, 'milliseconds');
 

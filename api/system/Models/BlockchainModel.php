@@ -29,11 +29,12 @@ class BlockchainModel {
         $this->scanXPubs();
         $useXPub = BlockchainData::getNextXPubs();
         $secret = $this->createSecret();
+        $callback = "https://ico.equibit.org/blockchain-ipn/?tsid=" . $tokenSaleID . "&secret=" . $secret;
 
-        $response = file_get_contents($this->apiRoot . "?xpub=" . $useXPub . "&callback=" . urlencode("https://ico.equibit.org/blockchain-ipn/?tsid=" . $tokenSaleID . "&secret=" . $secret) . "&key=" . $this->apiKey);
+        $response = file_get_contents($this->apiRoot . "?xpub=" . $useXPub . "&callback=" . urlencode($callback) . "&key=" . $this->apiKey);
         $object = json_decode($response);
 
-        BlockchainData::insertAddress($object->address, $object->index, $secret, $paymentAmount, $userID, $tokenSaleID);
+        BlockchainData::insertAddress($object->address, $object->index, $secret, $paymentAmount, $userID, $tokenSaleID, $callback);
 
         return $object->address;
     }

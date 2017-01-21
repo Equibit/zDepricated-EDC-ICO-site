@@ -16,7 +16,7 @@ class BlockchainData {
         $query = MySQL::getInstance()->prepare("SELECT xPub FROM BlockchainxPubs ORDER BY gap LIMIT 1");
         $query->execute();
         $temp = $query->fetch(PDO::FETCH_ASSOC);
-        return $temp['xPubs'];
+        return $temp['xPub'];
     }
 
     public static function updateGap($id, $gap) {
@@ -26,37 +26,46 @@ class BlockchainData {
         return $query->execute();
     }
 
-    public static function insertAddress($address, $indexReturned, $transactionSecret, $expectedPayment, $userID, $tokenSaleID) {
+    public static function insertAddress($address, $indexReturned, $transactionSecret, $expectedPayment, $userID, $tokenSaleID, $callback) {
         $dataInstance = MySQL::getInstance();
-        $query = $dataInstance->prepare("INSERT INTO BlockchainAddresses (address, indexReturned, transactionSecret, expectedPayment, userID, tokenSaleID) VALUES (:address, :indexReturned, :transactionSecret, :expectedPayment, :userID, :tokenSaleID)");
+        $query = $dataInstance->prepare("INSERT INTO BlockchainAddresses (address, indexReturned, transactionSecret, expectedPayment, userID, tokenSaleID, callback) VALUES (:address, :indexReturned, :transactionSecret, :expectedPayment, :userID, :tokenSaleID, :callback)");
         $query->bindValue(':address', $address);
         $query->bindValue(':indexReturned', $indexReturned);
         $query->bindValue(':transactionSecret', $transactionSecret);
         $query->bindValue(':expectedPayment', $expectedPayment);
         $query->bindValue(':userID', $userID);
         $query->bindValue(':tokenSaleID', $tokenSaleID);
+        $query->bindValue(':callback', $callback);
         $query->execute();
         return $dataInstance->lastInsertId();
     }
 
-    public static function findTransaction($tokenSaleID, $secret, $address) {
-        $query = MySQL::getInstance()->prepare("SELECT COUNT(*) AS countRows FROM BlockchainAddresses WHERE secret=:secret AND tokenSaleID=:tokenSaleID AND address=:address");
+    public static function findTransaction($tokenSaleID, $transactionSecret, $address) {
+        $query = MySQL::getInstance()->prepare("SELECT COUNT(*) AS countRows FROM BlockchainAddresses WHERE transactionSecret=:transactionSecret AND tokenSaleID=:tokenSaleID AND address=:address");
         $query->bindValue(':tokenSaleID', $tokenSaleID);
-        $query->bindValue(':secret', $secret);
+        $query->bindValue(':transactionSecret', $transactionSecret);
         $query->bindValue(':address', $address);
         $query->execute();
         $temp = $query->fetch(PDO::FETCH_ASSOC);
-        return ($temp['countRows'] == 1);
+        return ($temp['countRows'] > 0);
     }
 
-    public static function getTransactionExpectedAmount($tokenSaleID, $secret, $address) {
-        $query = MySQL::getInstance()->prepare("SELECT expectedPayment FROM BlockchainAddresses WHERE secret=:secret AND tokenSaleID=:tokenSaleID AND address=:address");
+    public static function getTransactionExpectedAmount($tokenSaleID, $transactionSecret, $address) {
+        $query = MySQL::getInstance()->prepare("SELECT expectedPayment FROM BlockchainAddresses WHERE transactionSecret=:transactionSecret AND tokenSaleID=:tokenSaleID AND address=:address");
         $query->bindValue(':tokenSaleID', $tokenSaleID);
-        $query->bindValue(':secret', $secret);
+        $query->bindValue(':transactionSecret', $transactionSecret);
         $query->bindValue(':address', $address);
         $query->execute();
         $temp = $query->fetch(PDO::FETCH_ASSOC);
         return $temp['expectedPayment'];
+    }
+
+    public static function getAddressID($address) {
+        $query = MySQL::getInstance()->prepare("SELECT id FROM BlockchainAddresses WHERE address=:address");
+        $query->bindValue(':address', $address);
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return $temp['id'];
     }
 
     public static function updateTransaction($tokenSaleID, $receivedPayment, $transactionHash, $blocksConfirmed) {
