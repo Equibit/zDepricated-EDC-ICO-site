@@ -9,11 +9,27 @@
       <div class="modal-body">
         {{#if countdown}}
           {{#if eqbNumberPositive}}
-            <p><strong>Purchase of {{eqbNumber}} EQB Units</strong></p>
+            {{#if noAddress}}
+              <p><strong>Purchase of {{eqbNumber}} EQB Units</strong></p>
 
-            <p>By purchasing I confirm that I have read and agreed to the Terms and Conditions.</p>
+              <p>By purchasing I confirm that I have read and agreed to the Terms and Conditions.</p>
 
-            <p>As soon as you hit Buy EQB you will have 2 minutes to complete the transaction. So please have your Bitcoin wallet ready.</p>
+              <p>As soon as you hit Buy EQB you will have 2 minutes to complete the transaction. So please have your Bitcoin wallet ready.</p>
+            {{else}}
+              {{#addressData}}
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:{{address}}" class="img-responsive">
+                  </div>
+                  <div class="col-sm-8 text-center">
+                    <br><br>
+                    <span style="background-color: #eee; padding: 5px">{{address}}</span>
+                    <br><br>
+                    Send <span style="background-color: #eee; padding: 5px">{{expectedPayment}}</span> BTC
+                  </div>
+                </div>
+              {{/addressData}}
+            {{/if}}
           {{else}}
             <h3 class="text-center" style="margin-top:10px;">Please Enter a Number before clicking buy!</h3>
           {{/if}}
@@ -25,8 +41,10 @@
         <button type="button" class="btn btn-clear btn-sm" data-dismiss="modal" aria-label="Close">Close</button>
         {{#if countdown}}
           {{#if eqbNumberPositive}}
-            <a href="http://equibit.org/equibitico.pdf" target="_blank" class="btn btn-primary btn-sm">Terms & Conditions</a>
-            <button type="button" ($click)="buyEQBs()" class="btn btn-primary btn-sm">Buy EQB</button>
+            {{#if noAddress}}
+              <a href="http://equibit.org/equibitico.pdf" target="_blank" class="btn btn-primary btn-sm">Terms & Conditions</a>
+              <button type="button" ($click)="buyEQBs()" class="btn btn-primary btn-sm"{{#if inputDisabled}} disabled{{/if}} >{{#if buttonRunning}}<i class="fa fa-spin fa-spinner"></i>{{else}}Buy EQB{{/if}}</button>
+            {{/if}}
           {{/if}}
         {{/if}}
       </div>

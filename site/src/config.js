@@ -18,7 +18,7 @@ define(function() {
       signUpWithPhone: false,
       phoneMask: '+1(###) ###-####',
       hasBlog: false,
-      hasFAQs: false,
+      hasFAQs: true,
       hasSubUsers: true,
       hasAPI: false,
       hasChat: false,

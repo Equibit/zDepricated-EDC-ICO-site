@@ -78,7 +78,7 @@ class ICOTransaction extends BaseAPIController {
                 $blockchain = New BlockchainModel(_BLOCKCHAIN_API_KEY_);
                 $address = $blockchain->getNewAddress($expectedAmount, $userID, $id);
 
-                echo json_encode(StatusReturn::S200(Array("id" => $id, "address" => $address, "expectedPayment" => ($expectedAmount/100000000))), JSON_NUMERIC_CHECK);
+                echo json_encode(StatusReturn::S200(Array("id" => $id, "address" => $address, "expectedPayment" => ($expectedAmount/100000000), "paidBTC" => ($expectedAmount/100000000))), JSON_NUMERIC_CHECK);
             } else {
                 echo json_encode(StatusReturn::E400("Missing Data"));
             }

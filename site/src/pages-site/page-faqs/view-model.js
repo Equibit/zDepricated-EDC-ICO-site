@@ -38,7 +38,7 @@ export default can.Map.extend({
     }
   },
   updateSearch(searchStr) {
-    var newData = this.attr("faqsData").filter((elem, index, arr) =>  elem.question.includes(searchStr) || elem.answer.includes(searchStr));
+    let newData = this.attr("faqsData").filter(elem => elem.question.toUpperCase().includes(searchStr.toUpperCase()) || elem.answer.toUpperCase().includes(searchStr.toUpperCase()));
     this.attr("faqs", newData);
   }
 });

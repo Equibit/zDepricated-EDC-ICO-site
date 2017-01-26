@@ -29,14 +29,14 @@ class BlockchainIPN extends BaseAPIController {
 
                     BlockchainData::updateTransaction($tsid, $value_in_satoshi, $transaction_hash, $confirmation);
 
-                    if ($value_in_satoshi < $expected_payment) {
+                    if ($vari['confirmations'] == 0 && $value_in_satoshi < $expected_payment) {
                         $transaction = ICOTransactionsData::getTransactions($tsid);
-                        $perBTC = ($expected_payment / $transaction['numberEQB']);
-                        $newNumber = $value_in_satoshi / $perBTC;
-                        ICOTransactionsData::updateEQBNumber($tsid, $newNumber);
-                    }
-
-                    if ($vari['confirmations'] >= 4) {
+                        if ($transaction['numberEQB'] > 0) {
+                            $perBTC = ($expected_payment / $transaction['numberEQB']);
+                            $newNumber = $value_in_satoshi / $perBTC;
+                            ICOTransactionsData::updateEQBNumber($tsid, $newNumber);
+                        }
+                    } else if ($vari['confirmations'] >= 4) {
                         ICOTransactionsData::confirmTransaction($tsid);
                         echo "*ok*";
                     } else {

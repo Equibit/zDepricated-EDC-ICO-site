@@ -6,6 +6,12 @@ import ICOTransactionModels from 'easyapp/models/ico-transactions/';
 export default can.Map.extend({
 	ICOPurchase:ICOPurchase,
   define: {
+		inputDisabled: {
+			value: false
+		},
+		buttonRunning: {
+			value: false
+		},
     data: {
       value: []
     },
@@ -27,14 +33,33 @@ export default can.Map.extend({
 		eqbNumber: {
       value: null,
       type: "number"
-    }
+    },
+		noAddress: {
+    	value: true
+		},
+		addressData: {
+    	value: null,
+			Type: ICOTransactionModels
+		}
   },
   buyEQBs() {
+		this.attr("buttonRunning", true);
+		this.attr("inputDisabled", true);
+
 		let newTransaction = new ICOTransactionModels({});
 		newTransaction.attr("numberEQB", this.attr("eqbNumber"));
 		newTransaction.attr("manualTransaction", false);
+		newTransaction.save(saved => {
+			saved.attr("timeDate", Math.floor(Date.now() / 1000));
+			saved.attr("fundingLevel", this.attr("currentTranche"));
+			this.attr("noAddress", false);
+			this.attr("addressData", saved);
+			this.attr("confirmed", false);
+			this.attr("data").push(saved);
 
-		console.log(newTransaction);
+			this.attr("buttonRunning", false);
+			this.attr("inputDisabled", false);
+		});
   },
 	updateEstimation(btc) {
 		let tranche = this.attr("currentTranche");

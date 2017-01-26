@@ -21,6 +21,9 @@ let AdminICOTransactionModel = can.Model.extend({
     },
 		numberEQB: {
       value: 0
+    },
+    address: {
+      value: ''
     }
   }
 });
