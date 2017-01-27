@@ -89,7 +89,7 @@ class ICOTransaction extends BaseAPIController {
 
                     echo json_encode(StatusReturn::S200(Array("id" => $id, "address" => $address, "expectedPayment" => ($expectedAmount / 100000000), "paidBTC" => ($expectedAmount / 100000000), "breakdown" => $breakdown)), JSON_NUMERIC_CHECK);
                 } else {
-
+                    echo json_encode(StatusReturn::E400("No more EQB available."));
                 }
             } else {
                 echo json_encode(StatusReturn::E400("Missing Data"));
