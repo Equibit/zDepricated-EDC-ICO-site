@@ -3,15 +3,15 @@
 <div class="row">
   <div class="col-md-12 text-center">
 
-    <div class="h2">Crowd Sale Progress</div>
 
     {{#if countdown}}
       {{#if loaded}}
+        <div class="h2">Confirmed EQB's Sold</div>
         <div class="progress">
           <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">
-            {{#if progressOverHalf}}<span>{{progress}}%</span>{{/if}}
+            {{#if progressOverHalf}}<span>{{addCommas progressNum}} ({{progress}}%)</span>{{/if}}
           </div>
-          {{^if progressOverHalf}}<span>{{progress}}%</span>{{/if}}
+          {{^if progressOverHalf}}<span>{{addCommas progressNum}} ({{progress}}%)</span>{{/if}}
         </div>
       {{else}}
         <div>
@@ -21,6 +21,10 @@
       {{/if}}
     {{/if}}
 
+    <div class="h2">Funding Levels</div>
+    {{#if countdown}}
+      <small>* Remaining EQBs are calculated by subtracting both completed and pending orders</small>
+    {{/if}}
     <div class="panel">
       <div class="panel-body">
 

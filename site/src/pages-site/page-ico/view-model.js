@@ -1,6 +1,5 @@
 import can from 'can';
 import 'can/map/define/';
-import isSsr from 'easyapp/utils/isSsr';
 
 export default can.Map.extend({
 	define: {
@@ -8,11 +7,11 @@ export default can.Map.extend({
 			value: false
 		},
 		haveEQBRemaining : {
+			value: true,
 			get() {
-				if (!isSsr && this.attr("eqbRemaining") != 'undefined' && Object.prototype.toString.call( this.attr("eqbRemaining") ) === '[object Object]') {
-					let total = 0;
-					this.attr("eqbRemaining").forEach(item => total += item);
-					return (total > 0)
+				if (this.attr("eqbConfirmed")) {
+					console.log(this.attr("eqbConfirmed") < 1000000);
+					return (this.attr("eqbConfirmed") < 1000000)
 				} else {
 					return true;
 				}

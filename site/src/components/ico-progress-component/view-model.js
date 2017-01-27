@@ -13,6 +13,9 @@ export default can.Map.extend({
     eqbRemaining: {
       value: []
     },
+		eqbConfirmed: {
+      value: []
+    },
     currentTranche: {
       get() {
         let highestZero = 0;
@@ -25,9 +28,12 @@ export default can.Map.extend({
     },
     progress: {
       get() {
-        let total = 0;
-        this.attr("eqbRemaining").forEach(item => total += item);
-        return ((1000000-total)/1000000)*100
+        return ((this.attr('eqbConfirmed')/1000000)*100).toFixed(2)
+      }
+    },
+		progressNum: {
+      get() {
+        return this.attr('eqbConfirmed')
       }
     },
     progressOverHalf: {
@@ -151,6 +157,7 @@ export default can.Map.extend({
     restAPI.requestUnsigned('GET', '/wapi/crowd-sale-progress/', {},
       data => {
         this.attr('eqbRemaining', data.eqbRemaining);
+        this.attr('eqbConfirmed', data.eqbConfirmed);
         this.attr('btcPrices', data.btcPrices);
         this.attr('loaded', true);
       },
@@ -166,6 +173,7 @@ export default can.Map.extend({
       restAPI.requestUnsigned('GET', '/wapi/crowd-sale-progress/', {},
         data => {
           _self.attr('eqbRemaining', data.eqbRemaining);
+					_self.attr('eqbConfirmed', data.eqbConfirmed);
           _self.attr('btcPrices', data.btcPrices);
         },
         err => {

@@ -17,10 +17,14 @@ class BlockchainModel {
 
         foreach ($xPubs2Scan AS $xPub) {
             $response = file_get_contents($this->apiRoot . "/checkgap?xpub=" . $xPub['xPub'] . "&key=" . $this->apiKey);
-            $object = json_decode($response);
+            if ($response !== false) {
+                $object = json_decode($response);
 
-            if (isset($object->error)) BlockchainData::updateGap($xPub['id'], 0);
-            else if (isset($object->gap)) BlockchainData::updateGap($xPub['id'], $object->gap);
+                if (json_last_error() == JSON_ERROR_NONE) {
+                    if (isset($object->error)) BlockchainData::updateGap($xPub['id'], 0);
+                    else if (isset($object->gap)) BlockchainData::updateGap($xPub['id'], $object->gap);
+                }
+            }
         }
 
     }
@@ -32,11 +36,16 @@ class BlockchainModel {
         $callback = "https://ico.equibit.org/blockchain-ipn/?tsid=" . $tokenSaleID . "&secret=" . $secret;
 
         $response = file_get_contents($this->apiRoot . "?xpub=" . $useXPub . "&callback=" . urlencode($callback) . "&key=" . $this->apiKey);
-        $object = json_decode($response);
+        if ($response !== false) {
+            $object = json_decode($response);
 
-        BlockchainData::insertAddress($object->address, $object->index, $secret, $paymentAmount, $userID, $tokenSaleID, $callback);
+            if (json_last_error() == JSON_ERROR_NONE) {
+                BlockchainData::insertAddress($object->address, $object->index, $secret, $paymentAmount, $userID, $tokenSaleID, $callback);
 
-        return $object->address;
+                return $object->address;
+            }
+        }
+        return "Error";
     }
 
     public static function createSecret($baseLen = 0) {

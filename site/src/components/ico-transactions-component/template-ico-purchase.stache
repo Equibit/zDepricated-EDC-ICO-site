@@ -50,7 +50,7 @@
                     </div>
                   {{else}}
                     <div class="col-xs-12">
-                      <h3 class="no-top-margin" style="color: red;">Sorry, your time has expired. If you did transfer the Bitcoin in time, no worries, we will honor your purchase. Otherwise, simply wait and the system clears that order and you can order again.</h3>
+                      <h3 class="no-top-margin" style="color: red;">Sorry, your time has expired. If you did make a Bitcoin transfer in time, no worries, we will honor your purchase. Simply refresh your browser and check your transactions. If you did not transfer Bitcoins yet then you will have to start your order over again as you have lost your reservation. Do not send payment for expired orders. If you do EDC will refund your bitcoins after the ICO closes.</h3>
                     </div>
                   {{/if}}
                 </div>

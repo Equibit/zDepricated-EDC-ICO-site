@@ -12,6 +12,12 @@ class ICOTransactionsData {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getRevokingBitcoinTransactions() {
+        $query = MySQL::getInstance()->prepare("SELECT tokenSaleID FROM BlockchainAddresses WHERE blocksConfirmed=-1 AND NOW() >= DATE_ADD(timeDate, INTERVAL 120 SECOND)");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getXPubs() {
         $query = MySQL::getInstance()->prepare("SELECT id, xPub, gap FROM BlockchainxPubs");
         $query->execute();
@@ -28,6 +34,13 @@ class ICOTransactionsData {
 
     public static function getTotalEQBSold() {
         $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) AS numberEQB FROM tokenSales WHERE rejected=0");
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return $temp['numberEQB'];
+    }
+
+    public static function getTotalEQBConfirmed() {
+        $query = MySQL::getInstance()->prepare("SELECT SUM(numberEQB) AS numberEQB FROM tokenSales WHERE rejected=0 AND completed=1");
         $query->execute();
         $temp = $query->fetch(PDO::FETCH_ASSOC);
         return $temp['numberEQB'];

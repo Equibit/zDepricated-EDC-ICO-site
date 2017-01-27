@@ -55,7 +55,7 @@
   </div>
 {{/if}}
 
-<ico-progress-component {^btc-prices}="btcPrices" {^eqb-remaining}="eqbRemaining" {^current-tranche}="currentTranche" {countdown}="countdown"></ico-progress-component>
+<ico-progress-component {^btc-prices}="btcPrices" {^eqb-confirmed}="eqbConfirmed" {^current-tranche}="currentTranche" {countdown}="countdown"></ico-progress-component>
 
 {{#if isLoggedIn}}
   <div class="row">
