@@ -14,19 +14,45 @@
 
               <p>By purchasing I confirm that I have read and agreed to the Terms and Conditions.</p>
 
-              <p>As soon as you hit Buy EQB you will have 2 minutes to complete the transaction. So please have your Bitcoin wallet ready.</p>
+              <p>As soon as you hit Buy EQB you will have approximately 2 minutes to complete the transaction. So please have your Bitcoin wallet ready before clicking "Buy EQB".</p>
             {{else}}
               {{#addressData}}
                 <div class="row">
-                  <div class="col-sm-4">
-                    <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:{{address}}" class="img-responsive">
-                  </div>
-                  <div class="col-sm-8 text-center">
-                    <br><br>
-                    <span style="background-color: #eee; padding: 5px">{{address}}</span>
-                    <br><br>
-                    Send <span style="background-color: #eee; padding: 5px">{{expectedPayment}}</span> BTC
-                  </div>
+                  {{^if expiredOrder}}
+                    <div class="col-sm-4">
+                      <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:{{address}}" class="img-responsive">
+                    </div>
+                    <div class="col-sm-8 text-center">
+                      <span style="background-color: #eee; padding: 5px">{{address}}</span>
+                      <br><br>
+                      Send <span style="background-color: #eee; padding: 5px">{{expectedPayment}}</span> BTC
+                      <br><br>
+                      <table class="table table-striped table-condensed">
+                        <thead>
+                        <tr>
+                          <th>Level</th>
+                          <th>Price Per EQB</th>
+                          <th>Number of EQB</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each breakdown}}
+                          <tr>
+                            <td>{{level}}</td>
+                            <td>{{pricePer}}</td>
+                            <td>{{numberEQB}}</td>
+                          </tr>
+                        {{/each}}
+                        </tbody>
+                      </table>
+                      <br>
+                      Order Expires <span style="background-color: #eee; padding: 5px{{#if makeRed}}; color: red{{/if}}">{{countTo expireTime}}</span>
+                    </div>
+                  {{else}}
+                    <div class="col-xs-12">
+                      <h3 class="no-top-margin" style="color: red;">Sorry, your time has expired. If you did transfer the Bitcoin in time, no worries, we will honor your purchase. Otherwise, simply wait and the system clears that order and you can order again.</h3>
+                    </div>
+                  {{/if}}
                 </div>
               {{/addressData}}
             {{/if}}

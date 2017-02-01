@@ -56,29 +56,41 @@ class ICOTransaction extends BaseAPIController {
                 $fundingLevel = 0;
                 $expectedAmount = 0;
                 $newNumberEQB = $numberEQB;
-                foreach ($remainingArr AS &$amount) {
-                    $fundingLevel++;
-                    if ($amount > 0) {
-                        if ($amount > $numberEQB) {
-                            $expectedAmount += $btcPrices[$fundingLevel-1] * $newNumberEQB;
-                            break;
-                        } else {
-                            $expectedAmount += $btcPrices[$fundingLevel-1] * $amount;
-                            $newNumberEQB -= $amount;
-                            $amount = 0;
+                $breakdown = Array();
+                if ($numberEQB > array_sum($remainingArr)) {
+                    $numberEQB = array_sum($remainingArr);
+                }
+                if ($numberEQB > 0) {
+                    foreach ($remainingArr AS &$amountLeft) {
+                        $fundingLevel++;
+                        if ($amountLeft > 0) {
+                            if ($amountLeft > $newNumberEQB) {
+                                $expectedAmount += $btcPrices[$fundingLevel - 1] * $newNumberEQB;
+                                $breakdown[] = Array("level" => $fundingLevel, "pricePer" => $btcPrices[$fundingLevel - 1], "numberEQB" => $newNumberEQB);
+                                break;
+                            } else if ($newNumberEQB > 0) {
+                                $expectedAmount += $btcPrices[$fundingLevel - 1] * $amountLeft;
+                                $breakdown[] = Array("level" => $fundingLevel, "pricePer" => $btcPrices[$fundingLevel - 1], "numberEQB" => $amountLeft);
+                                $newNumberEQB -= $amountLeft;
+                                $amountLeft = 0;
+                            } else {
+                                break;
+                            }
                         }
                     }
+
+                    $userID = AuthUserData::getUserIDByUserName($headers['Auth-User']);
+                    $id = ICOTransactionsData::insertNewTransaction($userID, $fundingLevel, $numberEQB, $expectedAmount, null, 0, 0);
+
+                    $expectedAmount *= 100000000;
+
+                    $blockchain = New BlockchainModel(_BLOCKCHAIN_API_KEY_);
+                    $address = $blockchain->getNewAddress($expectedAmount, $userID, $id);
+
+                    echo json_encode(StatusReturn::S200(Array("id" => $id, "address" => $address, "expectedPayment" => ($expectedAmount / 100000000), "paidBTC" => ($expectedAmount / 100000000), "breakdown" => $breakdown)), JSON_NUMERIC_CHECK);
+                } else {
+
                 }
-
-                $userID = AuthUserData::getUserIDByUserName($headers['Auth-User']);
-                $id = ICOTransactionsData::insertNewTransaction($userID, $fundingLevel, $numberEQB, $expectedAmount, null, 0, 0);
-
-                $expectedAmount *= 100000000;
-
-                $blockchain = New BlockchainModel(_BLOCKCHAIN_API_KEY_);
-                $address = $blockchain->getNewAddress($expectedAmount, $userID, $id);
-
-                echo json_encode(StatusReturn::S200(Array("id" => $id, "address" => $address, "expectedPayment" => ($expectedAmount/100000000), "paidBTC" => ($expectedAmount/100000000))), JSON_NUMERIC_CHECK);
             } else {
                 echo json_encode(StatusReturn::E400("Missing Data"));
             }

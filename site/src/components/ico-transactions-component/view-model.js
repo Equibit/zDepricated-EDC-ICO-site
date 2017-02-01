@@ -9,6 +9,15 @@ export default can.Map.extend({
 		inputDisabled: {
 			value: false
 		},
+		makeRed: {
+			value: false
+		},
+		expiredOrder: {
+			value: false
+		},
+		expireTime: {
+			value: Math.floor(Date.now() / 1000 - 120)
+		},
 		buttonRunning: {
 			value: false
 		},
@@ -51,6 +60,18 @@ export default can.Map.extend({
 		newTransaction.attr("manualTransaction", false);
 		newTransaction.save(saved => {
 			saved.attr("timeDate", Math.floor(Date.now() / 1000));
+			let remainingTime = 120;
+			let timer = setInterval(() => {
+				remainingTime--;
+				if (remainingTime < 30) {
+					this.attr("makeRed", true);
+				}
+				this.attr("expireTime", Math.floor(Date.now() / 1000 - remainingTime));
+				if (remainingTime <= 0) {
+					clearInterval(timer);
+					this.attr("expiredOrder", true);
+				}
+			}, 1000);
 			saved.attr("fundingLevel", this.attr("currentTranche"));
 			this.attr("noAddress", false);
 			this.attr("addressData", saved);

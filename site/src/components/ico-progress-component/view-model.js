@@ -15,7 +15,7 @@ export default can.Map.extend({
     },
     currentTranche: {
       get() {
-        var highestZero = 0;
+        let highestZero = 0;
         this.attr("eqbRemaining").forEach((item, index) => {
           if (item == 0) highestZero = index + 1;
         });
@@ -25,7 +25,7 @@ export default can.Map.extend({
     },
     progress: {
       get() {
-        var total = 0;
+        let total = 0;
         this.attr("eqbRemaining").forEach(item => total += item);
         return ((1000000-total)/1000000)*100
       }

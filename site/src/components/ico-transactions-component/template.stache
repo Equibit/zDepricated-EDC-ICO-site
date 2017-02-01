@@ -58,9 +58,10 @@
           <input id="removeFocus" type="number" class="form-control" {($value)}="eqbNumber" ($keyup)="updateEstimation(@element.val)" placeholder="Number of EQB Tokens" maxlength="6">
           <span class="input-group-addon" id="basic-addon2">{{btcPrediction}} BTC Estimated</span>
           <span class="input-group-btn">
-            <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#ico-purchase-modal">Buy!</button>
-          </span>
-        </div><!-- /input-group -->
+          <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#ico-purchase-modal">Buy!</button>
+        </span>
+        </div>
+        <small>* Estimations do not cross funding levels</small>
       {{else}}
         <h2>Transaction Needs to be confirmed before you can order more.</h2>
       {{/if}}

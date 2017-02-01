@@ -40,3 +40,7 @@ can.stache.registerSimpleHelper('timestampDetailed', ts => {
   let format = i18n.attr('timestampDetailed');
   return moment(ts * 1000).format(format);
 });
+
+can.stache.registerSimpleHelper('countTo', ts => {
+  return moment(ts * 1000).toNow();
+});
