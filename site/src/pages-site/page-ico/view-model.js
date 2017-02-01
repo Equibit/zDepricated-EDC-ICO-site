@@ -7,9 +7,9 @@ export default can.Map.extend({
 			value: false
 		},
 		haveEQBRemaining : {
-			value: true,
+			value: -1,
 			get() {
-				if (this.attr("eqbConfirmed")) {
+				if (this.attr("eqbConfirmed") && this.attr("eqbConfirmed") >= 0) {
 					return (this.attr("eqbConfirmed") < 1000000)
 				} else {
 					return true;

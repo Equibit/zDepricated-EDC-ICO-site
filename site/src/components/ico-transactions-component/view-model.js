@@ -20,7 +20,7 @@ export default can.Map.extend({
 			value: false
 		},
 		expireTime: {
-			value: Math.floor(Date.now() / 1000 - 120)
+			value: Math.floor(Date.now() / 1000 - 300)
 		},
 		buttonRunning: {
 			value: false
@@ -71,7 +71,7 @@ export default can.Map.extend({
 		newTransaction.attr("manualTransaction", false);
 		newTransaction.save(saved => {
 			saved.attr("timeDate", Math.floor(Date.now() / 1000));
-			let remainingTime = 120;
+			let remainingTime = 300;
 			let timer = setInterval(() => {
 				remainingTime--;
 				if (remainingTime < 30) {

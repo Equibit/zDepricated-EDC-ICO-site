@@ -13,7 +13,7 @@ class ICOTransactionsData {
     }
 
     public static function getRevokingBitcoinTransactions() {
-        $query = MySQL::getInstance()->prepare("SELECT tokenSaleID FROM BlockchainAddresses WHERE blocksConfirmed=-1 AND NOW() >= DATE_ADD(timeDate, INTERVAL 120 SECOND)");
+        $query = MySQL::getInstance()->prepare("SELECT tokenSaleID FROM BlockchainAddresses WHERE blocksConfirmed=-1 AND NOW() >= DATE_ADD(timeDate, INTERVAL 300 SECOND)");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

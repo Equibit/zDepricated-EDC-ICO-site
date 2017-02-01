@@ -16,7 +16,7 @@
 
               <p>By purchasing I confirm that I have read and agreed to the Terms and Conditions.</p>
 
-              <p>As soon as you hit "Buy EQB" you will have approximately 2 minutes to complete the transaction. So please have your Bitcoin wallet ready before clicking "Buy EQB".</p>
+              <p>As soon as you hit "Buy EQB" you will have approximately <strong>5 minutes</strong> to complete the transaction. So please have your Bitcoin wallet ready before clicking "Buy EQB".</p>
             {{else}}
               {{#addressData}}
                 {{#if completedOrder}}

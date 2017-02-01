@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 text-center">
       <h4 class="text-center bold">RESERVE UNITS AMONG THE FIRST MILLION OF A 22 MILLION UNIT SYSTEM</h4>
-      <p class="text-center">Early adopters can reserve equibit units through an upcoming crowdsale! The planned opening date for this opportunity is on February 1, 2017.</p>
+      <p class="text-center">Early adopters can reserve equibit units through this crowdsale! The planned opening date for this opportunity is on February 1, 2017.</p>
       <p class="text-center">Please review our ICO Terms and Conditions for detailed information on this opportunity. If you would like to receive more information about this offering as it comes, please register.</p>
     </div>
   </div>
@@ -17,14 +17,17 @@
 
 {{^if isLoggedIn}}
   <div class="row">
-    <div class="col-sm-4 text-center">
+    <div class="col-sm-3 text-center">
       <a href="http://equibit.org/equibit.pdf" target="_blank" class="btn btn-primary">White Paper</a>
     </div>
-    <div class="col-sm-4 text-center">
+    <div class="col-sm-3 text-center">
       <a href="http://equibit.org/equibitico.pdf" target="_blank" class="btn btn-primary">Terms & Conditions</a>
     </div>
-    <div class="col-sm-4 text-center">
+    <div class="col-sm-3 text-center">
       <a href="http://equibit.org/" target="_blank" class="btn btn-primary">Main Website</a>
+    </div>
+    <div class="col-sm-3 text-center">
+      <a href="https://equibit.herokuapp.com/" target="_blank" class="btn btn-primary">Join EDC on Slack <i class="fa fa-slack"></i></a>
     </div>
   </div>
 {{/if}}
@@ -59,19 +62,20 @@
 
 {{#if isLoggedIn}}
   <div class="row">
-    <div class="col-sm-4 text-center">
+    <div class="col-sm-3 text-center">
       <a href="http://equibit.org/equibit.pdf" target="_blank" class="btn btn-primary">White Paper</a>
     </div>
-    <div class="col-sm-4 text-center">
+    <div class="col-sm-3 text-center">
       <a href="http://equibit.org/equibitico.pdf" target="_blank" class="btn btn-primary">Terms & Conditions</a>
     </div>
-    <div class="col-sm-4 text-center">
+    <div class="col-sm-3 text-center">
       <a href="http://equibit.org/" target="_blank" class="btn btn-primary">Main Website</a>
+    </div>
+    <div class="col-sm-3 text-center">
+      <a href="https://equibit.herokuapp.com/" target="_blank" class="btn btn-primary">Join EDC on Slack <i class="fa fa-slack"></i></a>
     </div>
   </div>
 {{/if}}
 
 
 <br><br>
-
-<h3>Join the team and the community for real time discussion and for any query you may have.</h3>
