@@ -36,7 +36,7 @@ export default can.Map.extend({
 		eqbNumberPositive: {
 			get() {
 				let num = this.attr("eqbNumber");
-				return Number(parseFloat(num)) == num && num != 0
+				return Number(parseFloat(num)) == num && num > 0
 			}
 		},
 		eqbNumber: {

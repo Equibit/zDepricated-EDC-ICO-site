@@ -3,7 +3,7 @@
 <can-import from="components/ico-transactions-component/" />
 
 {{#if isLoggedIn}}
-  <ico-transactions-component {btc-prices}="btcPrices" {current-tranche}="currentTranche" {eqb-remaining}="eqbRemaining"></ico-transactions-component>
+  <ico-transactions-component {btc-prices}="btcPrices" {current-tranche}="currentTranche"></ico-transactions-component>
 {{else}}
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 text-center">
@@ -29,19 +29,30 @@
   </div>
 {{/if}}
 
-{{#if countdown}}
-  <countdown-component timestamp="1491019200" title="Crowd sale ends in"></countdown-component>
+{{#if haveEQBRemaining}}
+
+  {{#if countdown}}
+    <countdown-component timestamp="1491019200" title="Crowd sale ends in"></countdown-component>
+  {{else}}
+    <countdown-component {^countdown}="countdown" timestamp="1485925200" title="Crowd sale starts in"></countdown-component>
+  {{/if}}
+
+  <br><br>
+
+  {{^if isLoggedIn}}
+    <div class="text-center">
+      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Register for ICO!</a>
+    </div>
+    <br>
+  {{/if}}
+
 {{else}}
-  <countdown-component {^countdown}="countdown" timestamp="1485925200" title="Crowd sale starts in"></countdown-component>
-{{/if}}
-
-<br><br>
-
-{{^if isLoggedIn}}
   <div class="text-center">
-    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Register for ICO!</a>
+    <br><br>
+    <h1>There are no more EQB available!</h1>
+    <p>Thank you very much for your interest, but we are out of EQB to sell.</p>
+    <br><br>
   </div>
-  <br>
 {{/if}}
 
 <ico-progress-component {^btc-prices}="btcPrices" {^eqb-remaining}="eqbRemaining" {^current-tranche}="currentTranche" {countdown}="countdown"></ico-progress-component>
