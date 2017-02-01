@@ -41,7 +41,14 @@ export default can.Map.extend({
 		},
 		eqbNumber: {
       value: null,
-      type: "number"
+      type: "number",
+			get(lastSetValue) {
+      	if (lastSetValue > 100000) {
+      		return 100000;
+				} else {
+      		return lastSetValue;
+				}
+			}
     },
 		noAddress: {
     	value: true

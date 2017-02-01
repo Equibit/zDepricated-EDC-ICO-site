@@ -10,11 +10,13 @@
         {{#if countdown}}
           {{#if eqbNumberPositive}}
             {{#if noAddress}}
-              <p><strong>Purchase of {{eqbNumber}} EQB Units</strong></p>
+              <p><strong>Purchase of {{addCommas eqbNumber}} EQB Units</strong></p>
+
+              <p>You can order up to 100,000 EQB at a time. Your order might also be limited to the number of available units at execution.</p>
 
               <p>By purchasing I confirm that I have read and agreed to the Terms and Conditions.</p>
 
-              <p>As soon as you hit Buy EQB you will have approximately 2 minutes to complete the transaction. So please have your Bitcoin wallet ready before clicking "Buy EQB".</p>
+              <p>As soon as you hit "Buy EQB" you will have approximately 2 minutes to complete the transaction. So please have your Bitcoin wallet ready before clicking "Buy EQB".</p>
             {{else}}
               {{#addressData}}
                 <div class="row">

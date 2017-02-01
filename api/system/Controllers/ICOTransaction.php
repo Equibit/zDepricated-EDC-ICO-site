@@ -21,6 +21,7 @@ class ICOTransaction extends BaseAPIController {
             if (AuthUserData::userExist($headers['Auth-User'])) {
 
                 $numberEQB = $_POST['numberEQB'];
+                if ($numberEQB > 100000) $numberEQB = 100000;
 
                 $bitcoinCharts = new BitcoinChartsModel();
                 $bitcoinPrice = $bitcoinCharts->getBitCoinPricePerDollar();
