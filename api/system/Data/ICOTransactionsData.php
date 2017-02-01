@@ -18,6 +18,15 @@ class ICOTransactionsData {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function checkTransaction($tokenSaleID, $userID) {
+        $query = MySQL::getInstance()->prepare("SELECT blocksConfirmed FROM BlockchainAddresses WHERE tokenSaleID=:tokenSaleID AND userID=:userID");
+        $query->bindValue(':tokenSaleID', $tokenSaleID);
+        $query->bindValue(':userID', $userID);
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return ($temp['blocksConfirmed'] >= 0);
+    }
+
     public static function getXPubs() {
         $query = MySQL::getInstance()->prepare("SELECT id, xPub, gap FROM BlockchainxPubs");
         $query->execute();

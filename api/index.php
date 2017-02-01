@@ -43,13 +43,6 @@ if (!isset($argv[1])) {
     $controllersArray = Array(
         '/'
         => Array('controller' => 'WebSPA', 'auth' => false),
-        '/api-tester/'
-        => Array('controller' => 'WebAPITester', 'auth' => false),
-        '/wapi-tester/'
-        => Array('controller' => 'WebSiteAPITester', 'auth' => false),
-
-        '/bit-pay-ipn/'
-        => Array('controller' => 'BitPayIPN', 'auth' => false),
 
         '/blockchain-ipn/'
         => Array('controller' => 'BlockchainIPN', 'auth' => false),
@@ -158,8 +151,8 @@ if (!isset($argv[1])) {
         '/wapi/manage-api-keys/'
         => Array('controller' => 'ManageAPIKeys', 'roles' => Array('i18nManage'), 'whenLocked' => false),
 
-        '/api/v0/test/'
-        => Array('controller' => 'CheckLogin', 'roles' => Array('i18nUser'), 'api' => true),
+        '/wapi/check-sale/:num/'
+        => Array('controller' => 'ICOCheckSale', 'roles' => Array('i18nUser')),
 
         '/wapi/ico-transactions/'
         => Array('controller' => 'ICOTransaction', 'roles' => Array('i18nUser')),

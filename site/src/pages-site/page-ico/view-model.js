@@ -10,7 +10,6 @@ export default can.Map.extend({
 			value: true,
 			get() {
 				if (this.attr("eqbConfirmed")) {
-					console.log(this.attr("eqbConfirmed") < 1000000);
 					return (this.attr("eqbConfirmed") < 1000000)
 				} else {
 					return true;

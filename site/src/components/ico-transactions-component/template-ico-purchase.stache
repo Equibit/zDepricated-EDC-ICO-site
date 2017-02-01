@@ -19,6 +19,10 @@
               <p>As soon as you hit "Buy EQB" you will have approximately 2 minutes to complete the transaction. So please have your Bitcoin wallet ready before clicking "Buy EQB".</p>
             {{else}}
               {{#addressData}}
+                {{#if completedOrder}}
+                  <h3 class="green-text text-center no-top-margin">Thank you, we have verified your payment!</h3>
+                  <br>
+                {{/if}}
                 <div class="row">
                   {{^if expiredOrder}}
                     <div class="col-sm-4">
@@ -47,8 +51,10 @@
                         {{/each}}
                         </tbody>
                       </table>
-                      <br>
-                      Order Expires <span style="background-color: #eee; padding: 5px{{#if makeRed}}; color: red{{/if}}">{{countTo expireTime}}</span>
+                      {{^if completedOrder}}
+                        <br>
+                        Order Expires <span style="background-color: #eee; padding: 5px{{#if makeRed}}; color: red{{/if}}">{{countTo expireTime}}</span>
+                      {{/if}}
                     </div>
                   {{else}}
                     <div class="col-xs-12">

@@ -2,6 +2,7 @@ import can from 'can';
 import 'can/map/define/';
 import ICOPurchase from '../../components/ico-transactions-component/template-ico-purchase.stache!'
 import ICOTransactionModels from 'easyapp/models/ico-transactions/';
+import restAPI from 'rest-api';
 
 export default can.Map.extend({
 	ICOPurchase:ICOPurchase,
@@ -13,6 +14,9 @@ export default can.Map.extend({
 			value: false
 		},
 		expiredOrder: {
+			value: false
+		},
+		completedOrder: {
 			value: false
 		},
 		expireTime: {
@@ -77,6 +81,15 @@ export default can.Map.extend({
 				if (remainingTime <= 0) {
 					clearInterval(timer);
 					this.attr("expiredOrder", true);
+				}
+				if (remainingTime % 10 == 0) {
+					restAPI.request('GET', '/wapi/check-sale/' + saved.attr("id") + '/', {},
+						() => {
+							clearInterval(timer);
+							this.attr("completedOrder", true);
+						},
+						err => console.log('FAILED', err)
+					);
 				}
 			}, 1000);
 			saved.attr("fundingLevel", this.attr("currentTranche"));
