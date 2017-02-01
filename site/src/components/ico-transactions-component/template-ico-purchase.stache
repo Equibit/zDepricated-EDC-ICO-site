@@ -15,7 +15,7 @@
 
             <p>As soon as you hit Buy EQB you will have 2 minutes to complete the transaction. So please have your Bitcoin wallet ready.</p>
           {{else}}
-            <p><strong>Please Enter a Number before clicking buy!</strong></p>
+            <h3 class="text-center" style="margin-top:10px;">Please Enter a Number before clicking buy!</h3>
           {{/if}}
         {{else}}
           <h3 class="text-center" style="margin-top:10px;">Come back once the offering starts!</h3>
@@ -26,7 +26,7 @@
         {{#if countdown}}
           {{#if eqbNumberPositive}}
             <a href="http://equibit.org/equibitico.pdf" target="_blank" class="btn btn-primary btn-sm">Terms & Conditions</a>
-            <button type="button" class="btn btn-primary btn-sm">Buy EQB</button>
+            <button type="button" ($click)="buyEQBs()" class="btn btn-primary btn-sm">Buy EQB</button>
           {{/if}}
         {{/if}}
       </div>

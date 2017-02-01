@@ -3,7 +3,7 @@
 <can-import from="components/ico-transactions-component/" />
 
 {{#if isLoggedIn}}
-  <ico-transactions-component {^confirmed}="confirmed"></ico-transactions-component>
+  <ico-transactions-component {btc-prices}="btcPrices" {current-tranche}="currentTranche"></ico-transactions-component>
 {{else}}
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 text-center">
