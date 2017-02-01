@@ -13,7 +13,7 @@
 
             <p>By purchasing I confirm that I have read and agreed to the Terms and Conditions.</p>
 
-            <p>We will provide a bitcoin address and final price once you click Buy!</p>
+            <p>As soon as you hit Buy EQB you will have 2 minutes to complete the transaction. So please have your Bitcoin wallet ready.</p>
           {{else}}
             <p><strong>Please Enter a Number before clicking buy!</strong></p>
           {{/if}}

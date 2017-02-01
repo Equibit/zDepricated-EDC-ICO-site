@@ -37,27 +37,12 @@
 
 <br><br>
 
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3 text-center">
-    {{#if isLoggedIn}}
-      {{#if confirmed}}
-        <div class="input-group">
-          <input id="removeFocus" type="text" class="form-control" {($value)}="eqbNumber" ($keyup)="updateEstimation(@element.val)" placeholder="Number of EQB Tokens" maxlength="4">
-          <span class="input-group-addon" id="basic-addon2">{{btcPrediction}} BTC Estimated</span>
-          <span class="input-group-btn">
-            <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#ico-purchase-modal">Buy!</button>
-          </span>
-        </div><!-- /input-group -->
-      {{else}}
-        <h2>Transaction Needs to be confirmed before you can order more.</h2>
-      {{/if}}
-    {{else}}
-      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Register for ICO!</a>
-    {{/if}}
+{{^if isLoggedIn}}
+  <div class="text-center">
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Register for ICO!</a>
   </div>
-</div>
-
-<br>
+  <br>
+{{/if}}
 
 <ico-progress-component {^btc-prices}="btcPrices" {^eqb-remaining}="eqbRemaining" {^current-tranche}="currentTranche" {countdown}="countdown"></ico-progress-component>
 
@@ -77,5 +62,3 @@
 
 
 <br><br>
-
-{{>ICOPurchase}}

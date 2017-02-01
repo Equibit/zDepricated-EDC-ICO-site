@@ -15,15 +15,11 @@ class BlockchainIPN extends BaseAPIController {
                 $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                 $vari = Array();
 
-                file_put_contents("calledIPN.txt", $url . "\n\n", FILE_APPEND);
-
                 parse_str(parse_url($url, PHP_URL_QUERY), $vari);
 
                 $secret = (isset($vari['secret']) ? $vari['secret'] : '');
                 $tsid = (isset($vari['tsid']) ? $vari['tsid'] : '');
                 $address = (isset($vari['address']) ? $vari['address'] : '');
-
-                file_put_contents("calledIPN.txt","SECRET: " . $secret . " tokenSaleID: " . $tsid . " ADDRESS: " . $address . "\n\n", FILE_APPEND);
 
                 if ($secret != '' && $tsid != '' && $address != '' && BlockchainData::findTransaction($tsid, $secret, $address)) {
                     $expected_payment = BlockchainData::getTransactionExpectedAmount($tsid, $secret, $address);

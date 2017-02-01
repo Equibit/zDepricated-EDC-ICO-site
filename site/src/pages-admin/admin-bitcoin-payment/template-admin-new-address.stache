@@ -36,9 +36,9 @@
               </div>
               <div class="col-sm-8 text-center">
                 <br><br>
-                <span style="background-color: #eee; padding: 2px">{{address}}</span>
+                <span style="background-color: #eee; padding: 5px">{{address}}</span>
                 <br><br>
-                Send {{toBTC expectedPayment}} BTC
+                Send <span style="background-color: #eee; padding: 5px">{{toBTC expectedPayment}}</span> BTC
               </div>
             </div>
           {{/if}}
