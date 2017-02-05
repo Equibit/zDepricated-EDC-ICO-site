@@ -1,3 +1,4 @@
+import 'easyapp/utils/polyfill';
 import can from 'can';
 import $ from 'jquery';
 import 'can/map/define/';

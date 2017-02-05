@@ -7,7 +7,7 @@ use \PDO;
 class ICOTransactionsData {
 
     public static function getBitcoinTransactions() {
-        $query = MySQL::getInstance()->prepare("SELECT address, indexReturned, expectedPayment, receivedPayment, blocksConfirmed, transactionHash, UNIX_TIMESTAMP(timeDate) AS timeDate FROM BlockchainAddresses");
+        $query = MySQL::getInstance()->prepare("SELECT AuthUser.userName, address, indexReturned, expectedPayment, receivedPayment, blocksConfirmed, transactionHash, UNIX_TIMESTAMP(timeDate) AS timeDate FROM BlockchainAddresses LEFT JOIN AuthUser ON AuthUser.userID=BlockchainAddresses.userID");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

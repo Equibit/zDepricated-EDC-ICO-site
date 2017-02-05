@@ -5,6 +5,7 @@
     <div class="h1 no-top-margin">xPubs</div>
   </div>
 </div>
+</div>
 <div class="row">
   <div class="col-md-12">
     <div class="panel">
@@ -22,7 +23,7 @@
               <tbody>
               {{#if loaded}}
                 {{#if data.length}}
-                  {{#each rows}}
+                  {{#each pagedRows}}
                     <tr>
                       <td>{{id}}</td>
                       <td>{{shorten xPub}}...</td>

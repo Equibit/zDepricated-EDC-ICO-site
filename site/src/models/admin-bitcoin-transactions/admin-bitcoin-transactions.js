@@ -12,6 +12,14 @@ let AdminBitcoinTransactionModel = can.Model.extend({
   define: {
 		noAddress: {
 		  value: true
+    },
+		difference: {
+		  get() {
+		    if (this.attr("expectedPayment") && this.attr("receivedPayment") && this.attr("receivedPayment") != 0) {
+		      return this.attr("receivedPayment") - this.attr("expectedPayment")
+        }
+        return 0
+      }
     }
   }
 });

@@ -24,7 +24,7 @@
                 <th class="text-nowrap" ($click)="{sortBy 'numberEQB'}">EQB Purchased {{{sortArrow 'numberEQB'}}}</th>
                 <th class="text-nowrap" ($click)="{sortBy 'fundingLevel'}">Funding Level {{{sortArrow 'fundingLevel'}}}</th>
                 <th class="text-nowrap" ($click)="{sortBy 'paidUSD'}">Paid USD {{{sortArrow 'paidUSD'}}}</th>
-                <th class="text-nowrap" ($click)="{sortBy 'paidBTC'}">Paid BTC {{{sortArrow 'paidBTC'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'paidBTC'}">Expected BTC {{{sortArrow 'paidBTC'}}}</th>
                 <th class="text-nowrap" ($click)="{sortBy 'timeDate'}">Time and Date {{{sortArrow 'timeDate'}}}</th>
                 <th class="text-nowrap" ($click)="{sortBy 'completed'}">Confirmed {{{sortArrow 'completed'}}}</th>
                 <th class="text-nowrap" ($click)="{sortBy 'rejected'}">Revoked {{{sortArrow 'rejected'}}}</th>
@@ -34,7 +34,7 @@
               <tbody>
               {{#if loaded}}
                 {{#if data.length}}
-                  {{#each rows}}
+                  {{#each pagedRows}}
                     <tr>
                       <td>{{username}}</td>
                       <td>{{addCommas numberEQB}}</td>

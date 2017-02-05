@@ -12,8 +12,8 @@ can.stache.registerSimpleHelper('leading', num => {
 });
 
 can.stache.registerSimpleHelper('shorten', s => {
-	if (s != 'undefined' && s) return s.substr(0,25);
-  else return 'None';
+	if (s != 'undefined' && s) return s.substr(0,15);
+  else return false;
 });
 
 can.stache.registerSimpleHelper('addCommas', num => {

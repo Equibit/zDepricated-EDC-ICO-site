@@ -4,6 +4,12 @@
   <div class="col-xs-8 col-md-9">
     <div class="h1 no-top-margin">Bitcoin Addresses</div>
   </div>
+  <div class="col-xs-4 col-md-3">
+    <div class="input-group">
+      <div class="input-group-addon"><span class="fa fa-search"></span></div>
+      <input type="text" class="form-control" {($value)}="search" ($keyup)="updateSearch(@element.val)" placeholder="User {{i18n.adminUsersSearch}}">
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -14,9 +20,10 @@
             <table class="table table-striped">
               <thead>
               <tr>
-                <th class="text-nowrap" ($click)="{sortBy 'address'}">Address {{{sortArrow 'address'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'userName'}">Username {{{sortArrow 'userName'}}}</th>
                 <th class="text-nowrap" ($click)="{sortBy 'expectedPayment'}">Expected Payment {{{sortArrow 'expectedPayment'}}}</th>
                 <th class="text-nowrap" ($click)="{sortBy 'receivedPayment'}">Received Payment {{{sortArrow 'receivedPayment'}}}</th>
+                <th class="text-nowrap" ($click)="{sortBy 'difference'}">Difference {{{sortArrow 'difference'}}}</th>
                 <th class="text-nowrap" ($click)="{sortBy 'blocksConfirmed'}">Blocks Confirmed {{{sortArrow 'blocksConfirmed'}}}</th>
                 <th class="text-nowrap">Transaction ID</th>
                 <th class="text-nowrap" ($click)="{sortBy 'timeDate'}">Time and Date {{{sortArrow 'timeDate'}}}</th>
@@ -25,13 +32,14 @@
               <tbody>
               {{#if loaded}}
                 {{#if data.length}}
-                  {{#each rows}}
+                  {{#each pagedRows}}
                     <tr>
-                      <td>{{shorten address}}...</td>
+                      <td>{{userName}}</td>
                       <td>{{toBTC expectedPayment}}</td>
                       <td>{{toBTC receivedPayment}}</td>
+                      <td>{{toBTC difference}}</td>
                       <td>{{blocksConfirmed}}</td>
-                      <td>{{shorten transactionHash}}...</td>
+                      <td>{{#if transactionHash}}<a href="https://blockchain.info/tx/{{transactionHash}}" target="_blank">{{shorten transactionHash}}...</a>{{else}}None{{/if}}</td>
                       <td class="text-nowrap">{{timestampDetailed timeDate}}</td>
                     </tr>
                   {{/each}}

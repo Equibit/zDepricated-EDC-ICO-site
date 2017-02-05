@@ -31,6 +31,10 @@ export default can.Map.extend({
       value: new AdminTransactionModels({})
 		}
 	},
+	updateSearch(searchStr) {
+		var newData = this.attr("bitcoinData").filter((elem, index, arr) =>  elem.userName.includes(searchStr) || elem.email.includes(searchStr));
+		this.attr("data", newData);
+	},
 	addAddress(sale) {
 		let tokenSaleID = sale.attr("tokenSaleID");
 
