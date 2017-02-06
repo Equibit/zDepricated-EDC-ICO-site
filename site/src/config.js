@@ -24,6 +24,7 @@ define(function() {
       hasChat: false,
       usernameMinLength: 4,
       securityAnswerMinLength: 4
-    }
+    },
+		analytics: 'UA-24771308-4'
   }
 });

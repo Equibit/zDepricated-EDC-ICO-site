@@ -1,4 +1,5 @@
 import 'easyapp/utils/polyfill';
+import 'easyapp/utils/analytics';
 import can from 'can';
 import $ from 'jquery';
 import 'can/map/define/';
@@ -187,6 +188,8 @@ const AppViewModel = can.Map.extend({
     return true;
   },
   switchPage(page){
+		ga('set', { page: '/' + page + '/', title: "EDC ICO" });
+		ga('send', 'pageview');
     this.attr("page", page);
     if ($('.navbar-toggle').is(':visible') && $('.navbar-collapse').hasClass('in')) $('.navbar-toggle').trigger('click');
   }
