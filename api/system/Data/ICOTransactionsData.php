@@ -78,7 +78,7 @@ class ICOTransactionsData {
     }
 
     public static function getAllTransactions() {
-        $query = MySQL::getInstance()->prepare("SELECT id, userID, fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed, rejected FROM tokenSales ORDER BY timeDate DESC");
+        $query = MySQL::getInstance()->prepare("SELECT id, userID, fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed, rejected, manualTransaction FROM tokenSales ORDER BY timeDate DESC");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -105,7 +105,7 @@ class ICOTransactionsData {
     }
 
     public static function confirmTransaction($id) {
-        $query = MySQL::getInstance()->prepare("UPDATE tokenSales SET completed=1 WHERE id=:id");
+        $query = MySQL::getInstance()->prepare("UPDATE tokenSales SET completed=1, rejected=0 WHERE id=:id");
         $query->bindValue(':id', $id);
         return $query->execute();
     }

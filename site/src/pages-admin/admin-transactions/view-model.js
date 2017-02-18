@@ -45,6 +45,7 @@ export default can.Map.extend({
   },
   confirmTransaction(transactionCompleted) {
 		transactionCompleted.attr("completed", 1);
+		transactionCompleted.attr("rejected", 0);
 		transactionCompleted.save();
   },
   addTransaction(transaction) {
