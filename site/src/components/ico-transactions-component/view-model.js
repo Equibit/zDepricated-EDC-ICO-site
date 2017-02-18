@@ -71,7 +71,7 @@ export default can.Map.extend({
 		newTransaction.attr("manualTransaction", false);
 		newTransaction.save(saved => {
 			saved.attr("timeDate", Math.floor(Date.now() / 1000));
-			let remainingTime = 300;
+			let remainingTime = 600;
 			let timer = setInterval(() => {
 				remainingTime--;
 				if (remainingTime < 30) {
@@ -80,13 +80,14 @@ export default can.Map.extend({
 				this.attr("expireTime", Math.floor(Date.now() / 1000 - remainingTime));
 				if (remainingTime <= 0) {
 					clearInterval(timer);
-					this.attr("expiredOrder", true);
+					// this.attr("expiredOrder", true);
 				}
-				if (remainingTime % 10 == 0) {
+				if (remainingTime % 30 == 0) {
 					restAPI.request('GET', '/wapi/check-sale/' + saved.attr("id") + '/', {},
 						() => {
 							clearInterval(timer);
 							this.attr("completedOrder", true);
+							saved.attr("confirmed", true);
 						},
 						err => console.log('FAILED', err)
 					);

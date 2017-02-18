@@ -7,7 +7,7 @@ use \PDO;
 class ICOTransactionsData {
 
     public static function getBitcoinTransactions() {
-        $query = MySQL::getInstance()->prepare("SELECT AuthUser.userName, address, indexReturned, expectedPayment, receivedPayment, blocksConfirmed, transactionHash, UNIX_TIMESTAMP(timeDate) AS timeDate FROM BlockchainAddresses LEFT JOIN AuthUser ON AuthUser.userID=BlockchainAddresses.userID");
+        $query = MySQL::getInstance()->prepare("SELECT AuthUser.userName, address, indexReturned, expectedPayment, receivedPayment, blocksConfirmed, transactionHash, UNIX_TIMESTAMP(timeDate) AS timeDate FROM BlockchainAddresses LEFT JOIN AuthUser ON AuthUser.userID=BlockchainAddresses.userID ORDER BY timeDate DESC");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -56,7 +56,7 @@ class ICOTransactionsData {
     }
 
     public static function getUserTransactions($userID) {
-        $query = MySQL::getInstance()->prepare("SELECT fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed FROM tokenSales WHERE userID=:userID AND rejected=0");
+        $query = MySQL::getInstance()->prepare("SELECT fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed, rejected FROM tokenSales WHERE userID=:userID ORDER BY timeDate");
         $query->bindValue(':userID', $userID);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -78,7 +78,7 @@ class ICOTransactionsData {
     }
 
     public static function getAllTransactions() {
-        $query = MySQL::getInstance()->prepare("SELECT id, userID, fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed, rejected FROM tokenSales");
+        $query = MySQL::getInstance()->prepare("SELECT id, userID, fundingLevel, numberEQB, paidUSD, paidBTC, UNIX_TIMESTAMP(timeDate) AS timeDate, completed, rejected FROM tokenSales ORDER BY timeDate DESC");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

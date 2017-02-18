@@ -28,7 +28,7 @@ export default can.Map.extend({
     },
     progress: {
       get() {
-        return ((this.attr('eqbConfirmed')/1000000)*100).toFixed(2)
+        return ((this.attr('eqbConfirmed')/1000000)*100).toFixed(0)
       }
     },
 		progressNum: {

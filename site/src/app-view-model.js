@@ -3,6 +3,7 @@ import 'easyapp/utils/analytics';
 import can from 'can';
 import $ from 'jquery';
 import 'can/map/define/';
+import 'can/route/pushstate/';
 import i18n from 'easyapp/i18n/i18n';
 import { setLang } from 'easyapp/i18n/i18n';
 import { translate } from 'easyapp/i18n/i18n';

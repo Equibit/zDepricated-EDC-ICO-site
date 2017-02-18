@@ -18,6 +18,12 @@ can.stache.registerSimpleHelper('shorten', s => {
 
 can.stache.registerSimpleHelper('addCommas', num => {
   let nf = new Intl.NumberFormat();
+  if (num) return nf.format(num.toFixed(0));
+  else return 0;
+});
+
+can.stache.registerSimpleHelper('addCommas2', num => {
+  let nf = new Intl.NumberFormat();
   return nf.format(num)
 });
 

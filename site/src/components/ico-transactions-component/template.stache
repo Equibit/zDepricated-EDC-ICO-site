@@ -16,6 +16,7 @@
                 <th>Cost / Paid</th>
                 <th>Time and Date</th>
                 <th>Confirmed</th>
+                <th>Failed</th>
               </tr>
               </thead>
               <tbody>
@@ -27,6 +28,7 @@
                     <td>{{#if paidUSD}}${{paidUSD}} USD{{/if}}{{#if paidBTC}}{{paidBTC}} BTC{{/if}}</td>
                     <td>{{timestampDetailed timeDate}}</td>
                     <td>{{#if completed}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>
+                    <td>{{#if rejected}}<span class="red-text fa fa-check"></span>{{else}}<span class="green-text fa fa-times"></span>{{/if}}</td>
                   </tr>
                 {{/each}}
               {{else}}

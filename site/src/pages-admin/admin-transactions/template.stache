@@ -37,9 +37,9 @@
                   {{#each pagedRows}}
                     <tr>
                       <td>{{username}}</td>
-                      <td>{{addCommas numberEQB}}</td>
+                      <td>{{addCommas2 numberEQB}}</td>
                       <td>{{fundingLevel}}</td>
-                      <td class="text-nowrap">{{#if paidUSD}}${{addCommas paidUSD}} USD{{/if}}</td>
+                      <td class="text-nowrap">{{#if paidUSD}}${{addCommas2 paidUSD}} USD{{/if}}</td>
                       <td class="text-nowrap">{{#if paidBTC}}{{paidBTC}} BTC{{/if}}</td>
                       <td class="text-nowrap">{{timestampDetailed timeDate}}</td>
                       <td>{{#if completed}}<span class="green-text fa fa-check"></span>{{else}}<span class="red-text fa fa-times"></span>{{/if}}</td>

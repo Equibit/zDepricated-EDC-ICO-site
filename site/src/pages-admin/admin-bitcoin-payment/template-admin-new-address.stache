@@ -20,7 +20,7 @@
                       {{#each ../transactionData}}
                         {{^if completed}}
                           {{^if rejected}}
-                            <option value="{{id}}">{{username}} Buying {{addCommas numberEQB}} EQBs for {{paidBTC}} BTC</option>
+                            <option value="{{id}}">{{username}} Buying {{addCommas2 numberEQB}} EQBs for {{paidBTC}} BTC</option>
                           {{/if}}
                         {{/if}}
                       {{/each}}

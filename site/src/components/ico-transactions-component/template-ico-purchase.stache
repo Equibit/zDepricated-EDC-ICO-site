@@ -15,8 +15,6 @@
               <p>You can order up to 100,000 EQB at a time. Your order might also be limited to the number of available units at execution.</p>
 
               <p>By purchasing I confirm that I have read and agreed to the Terms and Conditions.</p>
-
-              <p>As soon as you hit "Buy EQB" you will have approximately <strong>5 minutes</strong> to complete the transaction. So please have your Bitcoin wallet ready before clicking "Buy EQB".</p>
             {{else}}
               {{#addressData}}
                 {{#if completedOrder}}
@@ -52,8 +50,8 @@
                         </tbody>
                       </table>
                       {{^if completedOrder}}
-                        <br>
-                        Order Expires <span style="background-color: #eee; padding: 5px{{#if makeRed}}; color: red{{/if}}">{{countTo expireTime}}</span>
+                        <!--br>
+                        Order Expires <span style="background-color: #eee; padding: 5px{{#if makeRed}}; color: red{{/if}}">{{countTo expireTime}}</span-->
                       {{/if}}
                     </div>
                   {{else}}
