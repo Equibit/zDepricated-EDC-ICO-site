@@ -16,6 +16,20 @@ export default can.Map.extend({
 		eqbConfirmed: {
       value: []
     },
+		totalBTC: {
+      value: 0
+    },
+		totalUSD: {
+      value: 0
+    },
+		btc2usd: {
+      value: 0
+    },
+    totalRaised: {
+      get() {
+        return this.attr("totalUSD") + (this.attr("totalBTC")/100000000 / this.attr("btc2usd"));
+      }
+    },
     currentTranche: {
       get() {
         let highestZero = 0;
@@ -159,6 +173,9 @@ export default can.Map.extend({
         this.attr('eqbRemaining', data.eqbRemaining);
         this.attr('eqbConfirmed', data.eqbConfirmed);
         this.attr('btcPrices', data.btcPrices);
+        this.attr('totalUSD', data.soldUSD);
+        this.attr('totalBTC', data.soldBTC);
+        this.attr('btc2usd', data.btc2usd);
         this.attr('loaded', true);
       },
       err => console.log('FAILED to load email', err)
@@ -175,6 +192,9 @@ export default can.Map.extend({
           _self.attr('eqbRemaining', data.eqbRemaining);
 					_self.attr('eqbConfirmed', data.eqbConfirmed);
           _self.attr('btcPrices', data.btcPrices);
+          _self.attr('totalUSD', data.soldUSD);
+          _self.attr('totalBTC', data.soldBTC);
+					_self.attr('btc2usd', data.btc2usd);
         },
         err => {
           console.log('FAILED to load email', err);

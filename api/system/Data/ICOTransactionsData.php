@@ -27,6 +27,27 @@ class ICOTransactionsData {
         return ($temp['blocksConfirmed'] >= 0);
     }
 
+    public static function getUSDTotal() {
+        $query = MySQL::getInstance()->prepare("SELECT SUM(paidUSD) AS totalUSD FROM tokenSales WHERE manualTransaction=1 AND completed=1");
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return $temp['totalUSD'];
+    }
+
+    public static function getManualBTCTotal() {
+        $query = MySQL::getInstance()->prepare("SELECT SUM(paidBTC) AS totalBTC FROM tokenSales WHERE manualTransaction=1 AND completed=1");
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return $temp['totalBTC'];
+    }
+
+    public static function getBTCReceivedTotal() {
+        $query = MySQL::getInstance()->prepare("SELECT SUM(receivedPayment) AS totalBTC FROM BlockchainAddresses WHERE blocksConfirmed >= 4");
+        $query->execute();
+        $temp = $query->fetch(PDO::FETCH_ASSOC);
+        return $temp['totalBTC'];
+    }
+
     public static function getXPubs() {
         $query = MySQL::getInstance()->prepare("SELECT id, xPub, gap FROM BlockchainxPubs");
         $query->execute();

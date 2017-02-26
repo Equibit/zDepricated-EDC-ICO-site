@@ -8,7 +8,7 @@ class AuthUserSessionsData {
 
     public static function addNewSession($userID, $sessionSecret, $sessionIP, $sessionUserAgent) {
         $dataInstance = MySQL::getInstance();
-        $query = $dataInstance->prepare("INSERT INTO AuthUserSessions (userID, sessionSecret, sessionIP, sessionUserAgent, sessionLastActive) VALUES (:userID, :sessionSecret, :sessionIP, :sessionUserAgent, FROM_UNIXTIME(:sessionLastActive))");
+        $query = $dataInstance->prepare("INSERT INTO AuthUserSessions (userID, sessionSecret, sessionIP, sessionUserAgent, sessionLastActive) VALUES (:userID, :sessionSecret, :sessionIP, :sessionUserAgent, FROM_UNIXTIME(:sessionLastActive)) ON DUPLICATE KEY UPDATE sessionSecret=:sessionSecret, sessionIP=:sessionIP, sessionUserAgent=:sessionUserAgent, sessionLastActive=FROM_UNIXTIME(:sessionLastActive)");
         $query->bindValue(':userID', $userID);
         $query->bindValue(':sessionSecret', $sessionSecret);
         $query->bindValue(':sessionIP', $sessionIP);

@@ -28,7 +28,12 @@ can.stache.registerSimpleHelper('addCommas2', num => {
 });
 
 can.stache.registerSimpleHelper('toBTC', num => {
-  if (num != 'undefined' && num) return num / 100000000;
+  if (num != 'undefined' && num) return (num / 100000000).toFixed(6);
+  else return 0
+});
+
+can.stache.registerSimpleHelper('roundBTC', num => {
+  if (num != 'undefined' && num) return num.toFixed(6);
   else return 0
 });
 

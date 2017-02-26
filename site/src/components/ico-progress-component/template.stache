@@ -13,6 +13,12 @@
           </div>
           {{^if progressOverHalf}}<span>{{addCommas progressNum}} ({{progress}}%)</span>{{/if}}
         </div>
+        <br>
+        <div class="well" style="color:black">
+          <h1 class="no-top-margin">Total Raised:</h1>
+          <h4 class="text-center">${{addCommas totalUSD}} USD + {{toBTC totalBTC}} BTC = </h4>
+          <h1 class="bold" style="margin: 0">${{addCommas totalRaised}} USD</h1>
+        </div>
       {{else}}
         <div>
           <span class="fa fa-refresh fa-spin"></span>
