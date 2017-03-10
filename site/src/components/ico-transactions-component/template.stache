@@ -69,7 +69,7 @@
           </div>
           <small>* Estimations do not cross funding levels</small>
           <br>
-          <small>* Those wishing to pay in USD and CAD should contact us at <a href="mailto:investors@equibit.org">investors@equibit.org</a></small>
+          <small>* Those wishing to pay in USD and CAD should contact us at <a href="mailto:ico@equibit.org">ico@equibit.org</a></small>
         {{else}}
           <h2>Transaction Needs to be confirmed before you can order more.</h2>
         {{/if}}
