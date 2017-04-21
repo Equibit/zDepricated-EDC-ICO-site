@@ -5,13 +5,13 @@
 {{#if isLoggedIn}}
   <ico-transactions-component {btc-prices}="btcPrices" {current-tranche}="currentTranche"></ico-transactions-component>
 {{else}}
-  <div class="row">
+  <!--div class="row">
     <div class="col-sm-8 col-sm-offset-2 text-center">
       <h4 class="text-center bold">RESERVE UNITS AMONG THE FIRST MILLION OF A 22 MILLION UNIT SYSTEM</h4>
       <p class="text-center">Early adopters can reserve equibit units through this crowdsale! Please review our ICO Terms and Conditions for detailed information on this opportunity.</p>
     </div>
   </div>
-  <br>
+  <br-->
 {{/if}}
 
 {{^if isLoggedIn}}
@@ -34,19 +34,25 @@
 {{#if haveEQBRemaining}}
 
   {{#if countdown}}
-    <countdown-component timestamp="1491019200" title="Crowd sale ends in"></countdown-component>
+    <!--countdown-component timestamp="1491019200" title="Crowd sale ends in"></countdown-component-->
   {{else}}
     <countdown-component {^countdown}="countdown" timestamp="1485925200" title="Crowd sale starts in"></countdown-component>
   {{/if}}
 
-  <br><br>
+  <br>
 
-  {{^if isLoggedIn}}
-    <div class="text-center">
-      <a href="" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Register for ICO!</a>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+      <h1>Equibit Crowdsale is Over</h1>
+
+      <p>The Equibit crowdsale is officially closed. We would like to extend a sincere thank you to all participants as we now shift our focus to the next phase of development.</p>
+
+      <p>We will be releasing our source code and will be publishing two applications online in the coming months so stay tuned. Again, we thank everyone for their support of Equibit and look forward to this new and exciting chapter.</p>
+      <p></p>
     </div>
-    <br>
-  {{/if}}
+  </div>
+
+  <br>
 
 {{else}}
   <div class="text-center">

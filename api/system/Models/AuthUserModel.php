@@ -73,7 +73,7 @@ class AuthUserModel {
             }
         } else {
             $salt = bin2hex(mcrypt_create_iv(_PASSWORD_SALT_IV_SIZE_, MCRYPT_DEV_URANDOM));
-            $newUserID = AuthUserData::addNewUser($authUser, $authEmail, $authPhone, $authPass, $salt, $authQuestion, mb_strtolower($authAnswer));
+            $newUserID = AuthUserData::addNewUser($authUser, $authEmail, $authPhone, $authPass, $salt, $authQuestion, mb_strtolower($authAnswer), $ref);
             $this->loadUserForced($authUser);
             $this->createAndUpdatePassword($authPass);
             $this->loadUserForced($authUser);

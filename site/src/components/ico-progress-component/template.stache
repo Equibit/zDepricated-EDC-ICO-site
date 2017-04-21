@@ -1,7 +1,7 @@
 {{#if haveEQBRemaining}}
 
 <div class="row">
-  <div class="col-md-12 text-center">
+  <div-- class="col-md-12 text-center">
 
 
     {{#if countdown}}
@@ -27,7 +27,7 @@
       {{/if}}
     {{/if}}
 
-    <div class="h2">Funding Levels</div>
+    <!--div class="h2">Funding Levels</div>
     {{#if countdown}}
       <small>* Remaining EQBs are calculated by subtracting both completed and pending orders</small>
     {{/if}}
@@ -183,7 +183,8 @@
         </div>
 
       </div>
-    </div>
+
+    </div-->
   </div>
 </div>
 

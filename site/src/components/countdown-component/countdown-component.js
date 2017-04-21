@@ -10,10 +10,6 @@ can.Component.extend({
   events: {
     inserted() {
 
-			//$.getJSON('http://www.convert-unix-time.com/api?timestamp=now', data => {
-			//	currentTime = data.timestamp;
-			//});
-
       let startInterval = setInterval(() => {
         if (typeof this.viewModel.attr("timestamp") != 'undefined') {
           clearInterval(startInterval);
